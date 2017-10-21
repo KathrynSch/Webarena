@@ -27,11 +27,18 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <?= $this->Html->css('webarena.css') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <?php echo $this->Html->link('index/home', array('controller' => 'Arenas', 'action' => '/')); ?>
+    <?php echo $this->Html->link('sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
+    <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
+    <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
+    <?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
+    
+
 </head>
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation">
@@ -52,7 +59,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('content') ?>
     </div>
     <footer>
-        <h6>Goupe SI05</h6><h6>Kathryn Schutte</h6><h6>options</h6><h6>git</h6>
+        <p>Groupe n°5</p>
+        <p>Autors: SCHUTTE, GRIERE, DUMONT, BRUNETON</p>
+        <p>Options: BF</p>
     </footer>
 </body>
 </html>
