@@ -9,7 +9,7 @@ pr($fighter);
 
 
 ?>
-<form method="post" action="webarena/fighter/addFighterPicture/"+ $fighter["id"]>
+<form method="post" action="./addFighterPicture/<?php echo $fighter[0]['id'] ?>" enctype="multipart/form-data">
 	<input type="file" name="picture">
-	<button type="submit">Save</button>
+	<input type="submit" name="submit">
 </form>
