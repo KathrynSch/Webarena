@@ -31,11 +31,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
-    <?php echo $this->Html->link('index/home', array('controller' => 'Arenas', 'action' => '/')); ?>
-    <?php echo $this->Html->link('sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
-    <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
-    <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
-    <?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
+    
     
 
 </head>
@@ -44,12 +40,23 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
                 <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+                <?php echo $this->Html->link('index/home', array('controller' => 'Arenas', 'action' => '/')); ?>
+                <?php echo $this->Html->link('sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
+                <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
+                <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
+                <?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
             </li>
         </ul>
         <div class="top-bar-section">
             <ul class="right">
-                <li><a target="_blank" href="https://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
+                <?php if($loggedIn) : ?>
+                <li><?= $this->Html->link('Logout',['controller' => 'players', 'action' => 'logout']); ?></li>
+
+                <?php else: ?>
+                <li><?= $this->Html->link('Register',['controller' => 'players', 'action' => 'register']); ?></li>
+
+            <?php endif; ?>
+
             </ul>
         </div>
     </nav>

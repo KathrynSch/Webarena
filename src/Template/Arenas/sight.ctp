@@ -1,6 +1,6 @@
 <?php $this->assign('title', 'sight');
 
+for()
 
-pr($best);
 
 ?>
