@@ -28,7 +28,7 @@ class Player extends Entity
     protected $_accessible = [
         'email' => true,
         'password' => true,
-        'fighters' => true
+        /*'fighters' => true*/
     ];
 
     protected function _setPassword($password){

@@ -31,9 +31,7 @@ class ArenasController extends AppController {
           pr($figterlist->toArray()); */
     }
 
-    public function login() {
-        
-    }
+
 
     public function fighter($id) {
         $this->loadModel("Fighters");   //load model de la table fighters

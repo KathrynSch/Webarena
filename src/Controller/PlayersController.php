@@ -112,12 +112,12 @@ class PlayersController extends AppController
 // LOGIN 
     public function login()
     {
-
         if($this->request->is('post')){
             $player = $this -> Auth ->identify();
+
             // if good login
             if($player){
-                $this->Auth->setPlayer($player);
+                $this->Auth->setUser($player);
                 return $this->redirect(['controller' => 'Fighters']);
             }
             //bad login
@@ -142,7 +142,7 @@ class PlayersController extends AppController
             }
         }
         $this -> set(compact('player'));
-        $this -> set('_serialize',['user']);
+        $this -> set('_serialize',['player']);
     }
 
     public function beforeFilter(Event $event){

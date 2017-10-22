@@ -46,8 +46,9 @@ class AppController extends Controller
         $this->loadComponent('Auth', [
                 'authenticate' => [
                     'Form' => [
+                        'userModel' => 'Players', 
                         'fields' => [
-                            'email' => 'email',
+                            'username' => 'email',
                             'password' => 'password' 
                         ]
                     ]
