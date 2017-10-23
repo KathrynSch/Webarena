@@ -54,9 +54,10 @@ class FightersTable extends Table
         ]);
     }
 
-    public function getFighter(){
-
-        
+    public function getFighterByPlayerId($playerId)
+    {
+        $fighter=$this->find('all')->where(['player_id' => $playerId])->first();
+        return($fighter);
     }
     /**
      * Default validation rules.

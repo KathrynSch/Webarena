@@ -118,6 +118,7 @@ class PlayersController extends AppController
             // if good login
             if($player){
                 $this->Auth->setUser($player);
+
                 return $this->redirect(['controller' => 'Fighters', 'action' => 'view', $player['id']]);
             }
             //bad login

@@ -11,6 +11,7 @@
         <li><?= $this->Form->postLink(__('Delete Fighter'), ['action' => 'delete', $fighter->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fighter->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Fighters'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Fighter'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('Play'), ['controller' => 'Arenas', 'action' => 'sight']) ?> </li>
     </ul>
 </nav>
 <div class="fighters view large-9 medium-8 columns content">

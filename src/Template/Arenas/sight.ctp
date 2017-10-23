@@ -1,4 +1,1 @@
-<?php $this->assign('title', 'sight');
-
-
-?>
+This is sight ! Make yourself comfortable PU :-)

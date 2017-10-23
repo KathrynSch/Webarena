@@ -25,25 +25,15 @@ class FightersController extends AppController
         $this->set(compact('fighters'));
         $this->set('_serialize', ['fighters']);
     }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Fighter id.
-     * @return \Cake\Http\Response|void
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($playerid = null)
+    public function view($playerId)
     {
-        $fighter = $this->Fighters->get($playerid, [
-            'contain' => []
-        ]);
-
-        $this->set('fighter', $fighter);
+        $this->loadModel("Fighters");   //load model de la table fighters
+        $fighter = $this->Fighters->getFighterByPlayerId($playerId);
+        $this->set(compact('fighter'));
         $this->set('_serialize', ['fighter']);
     }
 
-    /**
+        /**
      * Add method
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
@@ -63,8 +53,20 @@ class FightersController extends AppController
         $this->set(compact('fighter'));
         $this->set('_serialize', ['fighter']);
     }
+    public function addFighterPicture()
+    {
+       
+        $this->loadModel("Fighters");
+        if ($this->request->is("post")){
+            $this->Fighters->addFighterPicture($this->request->data);
+        }
+        /*
+        $picture = $this->request->file('picture');
+        dd("add fighter picture");
+        $this->Fighters->getPlayerFighter($fighterId, $picture);*/
 
-    /**
+    }
+        /**
      * Edit method
      *
      * @param string|null $id Fighter id.
@@ -88,6 +90,9 @@ class FightersController extends AppController
         $this->set(compact('fighter'));
         $this->set('_serialize', ['fighter']);
     }
+
+
+
 
     /**
      * Delete method
