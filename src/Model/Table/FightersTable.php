@@ -59,6 +59,16 @@ class FightersTable extends Table
         $fighter=$this->find('all')->where(['player_id' => $playerId])->first();
         return($fighter);
     }
+    public function getFighterById($fighterId)
+    {
+        $fighter=$this->find('all')->where(['id' => $fighterId])->first();
+        return($fighter);
+    }
+    public function updatePosition($fighterId, $newPosX, $newPosY)
+    {
+        
+        $this->query()->update()->set(['coordinate_x' => $newPosX , 'coordinate_y' => $newPosY])->where(['id' => $fighterId])->execute();
+    }
     /**
      * Default validation rules.
      *

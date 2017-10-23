@@ -86,6 +86,7 @@ class AppController extends Controller
         //login check
         if($this->request->session()->read('Auth.Player')){
             $this->set('loggedIn', true);
+            $this->set('username', $this->request->session()->read('Auth.Player.username'));
         }
         else{
             $this->set('loggedIn', false);
