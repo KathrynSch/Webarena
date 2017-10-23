@@ -16,6 +16,10 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use App\Form\ContactForm;
+use App\Controller\Cln;
+//use Cake\Core\App;
+
 
 /**
  * Personal Controller
@@ -23,13 +27,13 @@ use Cake\ORM\TableRegistry;
  *
  */
 class ArenasController extends AppController {
-
+ 
     public function index() {
         /*         * $this->set('myname',"Julien Falconnet");
           $this->loadModel('Fighters');
           $figterlist=$this->Fighters->find('all');
           pr($figterlist->toArray()); */
-    }
+   }
 
     public function login() {
         
@@ -64,5 +68,21 @@ class ArenasController extends AppController {
     public function diary() {
         
     }
+    
 
+    public function initialize(){
+        parent::initialize();
+        $this->loadComponent('Upload');
+        $this->loadComponent('Flash');
+
+    }
+    
+    public function upload(){
+        if(!empty($this->request->data)){
+            //debug($this->request->data); die();
+            $this->Upload->send($this->request->data,$this->Flash);
+            
+        }
+    }
 }
+
