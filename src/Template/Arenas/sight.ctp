@@ -20,9 +20,10 @@
 	  <button class="btn btn-default"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
 	  <button class="btn btn-default"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></button>
 	</div> -->
+<div class="btn-toolbar" role="toolbar">
 <?php
 
-	echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $fighterId));
+	echo $this->Form->postButton('<span class="glyphicon glyphicon-arrow-left"></span>', array('action'=>'moveFighter', 'l', $fighterId));
 	echo $this->Form->postButton('Right', array('action'=>'moveFighter', 'r', $fighterId));
 	echo $this->Form->postButton('Down', array('action'=>'moveFighter', 'd', $fighterId));
 	echo $this->Form->postButton('Up', array('action'=>'moveFighter', 'u', $fighterId));
