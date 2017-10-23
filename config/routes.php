@@ -54,7 +54,6 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
     $routes->connect('/fighter/*',['controller' => 'Arenas', 'action' => 'fighter']);
 
-    $routes->connect('/fighter/addFighterPicture/*',['controller' => 'Arenas', 'action' => 'addFighterPicture']);
     
     $routes->fallbacks(DashedRoute::class);
 });

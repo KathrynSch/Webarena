@@ -33,9 +33,9 @@ class FightersController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($playerid = null)
     {
-        $fighter = $this->Fighters->get($id, [
+        $fighter = $this->Fighters->get($playerid, [
             'contain' => []
         ]);
 

@@ -54,6 +54,10 @@ class FightersTable extends Table
         ]);
     }
 
+    public function getFighter(){
+
+        
+    }
     /**
      * Default validation rules.
      *
