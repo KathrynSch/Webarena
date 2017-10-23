@@ -35,34 +35,20 @@ class ArenasController extends AppController {
           pr($figterlist->toArray()); */
    }
 
-    public function login() {
-        
-    }
+
 
     public function fighter($id) {
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getPlayerFighter($id)->toArray();
         $this->set('fighter', $fighter);
         $this->render();
+
        //get user's fighter    
-    
-    }
-    public function addFighterPicture($fighterId)
-    {
-        $this->loadModel("Fighters");
-        $picture = $this->request->file('picture');
-        $this->Fighters->getPlayerFighter($fighterId, $picture);
     }
 
+    
     public function sight() {
-        $this->loadModel("Fighters");
-        $best = $this->Fighters->getBestFighter()->toArray();
-        //$best=$this->Fighters->find('all')->first(['id' => 'DESC']);
-        //->order(['id' => 'ASC'])
-        //->order()->first
-        //pr($best->toArray());
-        //$best=($best->toArray());
-        $this->set('best', $best);
+        
     }
 
     public function diary() {

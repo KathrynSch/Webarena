@@ -1,6 +1,1 @@
-<?php $this->assign('title', 'sight');
-
-
-pr($best);
-
-?>
+This is sight ! Make yourself comfortable PU :-)

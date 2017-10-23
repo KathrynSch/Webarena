@@ -43,6 +43,21 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+                'authenticate' => [
+                    'Form' => [
+                        'userModel' => 'Players', 
+                        'fields' => [
+                            'username' => 'email',
+                            'password' => 'password' 
+                        ]
+                    ]
+                ],
+                'loginAction' => [
+                    'controller' => 'Players',
+                    'action' => 'login'
+                ]
+            ]);
 
         /*
          * Enable the following components for recommended CakePHP security settings.
@@ -67,6 +82,13 @@ class AppController extends Controller
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
+        }
+        //login check
+        if($this->request->session()->read('Auth.Player')){
+            $this->set('loggedIn', true);
+        }
+        else{
+            $this->set('loggedIn', false);
         }
     }
 }
