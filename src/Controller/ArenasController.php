@@ -16,6 +16,10 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use App\Form\ContactForm;
+use App\Controller\Cln;
+//use Cake\Core\App;
+
 
 /**
  * Personal Controller
@@ -23,42 +27,48 @@ use Cake\ORM\TableRegistry;
  *
  */
 class ArenasController extends AppController {
+ 
+    public function index() {
+        /*         * $this->set('myname',"Julien Falconnet");
+          $this->loadModel('Fighters');
+          $figterlist=$this->Fighters->find('all');
+          pr($figterlist->toArray()); */
+   }
+
+
+
+    public function fighter($id) {
+        $this->loadModel("Fighters");   //load model de la table fighters
+        $fighter = $this->Fighters->getPlayerFighter($id)->toArray();
+        $this->set('fighter', $fighter);
+        $this->render();
+
+       //get user's fighter    
+    }
+
     
     public function sight() {
-        $playerId=$this->Auth->user('id');
-        //$this->set('playerId', $playerId);
-        $this->loadModel("Fighters");
-        $fighter=$this->Fighters->getFighterByPlayerId($playerId);
-        $this->set('fighterId', $fighter['id']);
-        $this->set('fighterPosX', $fighter['coordinate_x']);
-        $this->set('fighterPosY', $fighter['coordinate_y']);
-
-    }
-    public function moveFighter($direction, $fighterId)
-    {
-        $this->loadModel("Fighters");
-        $fighter=$this->Fighters->getFighterById($fighterId);
-        $newPosX= $fighter['coordinate_x'];
-        $newPosY= $fighter['coordinate_y'];
-
-        if($direction == 'l'){  //move left
-           $newPosX-- ;
-        }
-        if($direction == 'r'){  //move right
-            $newPosX++ ;
-        }
-        if($direction == 'u'){  //move up
-            $newPosY-- ;
-        }
-        if($direction == 'd'){  //move down
-            $newPosY++ ;
-        }
-
-        $this->Fighters->updatePosition($fighterId, $newPosX, $newPosY);
-        $this->redirect(['action' => 'sight']);
-    }
-    public function diary() {
         
     }
 
+    public function diary() {
+        
+    }
+    
+
+    public function initialize(){
+        parent::initialize();
+        $this->loadComponent('Upload');
+        $this->loadComponent('Flash');
+
+    }
+    
+    public function upload(){
+        if(!empty($this->request->data)){
+            //debug($this->request->data); die();
+            $this->Upload->send($this->request->data,$this->Flash);
+            
+        }
+    }
 }
+

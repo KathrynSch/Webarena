@@ -70,4 +70,8 @@
             <td><?= h($fighter->next_action_time) ?></td>
         </tr>
     </table>
+    <div class="row">
+        <h4><?= __('Image') ?></h4>
+        <?= $this->Text->autoParagraph(h($fighter->image)); ?>
+    </div>
 </div>

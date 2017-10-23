@@ -1,4 +1,3 @@
-
 <div class="table-responsive">
   <table class="table table-bordered">
   	<?php for($y=0; $y<15; $y++) {
