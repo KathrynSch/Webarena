@@ -2,17 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/xampp/htdocs/webarena/src/Template/Element/Flash/default.ctp</file>
-            <file>file:/C:/xampp/htdocs/webarena/webroot/css/home.css</file>
-            <file>file:/C:/xampp/htdocs/webarena/src/Template/Element/Flash/success.ctp</file>
-            <file>file:/C:/xampp/htdocs/webarena/src/Model/Table/PlayersTable.php</file>
-            <file>file:/C:/xampp/htdocs/webarena/webroot/css/webarena.css</file>
-            <file>file:/C:/xampp/htdocs/webarena/src/Template/Layout/default.ctp</file>
-            <file>file:/C:/xampp/htdocs/webarena/src/Template/Pages/home.ctp</file>
-            <file>file:/C:/xampp/htdocs/webarena/src/Controller/ArenasController.php</file>
-            <file>file:/C:/xampp/htdocs/webarena/src/Controller/Component/UploadComponent.php</file>
-            <file>file:/C:/xampp/htdocs/webarena/src/Template/Arenas/upload.ctp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

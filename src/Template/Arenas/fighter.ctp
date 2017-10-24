@@ -3,7 +3,7 @@ Photo fighter
 caractéristiques
 jouer
 ajouter fighter
-<?php 
+<?php
 $this->assign('title', 'fighter');
 pr($fighter);
 

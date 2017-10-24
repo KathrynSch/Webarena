@@ -25,15 +25,21 @@ use Cake\ORM\TableRegistry;
 class ArenasController extends AppController {
     
     public function sight() {
-        $playerId=$this->Auth->user('id');
-        //$this->set('playerId', $playerId);
+        $playerId=$this->Auth->user('id');          //Player logged in
+
         $this->loadModel("Fighters");
         $fighter=$this->Fighters->getFighterByPlayerId($playerId);
         $this->set('fighterId', $fighter['id']);
         $this->set('fighterPosX', $fighter['coordinate_x']);
         $this->set('fighterPosY', $fighter['coordinate_y']);
+        $tabFighters=$this->Fighters->getAllFighters();
+        //$nbFighters=$this->Fighters->getNbFighters($tabFighters);
+
+        $this->set('tabFighters', $tabFighters);
+       // $this->set('nbFighters', $nbFighters);
 
     }
+
     public function moveFighter($direction, $fighterId)
     {
         $this->loadModel("Fighters");

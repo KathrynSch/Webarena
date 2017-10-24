@@ -69,6 +69,17 @@ class FightersTable extends Table
         
         $this->query()->update()->set(['coordinate_x' => $newPosX , 'coordinate_y' => $newPosY])->where(['id' => $fighterId])->execute();
     }
+
+    public function getAllFighters(){
+        $tabFighters=$this->find('all');
+        return($tabFighters->toArray());
+    }
+
+   /* public function getNbFighters($tabFighters){
+        $nbFighters=$this->fing('count', 'fields' => 'DISTINCT $tabFighters');
+        return($nbFighters);
+    }*/
+
     /**
      * Default validation rules.
      *

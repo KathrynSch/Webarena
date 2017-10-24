@@ -3,11 +3,16 @@
   	<?php for($y=0; $y<15; $y++) {
     	echo('<tr>'); 
     	for($x=0; $x<10; $x++) {
-    		if(($fighterPosX == $x)&&($fighterPosY == $y)){
-    			echo('<td>FF</td>');
-    		}
-    		else{
-    			echo('<td></td>');
+
+        foreach($tabFighters as $fighter){
+
+              if(($fighter['coordinate_x'] == $x)&&($fighter['coordinate_y']== $y)){
+                  echo ('<td>FF</td>');
+              }
+
+              else{
+                  echo('<td></td>');
+               }
     		}
       	}
     echo('</tr>'); 
