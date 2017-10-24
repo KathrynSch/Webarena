@@ -64,4 +64,23 @@ class ArenasController extends AppController {
         
     }
 
+    public function messages()
+    {
+        # code...
+    }
+
+    public function guilds()
+    {
+
+    }
+
+    public function shout()
+    {
+
+    }
+
+    public function fight()
+    {
+        
+    }
 }

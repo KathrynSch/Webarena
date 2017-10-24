@@ -29,12 +29,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->css('webarena.css') ?>
 
     <?= $this->Html->css('bootstrap.min.css') ?>
-    <?= $this->Html->css('bootstrap-grid.css') ?>
-    <?= $this->Html->css('bootstrap-grid.min.css') ?>
-    <?= $this->Html->css('bootstrap-reboot.css') ?>
-    <?= $this->Html->css('bootstrap-reboot.min.css') ?>
+    <?= $this->Html->css('bootstrap-theme.min.css') ?>
     <?= $this->Html->css('bootstrap.css') ?>
 
+    <?= $this->Html->script('bootstrap.js') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
