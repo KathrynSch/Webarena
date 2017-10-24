@@ -26,12 +26,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.generic.css') ?>
+    <?= $this->Html->css('webarena.css') ?>
 
-    <?= $this->Html->css('bootstrap.css') ?>
-    <?= $this->Html->css('bootstrap-theme.css') ?>
-    <?= $this->Html->css('bootstrap-theme.min.css') ?>
     <?= $this->Html->css('bootstrap.min.css') ?>
+    <?= $this->Html->css('bootstrap-grid.css') ?>
+    <?= $this->Html->css('bootstrap-grid.min.css') ?>
+    <?= $this->Html->css('bootstrap-reboot.css') ?>
+    <?= $this->Html->css('bootstrap-reboot.min.css') ?>
+    <?= $this->Html->css('bootstrap.css') ?>
+
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
@@ -44,13 +47,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-                <?php echo $this->Html->link('index/home', array('controller' => 'Arenas', 'action' => '/')); ?>
+                <h1><a href=""><?= $this->fetch('title') ?></a></h1></li>
+              <li> <?php echo $this->Html->link('home', array('controller' => 'Arenas', 'action' => '/')); ?> </li>
                 <?php echo $this->Html->link('sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
                 <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
                 <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
                 <?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
-            </li>
+            
         </ul>
         <div class="top-bar-section">
             <ul class="right">
