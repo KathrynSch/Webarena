@@ -3,17 +3,14 @@
   	<?php for($y=0; $y<15; $y++) {
     	echo('<tr>'); 
     	for($x=0; $x<10; $x++) {
-
+         echo ('<td>');
         foreach($tabFighters as $fighter){
 
               if(($fighter['coordinate_x'] == $x)&&($fighter['coordinate_y']== $y)){
-                  echo ('<td>FF</td>');
+                  echo ('FF');
               }
-
-              else{
-                  echo('<td></td>');
-               }
     		}
+      echo('</td>');
       	}
     echo('</tr>'); 
     }?>
@@ -27,7 +24,7 @@
 <div class="btn-toolbar" role="toolbar">
 <?php
 
-	echo $this->Form->postButton('<span class="glyphicon glyphicon-arrow-left"></span>', array('action'=>'moveFighter', 'l', $fighterId));
+	echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $fighterId));
 	echo $this->Form->postButton('Right', array('action'=>'moveFighter', 'r', $fighterId));
 	echo $this->Form->postButton('Down', array('action'=>'moveFighter', 'd', $fighterId));
 	echo $this->Form->postButton('Up', array('action'=>'moveFighter', 'u', $fighterId));

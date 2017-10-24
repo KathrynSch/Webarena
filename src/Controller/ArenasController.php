@@ -33,10 +33,7 @@ class ArenasController extends AppController {
         $this->set('fighterPosX', $fighter['coordinate_x']);
         $this->set('fighterPosY', $fighter['coordinate_y']);
         $tabFighters=$this->Fighters->getAllFighters();
-        //$nbFighters=$this->Fighters->getNbFighters($tabFighters);
-
         $this->set('tabFighters', $tabFighters);
-       // $this->set('nbFighters', $nbFighters);
 
     }
 

@@ -75,11 +75,6 @@ class FightersTable extends Table
         return($tabFighters->toArray());
     }
 
-   /* public function getNbFighters($tabFighters){
-        $nbFighters=$this->fing('count', 'fields' => 'DISTINCT $tabFighters');
-        return($nbFighters);
-    }*/
-
     /**
      * Default validation rules.
      *
