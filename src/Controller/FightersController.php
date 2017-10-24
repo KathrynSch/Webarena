@@ -12,7 +12,16 @@ use App\Controller\AppController;
  */
 class FightersController extends AppController
 {
+    
+    
+    public function initialize(){
+        parent::initialize();
+        $this->loadComponent('Upload');
+        $this->loadComponent('Flash');
 
+    }
+    
+    
     /**
      * Index method
      *
@@ -91,7 +100,13 @@ class FightersController extends AppController
         $this->set('_serialize', ['fighter']);
     }
 
-
+     public function upload(){
+        if(!empty($this->request->data)){
+            //debug($this->request->data); die();
+            $this->Upload->send($this->request->data,$this->Flash);
+            
+        }
+    }
 
 
     /**
