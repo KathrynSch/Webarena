@@ -13,31 +13,88 @@ class UploadComponent extends Component
 {
     public $max_files=10;
     
-    public function send($data,$flash){
+    public function send($data,$flash,$playerId,$Fighters){
         if(!empty($data)){
             if(count($data)>$this->max_files){
                 throw new InternalErrorException("Error Processing Request. Max number files accepted is {$this->max_files}",1);
             }
             
-            foreach($data as $file){
-                $filename=$file['name'];
-                $file_tmp_name=$file['tmp_name'];
+           // foreach($data as $file){
+                $filename=$playerId;
+                $file_tmp_name=$data['avatar_file']['tmp_name'];
                 $dir= WWW_ROOT . 'img'.DS.'avatars' ;
-                $allowed=array('png','jpg','jpeg');
-                            //debug($filename); die();
-
-                if(!in_array(substr(strrchr($filename,'.'),1),$allowed)){
+                $allowed=array('png','jpg','jpeg','gif');
+                            //debug($file_tmp_name); 
+                           //die();
+                $avatarExtension=substr(strrchr($data['avatar_file']['name'],'.'),1);
+                if(!in_array($avatarExtension,$allowed)){
                 throw new InternalErrorException("There is a problem with your file, please choose another.",1);}
                 //}elseif(is_uploaded_file($file_tmp_name)){
                 if(is_uploaded_file($file_tmp_name)){
-                    $filename=Text::uuid().'-'.$filename;
-                    $filedb=TableRegistry::get('Fighters');
-                    $entity=$filedb->newEntity();
-                    $entity->picture_name=$filename;
-                    $filedb->save($entity);
-                    $newName=$dir.DS.Text::uuid().'-'.$filename;
+                    //$filename=Text::uuid().'-'.$filename;
+                // $filedb=TableRegistry::get('Fighters');
+                  //$entity=$filedb->newEntity();
+                    //$entity->picture_name=$filename;
+                    //$filedb->save($entity);
+                    //$newName=$dir.DS.Text::uuid().'-'.$filename;
                     
-                    if(move_uploaded_file($file_tmp_name,$newName)&& is_writable($dir)){
+                  //$this->loadModel("Fighters");
+                  $tabfighters=$Fighters->getAllFighters();
+                  $filedb=TableRegistry::get('Fighters');
+                  $entity=$filedb->newEntity();
+                  $x= random_int(0,9);
+                  $y= random_int(0, 14);
+                  $occupy=false;
+                  foreach ($tabfighters as $fighter){
+                   
+                    if ($fighter['coordinate_x']==$x && $fighter['coordinate_y']==$y){
+                    
+                   $occupy=true;   
+                }
+               }
+               
+               while ($occupy){
+                   $occupy=false;
+                  $x= random_int(0,9);
+                  $y= random_int(0, 14);
+                  
+                  foreach ($tabfighters as $fighter){
+                   
+                   if ($fighter['coordinate_x']==$x && $fighter['coordinate_y']==$y){
+                    
+                     $occupy=true;   
+                   }
+                }
+               } 
+               
+               $entity->coordinate_x=$x;
+               $entity->coordinate_y=$y;
+               $entity->level=1;
+               $entity->xp=0;
+               $entity->player_id=$playerId;
+               $entity->skill_sight=2;
+               $entity->skill_strength=1;
+               $entity->skill_health=5;
+               $entity->current_health=5;
+               $entity->name=$data['name'];
+               $filedb->save($entity);
+               //$this->set(compact('fighter'));
+               //$this->set('_serialize', ['fighter']);
+                       if ($filedb->save($entity)) {
+                             $flash->success(__('The fighter has been saved.'));
+
+                               //return $this->redirect(['action' => 'index']);
+                            }
+                            else{
+                                  $flash->error(__('The fighter could not be saved. Please, try again.'));
+                                  
+                            }
+                            
+                           //debug($avatarExtension);
+                           //die();
+                   $newName=$filename.'.'.$avatarExtension;
+                   //move_uploaded_file($file_tmp_name,$dir.DS.$newName);
+                    if(move_uploaded_file($file_tmp_name,$dir.DS.$newName)&& is_writable($dir)){
                     //$this->Flash->set('Your picture has been successfully uploaded.', ['element' => 'success']);
                     //$this->loadComponent('Flash');
                     $flash->success('Your picture upload is successfull!'); 
@@ -56,4 +113,5 @@ class UploadComponent extends Component
             
                 }
     }
-}
+    
+                

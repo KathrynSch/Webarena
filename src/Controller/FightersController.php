@@ -38,8 +38,14 @@ class FightersController extends AppController
     {
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
+        if ($fighter == null){
+            $this->add($playerId);
+            
+        }
+        else{
         $this->set(compact('fighter'));
         $this->set('_serialize', ['fighter']);
+        }
     }
 
         /**
@@ -47,20 +53,18 @@ class FightersController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($playerId)
     {
+        $this->loadModel("Fighters");
         $fighter = $this->Fighters->newEntity();
-        if ($this->request->is('post')) {
-            $fighter = $this->Fighters->patchEntity($fighter, $this->request->getData());
-            if ($this->Fighters->save($fighter)) {
-                $this->Flash->success(__('The fighter has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The fighter could not be saved. Please, try again.'));
+        if ($this->request->is('post') && !empty($this->request->data)) {
+           //$fighter = $this->Fighters->patchEntity($fighter, $this->request->getData());
+            //debug($this->request->data); 
+            //die();
+            $this->Upload->send($this->request->data,$this->Flash,$playerId,$this->Fighters);
         }
-        $this->set(compact('fighter'));
-        $this->set('_serialize', ['fighter']);
+               
+        
     }
     public function addFighterPicture()
     {
@@ -100,10 +104,10 @@ class FightersController extends AppController
         $this->set('_serialize', ['fighter']);
     }
 
-     public function upload(){
+     public function upload($playerId){
         if(!empty($this->request->data)){
             //debug($this->request->data); die();
-            $this->Upload->send($this->request->data,$this->Flash);
+            $this->Upload->send($this->request->data,$this->Flash,$playerId);
             
         }
     }

@@ -29,7 +29,14 @@
 	echo $this->Form->postButton('Down', array('action'=>'moveFighter', 'd', $fighterId));
 	echo $this->Form->postButton('Up', array('action'=>'moveFighter', 'u', $fighterId));
   echo $this->Form->postButton('Shout', array('action'=>'shout'));
-  echo $this->Form->postButton('Fight', array('action'=>'fights'));
+
+  
+  echo $this->Form->postButton('FightR', array('action'=>'fight', 'r', $fighterId));
+  echo $this->Form->postButton('FightL', array('action'=>'fight', 'l', $fighterId));
+  echo $this->Form->postButton('FightU', array('action'=>'fight', 'u', $fighterId));
+  echo $this->Form->postButton('FightD', array('action'=>'fight', 'd', $fighterId));
+
+
 ?>
 </div>
 <div>
@@ -53,7 +60,7 @@
     </div>
   </div>
   <div class="panel panel-success">
-    <div class="panel-heading"><?= $this->Html->link(__('Fighter status'), ['controller' => 'Fighters', 'action' => 'view', $fighter['player_id']]) ?></div>
+    <div class="panel-heading"><?= $this->Html->link(__('Fighter status'), ['controller' => 'Fighters', 'action' => 'view', $fighterId]) ?></div>
       <div class="panel-body">
         Level truc truc expereience truc truc 
       </div>
