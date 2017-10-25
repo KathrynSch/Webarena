@@ -26,15 +26,11 @@ class ArenasController extends AppController {
     
     public function sight() {
         $playerId=$this->Auth->user('id');          //Player logged in
-
         $this->loadModel("Fighters");
-        $fighter=$this->Fighters->getFighterByPlayerId($playerId);
-        $this->set('fighterId', $fighter['id']);
-        $this->set('fighterPosX', $fighter['coordinate_x']);
-        $this->set('fighterPosY', $fighter['coordinate_y']);
+        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
+        $this->set('activeFighter', $activeFighter);
         $tabFighters=$this->Fighters->getAllFighters();
         $this->set('tabFighters', $tabFighters);
-
     }
 
     public function moveFighter($direction, $fighterId)
@@ -160,21 +156,22 @@ class ArenasController extends AppController {
 
 
 
-    public function diary() {
+    public function diary($fighterId) 
+    {
         
     }
 
-    public function messages()
+    public function messages($fighterId)
     {
-        # code...
+        
     }
 
-    public function guilds()
+    public function guild($fighterId)
     {
 
     }
 
-    public function shout()
+    public function shout($fighterId)
     {
 
     }

@@ -24,43 +24,43 @@
 <div class="btn-group" role="group">
 <?php
 
-	echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $fighterId));
-	echo $this->Form->postButton('Right', array('action'=>'moveFighter', 'r', $fighterId));
-	echo $this->Form->postButton('Down', array('action'=>'moveFighter', 'd', $fighterId));
-	echo $this->Form->postButton('Up', array('action'=>'moveFighter', 'u', $fighterId));
-  echo $this->Form->postButton('Shout', array('action'=>'shout'));
+	echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $activeFighter['id']));
+	echo $this->Form->postButton('Right', array('action'=>'moveFighter', 'r', $activeFighter['id']));
+	echo $this->Form->postButton('Down', array('action'=>'moveFighter', 'd', $activeFighter['id']));
+	echo $this->Form->postButton('Up', array('action'=>'moveFighter', 'u', $activeFighter['id']));
+  echo $this->Form->postButton('Shout', array('action'=>'shout', $activeFighter['id']));
 
   
-  echo $this->Form->postButton('FightR', array('action'=>'fight', 'r', $fighterId));
-  echo $this->Form->postButton('FightL', array('action'=>'fight', 'l', $fighterId));
-  echo $this->Form->postButton('FightU', array('action'=>'fight', 'u', $fighterId));
-  echo $this->Form->postButton('FightD', array('action'=>'fight', 'd', $fighterId));
+  echo $this->Form->postButton('FightR', array('action'=>'fight', 'r', $activeFighter['id']));
+  echo $this->Form->postButton('FightL', array('action'=>'fight', 'l', $activeFighter['id']));
+  echo $this->Form->postButton('FightU', array('action'=>'fight', 'u', $activeFighter['id']));
+  echo $this->Form->postButton('FightD', array('action'=>'fight', 'd', $activeFighter['id']));
 
 
 ?>
 </div>
 <div>
   <div class="panel panel-info">
-    <div class="panel-heading"><?= $this->Html->link(__('Messages from your guild'), ['action' => 'messages']) ?></div>
+    <div class="panel-heading"><?= $this->Html->link(__('Messages from your guild'), ['action' => 'messages', $activeFighter['id'] ]) ?></div>
     <div class="panel-body">
       trop dar ton experience !!
       <div class="input-group">
           <input type="text" class="form-control" placeholder="Write..." aria-describedby="basic-addon2">
       </div>
-      <?= $this->Html->link(__('Manage guilds'), ['action' => 'guilds']) ?>
+      <?= $this->Html->link(__('Manage guild'), ['action' => 'guild', $activeFighter['id'] ]) ?>
     </div>
   </div>
 
   </div>
    <div class="panel panel-warning">
-    <div class="panel-heading"><?= $this->Html->link(__('Diary'), ['action' => 'diary']) ?></div>
+    <div class="panel-heading"><?= $this->Html->link(__('Diary'), ['action' => 'diary', $activeFighter['id'] ]) ?></div>
       <div class="panel-body">
         Machin s'est fait tué par truc truc  
       </div>
     </div>
   </div>
   <div class="panel panel-success">
-    <div class="panel-heading"><?= $this->Html->link(__('Fighter status'), ['controller' => 'Fighters', 'action' => 'view', $fighterId]) ?></div>
+    <div class="panel-heading"><?= $this->Html->link(__('Fighter status'), ['controller' => 'Fighters', 'action' => 'view', $activeFighter['player_id'] ]) ?></div>
       <div class="panel-body">
         Level truc truc expereience truc truc 
       </div>
