@@ -50,7 +50,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
                 <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
                 <?php echo $this->Html->link('Fighter', ['controller' => 'Fighters', 'action' => 'view']); ?>
-                <?php echo $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout')); ?>
+                <?php echo $this->Html->link('LogIn/Out', array('controller' => 'Players', 'action' => 'logout')); ?>
             
         </ul>
         <div class="top-bar-section">

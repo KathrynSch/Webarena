@@ -169,6 +169,15 @@ class ArenasController extends AppController {
         $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");
         $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
+        $fighters=$this->Fighters->getAllFighters();
+        $this->set('fighters', $fighters);
+
+        $this->loadModel("Guilds");
+        $guilds = $this->Guilds->getGuilds();
+        $this->set('guilds', $guilds);
+        $fighterGuild = $this->Guilds->getFigtherGuild($activeFighter->guild_id);
+        $this->set('fighterGuild', $fighterGuild);
+
     }
 
     public function shout($fighterId)
