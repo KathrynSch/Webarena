@@ -49,7 +49,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
               <li> <?php echo $this->Html->link('home', array('controller' => 'Arenas', 'action' => '/')); ?> </li>
                 <?php echo $this->Html->link('sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
                 <?php echo $this->Html->link('diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
-                <?php echo $this->Html->link('fighter', array('controller' => 'Arenas', 'action' => 'fighter')); ?>
+                <?php echo $this->Html->link('fighter', array('controller' => 'fighter', 'action' => 'view')); ?>
                 <?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
             
         </ul>
