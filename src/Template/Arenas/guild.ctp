@@ -2,6 +2,11 @@
 	<div class="panel-heading">Your Guild</div>
 	<div class="panel-body">
 	  <table class="table">
+	  	<tr>
+  				<th>Id</th>
+  				<th>Name</th>
+  				<th>Members</th>
+  			</tr>
 	  	 <tr>
             <td><?= h($fighterGuild->id) ?></td>
             <td><?= h($fighterGuild->name) ?></td>
@@ -36,7 +41,10 @@
    					<br>
    				<?php endforeach ?>	
    			</td>
-   			<td><?php echo $this->Form->postButton('Join', array('action'=>'joinGuild', $guild->id)); ?></td>
+   			<td>
+   				<?php if($guild->id == $fighterGuild->id) echo ('Your Guild'); 
+   					else echo $this->Form->postButton('Join', array('action'=>'joinGuild', $guild->id)); ?>
+   			</td>
         </tr>
 <?php endforeach; ?>
 	</table>

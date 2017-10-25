@@ -39,15 +39,16 @@
 
 ?>
 </div>
+<?= $this->Html->link(__('Manage guild'), ['action' => 'guild', $activeFighter['id'] ]) ?>
 <div>
   <div class="panel panel-info">
-    <div class="panel-heading"><?= $this->Html->link(__('Messages from your guild'), ['action' => 'messages', $activeFighter['id'] ]) ?></div>
+    <div class="panel-heading"><?= $this->Html->link(__('Messages'), ['action' => 'messages' ]) ?></div>
     <div class="panel-body">
       trop dar ton experience !!
       <div class="input-group">
           <input type="text" class="form-control" placeholder="Write..." aria-describedby="basic-addon2">
       </div>
-      <?= $this->Html->link(__('Manage guild'), ['action' => 'guild', $activeFighter['id'] ]) ?>
+      
     </div>
   </div>
 

@@ -100,6 +100,12 @@ class FightersTable extends Table
         $f->coordinate_y = $newPosY;
         $this->save($f);
     }
+    public function setFighterGuild($guildId, $fighterId)
+    {
+        $f = $this->get($fighterId);
+        $f->guild_id = $guildId;
+        $this->save($f);
+    }
 
     /**
      * Default validation rules.
