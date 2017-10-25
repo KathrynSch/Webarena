@@ -69,8 +69,6 @@ class FightersTable extends Table
     }
 
     public function getAllFighters(){
-        //A MODIFIER
-      //  $t = $this ->get()
         $tabFighters=$this->find('all')->where(['level !='=> 0]);
         return($tabFighters->toArray());
     }

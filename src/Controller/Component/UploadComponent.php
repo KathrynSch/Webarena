@@ -42,8 +42,8 @@ class UploadComponent extends Component
                   $tabfighters=$Fighters->getAllFighters();
                   $filedb=TableRegistry::get('Fighters');
                   $entity=$filedb->newEntity();
-                  $x= random_int(0,9);
-                  $y= random_int(0, 14);
+                  $x= rand(0,9);
+                  $y= rand(0, 14);
                   $occupy=false;
                   foreach ($tabfighters as $fighter){
                    
@@ -55,8 +55,8 @@ class UploadComponent extends Component
                
                while ($occupy){
                    $occupy=false;
-                  $x= random_int(0,9);
-                  $y= random_int(0, 14);
+                  $x= rand(0,9);
+                  $y= rand(0, 14);
                   
                   foreach ($tabfighters as $fighter){
                    
