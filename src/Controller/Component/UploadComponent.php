@@ -26,7 +26,8 @@ class UploadComponent extends Component
                 $allowed=array('png','jpg','jpeg','gif');
                             //debug($file_tmp_name); 
                            //die();
-                $avatarExtension=substr(strrchr($data['avatar_file']['name'],'.'),1);
+                $avatarExtension=strtolower(substr(strrchr($data['avatar_file']['name'],'.'),1));
+                //debug($avatarExtension); die();
                 if(!in_array($avatarExtension,$allowed)){
                 throw new InternalErrorException("There is a problem with your file, please choose another.",1);}
                 //}elseif(is_uploaded_file($file_tmp_name)){
