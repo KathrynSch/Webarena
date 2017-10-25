@@ -25,13 +25,6 @@ use Cake\ORM\TableRegistry;
 class ArenasController extends AppController {
     
     
-    
-    
-    public function index(){
-        
-       
-    }
-    
     public function sight() {
         $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");
@@ -110,11 +103,7 @@ class ArenasController extends AppController {
                     break;
 
             default : return false;
-
-
-
         }
-
     }
 
     public function fight($direction, $fighterId)
@@ -148,7 +137,6 @@ class ArenasController extends AppController {
                 //Set nouvelle exp du player
                 $this->Fighters->setFighterXp($fighter['id'], $fighterXp);
                 }
-
                 else
                 {
                     //increment fighter xp +1
@@ -162,25 +150,31 @@ class ArenasController extends AppController {
     $this->redirect(['action'=> 'sight'] );        
     }
 
-
-
-    public function diary($fighterId) 
-    {
-        
+    public function diary() 
+    {   
+        $playerId=$this->Auth->user('id');          //Player logged in
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
     }
 
-    public function messages($fighterId)
+    public function messages()
     {
-        
+        $playerId=$this->Auth->user('id');          //Player logged in
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
     }
 
-    public function guild($fighterId)
+    public function guild()
     {
-
+        $playerId=$this->Auth->user('id');          //Player logged in
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
     }
 
     public function shout($fighterId)
     {
-
+        $playerId=$this->Auth->user('id');          //Player logged in
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
     }
 }

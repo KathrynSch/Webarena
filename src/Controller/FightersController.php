@@ -34,8 +34,9 @@ class FightersController extends AppController
         $this->set(compact('fighters'));
         $this->set('_serialize', ['fighters']);
     }
-    public function view($playerId)
+    public function view()
     {
+        $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
         if ($fighter == null){

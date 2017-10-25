@@ -143,8 +143,10 @@ class PlayersController extends AppController
         $this -> set(compact('player'));
         $this -> set('_serialize',['player']);
     }
-
+    public function home(){
+       $this->render();
+    }
     public function beforeFilter(Event $event){
-        $this-> Auth -> allow(['register']); // add later about and index pages
+        $this-> Auth -> allow(['register', 'home']); // add later about and index pages
     }
 }

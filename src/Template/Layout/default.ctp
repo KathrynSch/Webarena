@@ -45,21 +45,21 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1></li>
-              <li> <?php echo $this->Html->link('Home', array('controller' => 'Arenas', 'action' => '/')); ?> </li>
+              <h1><a href=""><?= $this->fetch('title') ?></a></h1></li>
+              <li> <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home')); ?> </li>
                 <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
                 <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
-                <?php echo $this->Html->link('Fighter', array('controller' => 'Fighter', 'action' => 'view')); ?>
-                <?php echo $this->Html->link('login', array('controller' => 'Arenas', 'action' => 'login')); ?>
+                <?php echo $this->Html->link('Fighter', ['controller' => 'Fighters', 'action' => 'view']); ?>
+                <?php echo $this->Html->link('logout', array('controller' => 'Players', 'action' => 'logout')); ?>
             
         </ul>
         <div class="top-bar-section">
             <ul class="right">
                 <?php if($loggedIn) : ?>
-                <li><?= $this->Html->link('Logout',['controller' => 'players', 'action' => 'logout']); ?></li>
+                <li><?= $this->Html->link('Logout',['controller' => 'Players', 'action' => 'logout']); ?></li>
 
                 <?php else: ?>
-                <li><?= $this->Html->link('Register',['controller' => 'players', 'action' => 'register']); ?></li>
+                <li><?= $this->Html->link('Register',['controller' => 'Players', 'action' => 'register']); ?></li>
 
             <?php endif; ?>
 
