@@ -24,6 +24,14 @@ use Cake\ORM\TableRegistry;
  */
 class ArenasController extends AppController {
     
+    
+    
+    
+    public function index(){
+        
+       
+    }
+    
     public function sight() {
         $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");

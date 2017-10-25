@@ -37,9 +37,7 @@ class PlayersController extends AppController
     public function view($id = null)
     {
         $player = $this->Players->get($id, [
-            'contain' => ['Fighters']
-        ]);
-
+            'contain' => ['Fighters']]);
         $this->set('player', $player);
         $this->set('_serialize', ['player']);
     }

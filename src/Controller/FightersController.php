@@ -39,7 +39,7 @@ class FightersController extends AppController
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
         if ($fighter == null){
-            $this->add($playerId);
+            $this->redirect(['controller'=>'Fighters','action'=>'add/'.$playerId]);
             
         }
         else{
