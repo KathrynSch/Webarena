@@ -54,25 +54,53 @@ class FightersTable extends Table
         ]);
     }
 
+
+    ///GETTERS
     public function getFighterByPlayerId($playerId)
     {
         $fighter=$this->find('all')->where(['player_id' => $playerId])->first();
         return($fighter);
     }
+
     public function getFighterById($fighterId)
     {
-        $fighter=$this->find('all')->where(['id' => $fighterId])->first();
-        return($fighter);
-    }
-    public function updatePosition($fighterId, $newPosX, $newPosY)
-    {
-        
-        $this->query()->update()->set(['coordinate_x' => $newPosX , 'coordinate_y' => $newPosY])->where(['id' => $fighterId])->execute();
+        $f = $this->get($fighterId);
+        return($f);
     }
 
     public function getAllFighters(){
-        $tabFighters=$this->find('all');
+        //A MODIFIER
+      //  $t = $this ->get()
+        $tabFighters=$this->find('all')->where(['level !='=> 0]);
         return($tabFighters->toArray());
+    }
+
+     public function getFighterHealth($fighterId){
+        $f = $this->get($fighterId);
+        return($f->current_health);
+    }
+
+    ///SETTERS
+    public function setFighterXp($fighterId, $fighterXp)
+    {
+         $f=$this->get($fighterId);
+         $f->xp = $fighterXp;
+         $this->save($f);
+    }
+
+    public function setFighterHealth($fighterId, $fighterCurrentHealth)
+    {
+        $f=$this->get($fighterId);
+        $f->current_health=$fighterCurrentHealth;
+        $this->save($f);
+    }
+
+     public function setPosition($fighterId, $newPosX, $newPosY)
+    {
+        $f = $this->get($fighterId);
+        $f->coordinate_x = $newPosX;
+        $f->coordinate_y = $newPosY;
+        $this->save($f);
     }
 
     /**
