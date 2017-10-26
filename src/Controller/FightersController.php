@@ -67,18 +67,7 @@ class FightersController extends AppController
             $this->redirect(['action' => 'view']);
         }        
     }
-<<<<<<< HEAD
 
-=======
-    public function addFighterPicture()
-    {
-       
-        $this->loadModel("Fighters");
-        if ($this->request->is("post")){
-            $this->Fighters->addFighterPicture($this->request->data);
-        }
-    }
->>>>>>> e5cd1cbacb535d53eabf99cfcb45802efd99280b
         /**
      * Edit method
      *
