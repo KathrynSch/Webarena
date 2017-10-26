@@ -107,6 +107,13 @@ class FightersTable extends Table
         $this->save($f);
     }
     
+    public function setFighterName($fighterId,$name){
+        $f = $this->get($fighterId);
+        $f->name = $name;
+        $this->save($f);
+    }
+    
+    
     public function addNewFighter($data,$playerId){
         
             if(!empty($data)){

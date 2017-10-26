@@ -2,7 +2,7 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Fighter'), ['action' => 'edit', $fighter->id]) ?> </li>
+        <li><?= $this->Html->link(__('Edit Fighter'), ['action' => 'edit']) ?> </li>
         <li><?= $this->Form->postLink(__('Delete Fighter'), ['action' => 'delete', $fighter->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fighter->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Fighters'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Fighter'), ['action' => 'add']) ?> </li>
