@@ -45,7 +45,7 @@ class FightersController extends AppController
         }
         else{
         $this->loadModel("Guilds");
-        $guild=$this->Guilds->getFigtherGuild($fighter->id);
+        $guild=$this->Guilds->getFighterGuild($fighter->id);
         $this->set('guild', $guild);
 
         $this->set(compact('fighter'));

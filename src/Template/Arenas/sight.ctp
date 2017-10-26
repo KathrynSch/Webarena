@@ -1,10 +1,10 @@
 <div class="table-responsive">
-  <table class="table table-bordered">
+  <table class="table table-bordered table-responsive">
   	<?php for($y=0; $y<15; $y++) {
     	echo('<tr>'); 
-    	for($x=0; $x<10; $x++) {
-         echo ('<td>');
-        foreach($tabFighters as $fighter){
+    	for($x=0; $x<10; $x++) { ?>
+         <td class="table_dark">
+        <?php foreach($tabFighters as $fighter){
 
               if(($fighter['coordinate_x'] == $x)&&($fighter['coordinate_y']== $y)){
                   echo ('FF');
