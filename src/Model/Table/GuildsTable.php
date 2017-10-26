@@ -41,17 +41,25 @@ class GuildsTable extends Table
         ]);
     }
 
+    ///GETTERS
     public function getGuilds()
     {
         $guilds = $this->find('all') ; 
         return($guilds);
     }
-    public function getFigtherGuild($activeFighterGuild)
+    public function getFighterGuild($activeFighterGuild)
     {
         $guild = $this->find('all')->where(['id' => $activeFighterGuild])->first();
         return ($guild);
     }
 
+    public function insertNewGuild($data)
+    {
+        $newGuild = $this->newEntity();
+        $newGuild->name = $data['name'];
+        $this->save($newGuild);
+        return($newGuild);
+    }
     /**
      * Default validation rules.
      *
