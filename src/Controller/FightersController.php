@@ -44,6 +44,10 @@ class FightersController extends AppController
             
         }
         else{
+        $this->loadModel("Guilds");
+        $guild=$this->Guilds->getFigtherGuild($fighter->id);
+        $this->set('guild', $guild);
+
         $this->set(compact('fighter'));
         $this->set('_serialize', ['fighter']);
         }
@@ -63,23 +67,10 @@ class FightersController extends AppController
             //debug($this->request->data); 
             //die();
             $this->Upload->send($this->request->data,$this->Flash,$playerId,$this->Fighters);
-        }
-               
-        
+            $this->redirect(['action' => 'view']);
+        }        
     }
-    public function addFighterPicture()
-    {
-       
-        $this->loadModel("Fighters");
-        if ($this->request->is("post")){
-            $this->Fighters->addFighterPicture($this->request->data);
-        }
-        /*
-        $picture = $this->request->file('picture');
-        dd("add fighter picture");
-        $this->Fighters->getPlayerFighter($fighterId, $picture);*/
 
-    }
         /**
      * Edit method
      *

@@ -1,9 +1,4 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Fighter $fighter
- */
-?>
+
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -20,22 +15,6 @@
         <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($fighter->name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Player Id') ?></th>
-            <td><?= h($fighter->player_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($fighter->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Coordinate X') ?></th>
-            <td><?= $this->Number->format($fighter->coordinate_x) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Coordinate Y') ?></th>
-            <td><?= $this->Number->format($fighter->coordinate_y) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Level') ?></th>
@@ -62,16 +41,27 @@
             <td><?= $this->Number->format($fighter->current_health) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Guild Id') ?></th>
-            <td><?= $this->Number->format($fighter->guild_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Next Action Time') ?></th>
-            <td><?= h($fighter->next_action_time) ?></td>
+            <th scope="row"><?= __('Guild') ?></th>
+            <td><?php if($guild) echo($guild->name);
+                    else echo('No guild'); ?></td>
         </tr>
     </table>
     <div class="row">
         <h4><?= __('Image') ?></h4>
-        <?= $this->Text->autoParagraph(h($fighter->image)); ?>
+
+        <?php 
+        if (file_exists(WWW_ROOT . 'img\avatars'.DS.$fighter->id.'.jpg')){
+            echo $this->Html->image('avatars/'.$fighter->id.'.jpg', array('max-height' => '200px','alt'=>'fighterAvatar'));
+        }
+        if (file_exists(WWW_ROOT . 'img\avatars'.DS.$fighter->id.'.jpeg')){
+            echo $this->Html->image('avatars/'.$fighter->id.'.jpeg', array('max-height' => '200px','alt'=>'fighterAvatar'));
+        }
+        if (file_exists(WWW_ROOT . 'img\avatars'.DS.$fighter->id.'.png')){
+            echo $this->Html->image('avatars/'.$fighter->id.'.png', array('max-height' => '200px','alt'=>'fighterAvatar'));
+        }
+        if (file_exists(WWW_ROOT . 'img\avatars'.DS.$fighter->id.'.gif')){
+            echo $this->Html->image('avatars/'.$fighter->id.'.gif', array('max-height' => '200px','alt'=>'fighterAvatar'));
+        }
+         ?>
     </div>
 </div>

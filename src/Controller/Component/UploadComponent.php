@@ -20,7 +20,7 @@ class UploadComponent extends Component
             }
             
            // foreach($data as $file){
-                $filename=$playerId;
+                $filename=$Fighters->getFighterByPlayerId($playerId)->id;
                 $file_tmp_name=$data['avatar_file']['tmp_name'];
                 $dir= WWW_ROOT . 'img'.DS.'avatars' ;
                 $allowed=array('png','jpg','jpeg','gif');
