@@ -37,9 +37,9 @@ class ArenasController extends AppController {
     public function moveFighter($direction, $fighterId)
     {
         $this->loadModel("Fighters");
-        $fighter=$this->Fighters->getFighterById($fighterId);
-        $newPosX= $fighter['coordinate_x'];
-        $newPosY= $fighter['coordinate_y'];
+        $activeFighter=$this->Fighters->getFighterById($fighterId);
+        $newPosX= $activeFighter['coordinate_x'];
+        $newPosY= $activeFighter['coordinate_y'];
 
         if($direction == 'l'){  //move left
            $newPosX-- ;
@@ -53,10 +53,44 @@ class ArenasController extends AppController {
         if($direction == 'd'){  //move down
             $newPosY++ ;
         }
-
-        $this->Fighters->setPosition($fighterId, $newPosX, $newPosY);
-        $this->redirect(['action' => 'sight']);
+        
+         if($this->isOkToMove($fighterId, $newPosX, $newPosY) == 'false'){
+             $this->Flash->error('You cannot move here!');
+          
+         }
+         
+         else{
+            $this->Fighters->setPosition($fighterId, $newPosX, $newPosY);
+             
+         }
+         
+         $this->redirect(['action' => 'sight']);
     }
+    
+    public function isOkToMove($fighterId, $newPosX,$newPosY){
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterById($fighterId);
+        $fighters=$this->Fighters->getAllFighters();
+        
+        //Check with other fighters
+        foreach($fighters as $fighter){
+
+            if(($fighter['coordinate_x'] == $newPosX) && ($fighter['coordinate_y']== $newPosY)){
+                return('false');
+            }  
+        }
+        
+        //Check grid borders
+        if($newPosX < 0 || $newPosX >=10 || $newPosY<0 || $newPosY>=15){
+                return('false');
+        }
+        
+        
+        //ok to move
+        return('true');
+
+    }
+    
 
     public function isNextToAdv($fighter, $tabFighters, $direction)
     {
