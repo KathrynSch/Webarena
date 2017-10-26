@@ -173,6 +173,12 @@ class FightersTable extends Table
                   
     }}
 
+    // ELSE
+    public function deleteFighter($fighterId){
+        $f = $this->get($fighterId);
+        $this->delete($f);
+    }
+
     /**
      * Default validation rules.
      *

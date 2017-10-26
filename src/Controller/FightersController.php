@@ -36,7 +36,15 @@ class FightersController extends AppController {
         $playerId = $this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
+<<<<<<< HEAD
         if ($fighter == null) {
+=======
+        if($fighter->current_health == 0){
+            
+            $this->redirect(['action' =>'deadfighter']);
+        }
+        if ($fighter == null){
+>>>>>>> f85709c452e7333e58448191b32a01928ebeb36f
             $this->Flash->error("You have no fighter to display. Create a fighter please.");
             $this->redirect(['controller' => 'Fighters', 'action' => 'add']);
         } else {
@@ -49,6 +57,7 @@ class FightersController extends AppController {
         }
     }
 
+<<<<<<< HEAD
     public function add() {
         $playerId = $this->Auth->user('id');
         $this->loadModel("Fighters");
@@ -99,6 +108,75 @@ class FightersController extends AppController {
                 }
             }
         } else {
+=======
+
+    public function deadfighter()
+    {
+        $playerId=$this->Auth->user('id');          //Player logged in
+        $this->loadModel("Fighters");   //load model de la table fighters
+        $fighter = $this->Fighters->getFighterByPlayerId($playerId);
+        $this->loadModel("Guilds");
+        $guild=$this->Guilds->getFighterGuild($fighter->id);
+        $this->set('guild', $guild);
+
+        $this->set(compact('fighter'));
+        $this->set('_serialize', ['fighter']);
+        $this->render('deadfighter');
+    }
+
+        /**
+     * Add method
+     *
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     */
+
+    public function add()
+    {
+        $playerId=$this->Auth->user('id');
+        $this->loadModel("Fighters");
+        // if player has no fighter -> allow fighter creation
+        $actualFighter = $this->Fighters->getFighterByPlayerId($playerId);
+
+        if( $actualFighter != null && $actualFighter->current_health == 0)
+            {
+                $this->Fighters->deleteFighter($actualFighter->id); //delete dead fighter
+            }
+        if( $actualFighter == null || $actualFighter->current_health == 0)  // if no fighter or old dead fighter -> allow new fighter
+        {
+            $fighter = $this->Fighters->newEntity();
+            if ($this->request->is('post') && !empty($this->request->data))
+            {
+                $this->Fighters->addNewFighter($this->request->data,$playerId);
+                $this->Flash->success(__('The fighter has been saved.'));
+                 
+                $filename=$this->Fighters->getFighterByPlayerId($playerId)->id;
+                 
+                $file_tmp_name=$this->request->data['avatar_file']['tmp_name'];
+                $dir= WWW_ROOT . 'img'.DS.'avatars' ;
+                $allowed=array('png','jpg','jpeg','gif');
+
+                $avatarExtension=strtolower(substr(strrchr($this->request->data['avatar_file']['name'],'.'),1));
+                    
+                if(!in_array($avatarExtension,$allowed))
+                {
+                    dd("There is a problem with your file, please choose another.");
+                }
+                $newName=$filename.'.png';
+                if(move_uploaded_file($file_tmp_name,$dir.DS.$newName)&& is_writable($dir))
+                {
+                    $this->Flash->success('Your picture upload is successfull!'); 
+                    $this->redirect(['action' => 'view']);
+                }
+            }
+            else
+            { 
+                $this->Flash->error('There is a problem with your picture upload.');          
+            }
+        }        
+        else
+        {   //if fighter is dead
+            if($actualFighter->current_health == 0)
+>>>>>>> f85709c452e7333e58448191b32a01928ebeb36f
             $this->Flash->error('You can\'t have more than one fighter.');
             $this->redirect(['action' => 'view']);
         }
