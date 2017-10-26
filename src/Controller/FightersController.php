@@ -83,59 +83,51 @@ class FightersController extends AppController
     {
         $playerId=$this->Auth->user('id');
         $this->loadModel("Fighters");
-        if(($this->Fighters->getFighterByPlayerId($playerId))==null){
-        $fighter = $this->Fighters->newEntity();
-        if ($this->request->is('post') && !empty($this->request->data))
-        {
-            
-            
+        // if player has no fighter -> allow fighter creation
+        $actualFighter = $this->Fighters->getFighterByPlayerId($playerId);
 
-           
- $this->Fighters->addNewFighter($this->request->data,$playerId);
-$this->Flash->success(__('The fighter has been saved.'));
- 
- $filename=$this->Fighters->getFighterByPlayerId($playerId)->id;
- 
- $file_tmp_name=$this->request->data['avatar_file']['tmp_name'];
+        if( $actualFighter != null && $actualFighter->current_health == 0)
+            {
+                $this->Fighters->deleteFighter($actualFighter->id); //delete dead fighter
+            }
+        if( $actualFighter == null || $actualFighter->current_health == 0)  // if no fighter or old dead fighter -> allow new fighter
+        {
+            $fighter = $this->Fighters->newEntity();
+            if ($this->request->is('post') && !empty($this->request->data))
+            {
+                $this->Fighters->addNewFighter($this->request->data,$playerId);
+                $this->Flash->success(__('The fighter has been saved.'));
+                 
+                $filename=$this->Fighters->getFighterByPlayerId($playerId)->id;
+                 
+                $file_tmp_name=$this->request->data['avatar_file']['tmp_name'];
                 $dir= WWW_ROOT . 'img'.DS.'avatars' ;
                 $allowed=array('png','jpg','jpeg','gif');
 
                 $avatarExtension=strtolower(substr(strrchr($this->request->data['avatar_file']['name'],'.'),1));
-                
-                if(!in_array($avatarExtension,$allowed)){
-                dd("There is a problem with your file, please choose another.");}
+                    
+                if(!in_array($avatarExtension,$allowed))
+                {
+                    dd("There is a problem with your file, please choose another.");
+                }
                 $newName=$filename.'.png';
-                
-                
-                
-                
-                
-                 
-                   //move_uploaded_file($file_tmp_name,$dir.DS.$newName);
-                   /*if ($filedb->save($entity)) {
-                             $flash->success(__('The fighter has been saved.'));
-
-                            }
-                            else{
-                                  $flash->error(__('The fighter could not be saved. Please, try again.'));
-                                  
-                            }*/
-                    if(move_uploaded_file($file_tmp_name,$dir.DS.$newName)&& is_writable($dir)){
-                   
+                if(move_uploaded_file($file_tmp_name,$dir.DS.$newName)&& is_writable($dir))
+                {
                     $this->Flash->success('Your picture upload is successfull!'); 
                     $this->redirect(['action' => 'view']);
-                        
-                    }
-                else{
-                    
-                    $this->Flash->error('There is a problem with your picture upload.');          
-            
-        }
+                }
+            }
+            else
+            { 
+                $this->Flash->error('There is a problem with your picture upload.');          
+            }
         }        
-    }else{
-         $this->Flash->error('You can\'t have more than one fighter.');
-          $this->redirect(['action' => 'view']);
-    }
+        else
+        {   //if fighter is dead
+            if($actualFighter->current_health == 0)
+            $this->Flash->error('You can\'t have more than one fighter.');
+            $this->redirect(['action' => 'view']);
+        }
     }
 
         /**
