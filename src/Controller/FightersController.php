@@ -39,18 +39,36 @@ class FightersController extends AppController
         $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
+        if($fighter->current_health == 0){
+            
+            $this->redirect(['action' =>'deadfighter']);
+        }
         if ($fighter == null){
             $this->redirect(['controller'=>'Fighters','action'=>'add/'.$playerId]);
             
         }
         else{
         $this->loadModel("Guilds");
-        $guild=$this->Guilds->getFigtherGuild($fighter->id);
+        $guild=$this->Guilds->getFighterGuild($fighter->id);
         $this->set('guild', $guild);
 
         $this->set(compact('fighter'));
         $this->set('_serialize', ['fighter']);
         }
+    }
+
+    public function deadfighter()
+    {
+        $playerId=$this->Auth->user('id');          //Player logged in
+        $this->loadModel("Fighters");   //load model de la table fighters
+        $fighter = $this->Fighters->getFighterByPlayerId($playerId);
+        $this->loadModel("Guilds");
+        $guild=$this->Guilds->getFighterGuild($fighter->id);
+        $this->set('guild', $guild);
+
+        $this->set(compact('fighter'));
+        $this->set('_serialize', ['fighter']);
+        $this->render('deadfighter');
     }
 
         /**
