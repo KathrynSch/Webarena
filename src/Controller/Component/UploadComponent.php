@@ -68,6 +68,7 @@ class UploadComponent extends Component
                 }
                } 
                
+               
                $entity->coordinate_x=$x;
                $entity->coordinate_y=$y;
                $entity->level=1;

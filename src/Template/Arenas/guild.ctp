@@ -1,4 +1,9 @@
 <div class="panel panel-info">
+<?= $this->Form->postButton('Create Guild', array('action'=>'addGuild')); ?>
+
+
+  <?php if ($fighterGuild <> null){ ?>
+
 	<div class="panel-heading">Your Guild</div>
 	<div class="panel-body">
 	  <table class="table">
@@ -21,6 +26,8 @@
 	</div>
 </div>
 
+<?php } ?>
+
 <div class="panel panel-default">
 	<div class="panel-heading">Guilds</div>
   	<div class="panel-body">
@@ -42,7 +49,7 @@
    				<?php endforeach ?>	
    			</td>
    			<td>
-   				<?php if($guild->id == $fighterGuild->id) echo ('Your Guild'); 
+   				<?php if(($fighterGuild <> null) && ($guild->id == $fighterGuild->id)) echo ('Your Guild'); 
    					else echo $this->Form->postButton('Join', array('action'=>'joinGuild', $guild->id)); ?>
    			</td>
         </tr>

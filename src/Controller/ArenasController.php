@@ -37,9 +37,9 @@ class ArenasController extends AppController {
     public function moveFighter($direction, $fighterId)
     {
         $this->loadModel("Fighters");
-        $fighter=$this->Fighters->getFighterById($fighterId);
-        $newPosX= $fighter['coordinate_x'];
-        $newPosY= $fighter['coordinate_y'];
+        $activeFighter=$this->Fighters->getFighterById($fighterId);
+        $newPosX= $activeFighter['coordinate_x'];
+        $newPosY= $activeFighter['coordinate_y'];
 
         if($direction == 'l'){  //move left
            $newPosX-- ;
@@ -53,10 +53,44 @@ class ArenasController extends AppController {
         if($direction == 'd'){  //move down
             $newPosY++ ;
         }
-
-        $this->Fighters->setPosition($fighterId, $newPosX, $newPosY);
-        $this->redirect(['action' => 'sight']);
+        
+         if($this->isOkToMove($fighterId, $newPosX, $newPosY) == 'false'){
+             $this->Flash->error('You cannot move here!');
+          
+         }
+         
+         else{
+            $this->Fighters->setPosition($fighterId, $newPosX, $newPosY);
+             
+         }
+         
+         $this->redirect(['action' => 'sight']);
     }
+    
+    public function isOkToMove($fighterId, $newPosX,$newPosY){
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterById($fighterId);
+        $fighters=$this->Fighters->getAllFighters();
+        
+        //Check with other fighters
+        foreach($fighters as $fighter){
+
+            if(($fighter['coordinate_x'] == $newPosX) && ($fighter['coordinate_y']== $newPosY)){
+                return('false');
+            }  
+        }
+        
+        //Check grid borders
+        if($newPosX < 0 || $newPosX >=10 || $newPosY<0 || $newPosY>=15){
+                return('false');
+        }
+        
+        
+        //ok to move
+        return('true');
+
+    }
+    
 
     public function isNextToAdv($fighter, $tabFighters, $direction)
     {
@@ -180,8 +214,28 @@ class ArenasController extends AppController {
         $this->loadModel("Guilds");
         $guilds = $this->Guilds->getGuilds();
         $this->set('guilds', $guilds);
-        $fighterGuild = $this->Guilds->getFigtherGuild($activeFighter->guild_id);
-        $this->set('fighterGuild', $fighterGuild);
+        $fighterGuild = $this->Guilds->getFighterGuild($activeFighter->guild_id);
+        $this->set('activeFighter', $activeFighter);
+        $this->set('fighterGuild', $fighterGuild);          //Guild of active fighter
+    }
+
+    public function addGuild()
+    {
+        $playerId=$this->Auth->user('id');
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
+
+        $this->loadModel("Guilds");
+        
+        if ($this->request->is('post') && !empty($this->request->data)) {
+            $newGuild = $this->Guilds->insertNewGuild($this->request->data);
+            $this->Fighters->setFighterGuild($newGuild->id, $activeFighter->id);
+            $this->Flash->success('Guild created successfully');
+            $this->redirect(['action' => 'guild']);
+
+    }
+
+
     }
 
     public function joinGuild($guildId)
@@ -192,6 +246,7 @@ class ArenasController extends AppController {
         $this->Fighters->setFighterGuild($guildId, $activeFighter->id);
         $this->redirect(['action' => 'guild']);
     }
+
     public function shout($fighterId)
     {
         $playerId=$this->Auth->user('id');          //Player logged in
