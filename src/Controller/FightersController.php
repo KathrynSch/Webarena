@@ -59,9 +59,6 @@ class FightersController extends AppController
         $this->loadModel("Fighters");
         $fighter = $this->Fighters->newEntity();
         if ($this->request->is('post') && !empty($this->request->data)) {
-           //$fighter = $this->Fighters->patchEntity($fighter, $this->request->getData());
-            //debug($this->request->data); 
-            //die();
             $this->Upload->send($this->request->data,$this->Flash,$playerId,$this->Fighters);
         }
                
@@ -74,11 +71,6 @@ class FightersController extends AppController
         if ($this->request->is("post")){
             $this->Fighters->addFighterPicture($this->request->data);
         }
-        /*
-        $picture = $this->request->file('picture');
-        dd("add fighter picture");
-        $this->Fighters->getPlayerFighter($fighterId, $picture);*/
-
     }
         /**
      * Edit method
