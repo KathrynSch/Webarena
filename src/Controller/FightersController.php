@@ -16,7 +16,7 @@ class FightersController extends AppController
     
     public function initialize(){
         parent::initialize();
-        $this->loadComponent('Upload');
+       // $this->loadComponent('Upload');
         $this->loadComponent('Flash');
 
     }
@@ -40,12 +40,13 @@ class FightersController extends AppController
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
         if ($fighter == null){
-            $this->redirect(['controller'=>'Fighters','action'=>'add/'.$playerId]);
+            $this->Flash->error("You have no fighter to display. Create a fighter please.");
+            $this->redirect(['controller'=>'Fighters','action'=>'add']);
             
         }
         else{
         $this->loadModel("Guilds");
-        $guild=$this->Guilds->getFigtherGuild($fighter->id);
+        $guild=$this->Guilds->getFighterGuild($fighter->id);
         $this->set('guild', $guild);
 
         $this->set(compact('fighter'));
@@ -53,19 +54,63 @@ class FightersController extends AppController
         }
     }
 
-        /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add($playerId)
+
+    public function add()
     {
+        $playerId=$this->Auth->user('id');
         $this->loadModel("Fighters");
+        if(($this->Fighters->getFighterByPlayerId($playerId))==null){
         $fighter = $this->Fighters->newEntity();
         if ($this->request->is('post') && !empty($this->request->data)) {
-            $this->Upload->send($this->request->data,$this->Flash,$playerId,$this->Fighters);
-            $this->redirect(['action' => 'view']);
+            
+            
+
+           
+ $this->Fighters->addNewFighter($this->request->data,$playerId);
+$this->Flash->success(__('The fighter has been saved.'));
+ 
+ $filename=$this->Fighters->getFighterByPlayerId($playerId)->id;
+ 
+ $file_tmp_name=$this->request->data['avatar_file']['tmp_name'];
+                $dir= WWW_ROOT . 'img'.DS.'avatars' ;
+                $allowed=array('png','jpg','jpeg','gif');
+
+                $avatarExtension=strtolower(substr(strrchr($this->request->data['avatar_file']['name'],'.'),1));
+                
+                if(!in_array($avatarExtension,$allowed)){
+                dd("There is a problem with your file, please choose another.");}
+                $newName=$filename.'.png';
+                
+                
+                
+                
+                
+                 
+                   //move_uploaded_file($file_tmp_name,$dir.DS.$newName);
+                   /*if ($filedb->save($entity)) {
+                             $flash->success(__('The fighter has been saved.'));
+
+                            }
+                            else{
+                                  $flash->error(__('The fighter could not be saved. Please, try again.'));
+                                  
+                            }*/
+                    if(move_uploaded_file($file_tmp_name,$dir.DS.$newName)&& is_writable($dir)){
+                   
+                    $this->Flash->success('Your picture upload is successfull!'); 
+                    $this->redirect(['action' => 'view']);
+                        
+                    }
+                else{
+                    
+                    $this->Flash->error('There is a problem with your picture upload.');          
+            
+        }
         }        
+    }else{
+         $this->Flash->error('You can\'t have more than one fighter.');
+          $this->redirect(['action' => 'view']);
+    }
     }
 
         /**

@@ -106,6 +106,65 @@ class FightersTable extends Table
         $f->guild_id = $guildId;
         $this->save($f);
     }
+    
+    public function addNewFighter($data,$playerId){
+        
+            if(!empty($data)){
+            //if(count($data)>$this->max_files){
+                //throw new InternalErrorException("Error Processing Request. Max number files accepted is {$this->max_files}",1);
+            //}
+
+                
+
+                
+
+                  $tabfighters=$this->getAllFighters();
+                  //$filedb=TableRegistry::get('Fighters');
+                  $entity=$this->newEntity();
+                  $x= rand(0,9);
+                  $y= rand(0, 14);
+                  $occupy=false;
+                  foreach ($tabfighters as $fighter){
+                   
+                    if ($fighter['coordinate_x']==$x && $fighter['coordinate_y']==$y){
+                    
+                   $occupy=true;   
+                }
+               }
+               
+               while ($occupy){
+                   $occupy=false;
+                  $x= rand(0,9);
+                  $y= rand(0, 14);
+                  
+                  foreach ($tabfighters as $fighter){
+                   
+                   if ($fighter['coordinate_x']==$x && $fighter['coordinate_y']==$y){
+                    
+                     $occupy=true;   
+                   }
+                }
+               } 
+               
+               
+               $entity->coordinate_x=$x;
+               $entity->coordinate_y=$y;
+               $entity->level=1;
+               $entity->xp=0;
+               $entity->player_id=$playerId;
+               $entity->skill_sight=2;
+               $entity->skill_strength=1;
+               $entity->skill_health=5;
+               $entity->current_health=5;
+               $entity->name=$data['name'];
+               $this->save($entity);
+
+                      
+                          
+                   //$newName=$filename.'.'.$avatarExtension;
+                  
+                  
+    }}
 
     /**
      * Default validation rules.
