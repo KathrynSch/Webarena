@@ -119,8 +119,8 @@ class FightersController extends AppController {
             }
         }        
         else
-        {   //if fighter is dead
-            if($actualFighter->current_health == 0)
+        {   //if fighter is dead (condition unecessary)
+            //if($actualFighter->current_health == 0)
 
             $this->Flash->error('You can\'t have more than one fighter.');
             $this->redirect(['action' => 'view']);
