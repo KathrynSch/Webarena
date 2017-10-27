@@ -14,7 +14,7 @@
 
 <!-- BOOTSTRAP FEATURE SUPER STYLE <-->
 
-<div class="container">
+<div class="container table-responsive">
     <div class="row">       
         <div class="col-md-9 ">
 
@@ -36,12 +36,6 @@
                                     <!--<div style="color:#999;" >click here to change profile image</div>  -->
                                     <li> <?= $this->Html->link(__($levelUpString), ['action' => 'levelup']) ?> </li> 
                                     <!--Upload Image Js And Css-->
-
-
-
-
-
-
 
                                 </div>
 

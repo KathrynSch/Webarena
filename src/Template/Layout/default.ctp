@@ -42,9 +42,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
+    <nav class="top-bar expanded" data-topbar role="navigation" style="background-color:#00897B; color:white;">
+        <ul class="title-area large-3 medium-4 columns" style="background-color:#00897B; " >
+            <li class="name" style="font-size:12px; color:white;">
               <h1><a href=""><?= $this->fetch('title') ?></a></h1></li>
               <li> <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home')); ?> </li>
                 <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
@@ -67,13 +67,22 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
     </nav>
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <div class="container clearfix" >
         <?= $this->fetch('content') ?>
     </div>
-    <footer>
-        <p>Groupe n°5</p>
-        <p>Autors: SCHUTTE, GRIERE, DUMONT, BRUNETON</p>
-        <p>Options: BF</p>
-    </footer>
+
+
+<footer class="container-fluid text-center bg-lightgray" style="width:100%; padding:0px; margin-bottom: 0px;">
+
+        <div class="copyrights" >
+            <p style="margin-bottom: 0px; font-size:12px; background-color:#00897B; color:white;">
+                <br>© 
+                <span>Web Design By: BRUNETON, DUMONT, GRIERE, SCHUTTE</span><br>
+                <span>Options B,F and D - SI05 October 2017</span>
+            </p>
+        </div>
+</footer>
+
+
 </body>
 </html>
