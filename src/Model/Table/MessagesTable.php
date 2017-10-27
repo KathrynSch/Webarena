@@ -4,6 +4,7 @@ namespace App\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\I18n\Time;
 use Cake\Validation\Validator;
 
 /**
@@ -44,8 +45,19 @@ class MessagesTable extends Table
 
     public function getMessagesByFighter($fighterId)
     {
-        $messages=$this->find('all', ['order' => ['date' => 'DESC']])->where(['fighter_id' => $fighterId]);
+        $messages=$this->find('all', ['order' => ['date' => 'DESC']])->where(['fighter_id' => $fighterId])->orWhere(['fighter_id_from' => $fighterId]);
         return $messages;
+    }
+
+    public function addNewMessage($data, $fighterId)
+    {
+        $m = $this->newEntity();
+        $m->title = $data['title'];
+        $m->date = Time::now();
+        $m->message = $data['message'];
+        $m->fighter_id_from = $fighterId;
+        $m->fighter_id = $data['to'];
+        $this->save($m);
     }
 
     /**

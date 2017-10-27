@@ -69,6 +69,11 @@ class FightersTable extends Table
     }
 
     public function getAllFighters(){
+        $tabFighters=$this->find('all');
+        return($tabFighters->toArray());
+    }
+
+    public function getAllAliveFighters(){
         $tabFighters=$this->find('all')->where(['current_health !='=> 0]);
         return($tabFighters->toArray());
     }
@@ -76,6 +81,11 @@ class FightersTable extends Table
      public function getFighterHealth($fighterId){
         $f = $this->get($fighterId);
         return($f->current_health);
+    }
+
+    public function getFightersNames(){
+        $f= $this->find('list', ['fields' =>['id','name'] ]);
+        return($f->toArray());
     }
 
     ///SETTERS

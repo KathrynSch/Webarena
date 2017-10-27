@@ -30,7 +30,7 @@ class ArenasController extends AppController {
         $this->loadModel("Fighters");
         $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
         $this->set('activeFighter', $activeFighter);
-        $tabFighters=$this->Fighters->getAllFighters();
+        $tabFighters=$this->Fighters->getAllAliveFighters();
         $this->set('tabFighters', $tabFighters);
     }
 
@@ -70,7 +70,7 @@ class ArenasController extends AppController {
     public function isOkToMove($fighterId, $newPosX,$newPosY){
         $this->loadModel("Fighters");
         $activeFighter=$this->Fighters->getFighterById($fighterId);
-        $fighters=$this->Fighters->getAllFighters();
+        $fighters=$this->Fighters->getAllAliveFighters();
         
         //Check with other fighters
         foreach($fighters as $fighter){
@@ -147,7 +147,7 @@ class ArenasController extends AppController {
         $fighter=$this->Fighters->getFighterById($fighterId);
 
         //Recuperate fighters table
-        $tabFighters=$this->Fighters->getAllFighters();
+        $tabFighters=$this->Fighters->getAllAliveFighters();
         $this->set('tabFighters', $tabFighters);
 
         //If next to adv
@@ -197,18 +197,34 @@ class ArenasController extends AppController {
         $this->loadModel("Fighters");
         $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
         $fighters = $this->Fighters->getAllFighters();
+        $fightersNames = $this->Fighters->getFightersNames();
         $this->set('fighters', $fighters);
+        $this->set('fightersNames', $fightersNames);
         $this->loadModel("Messages");
         $messages= $this->Messages->getMessagesByFighter($activeFighter->id)->toArray();
         $this->set('messages', $messages);
+        //FORM
+        if ($this->request->is('post') && !empty($this->request->data))
+        {
+            $this->Messages->addNewMessage($this->request->data, $activeFighter->id);
+            $this->redirect(['action' => 'messages']);
+        }
     }
+/*
+    public function sendmessage()
+    {
+        $playerId=$this->Auth->user('id');          //Player logged in
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
+        
+    }*/
 
     public function guild()
     {
         $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");
         $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
-        $fighters=$this->Fighters->getAllFighters();
+        $fighters=$this->Fighters->getAllAliveFighters();
         $this->set('fighters', $fighters);
 
         $this->loadModel("Guilds");
@@ -232,10 +248,7 @@ class ArenasController extends AppController {
             $this->Fighters->setFighterGuild($newGuild->id, $activeFighter->id);
             $this->Flash->success('Guild created successfully');
             $this->redirect(['action' => 'guild']);
-
-    }
-
-
+        }
     }
 
     public function joinGuild($guildId)
