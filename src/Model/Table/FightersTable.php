@@ -123,6 +123,35 @@ class FightersTable extends Table
         $this->save($f);
     }
     
+    public function setFighterMaximumHealth($fighterId, $fighterMaximumHealth)
+    {
+        $f=$this->get($fighterId);
+        $f->skill_health=$fighterMaximumHealth;
+        $this->save($f);
+    }
+    
+    
+    public function setFighterForce($fighterId, $fighterForce)
+    {
+        $f=$this->get($fighterId);
+        $f->skill_strength=$fighterForce;
+        $this->save($f);
+    }
+    
+    public function setFighterSight($fighterId, $fighterSight)
+    {
+        $f=$this->get($fighterId);
+        $f->skill_sight=$fighterSight;
+        $this->save($f);
+    }
+    
+    public function setFighterLevel($fighterId, $fighterLevel)
+    {
+         $f=$this->get($fighterId);
+         $f->level = $fighterLevel;
+         $this->save($f);
+    }
+    
     
     public function addNewFighter($data,$playerId){
         

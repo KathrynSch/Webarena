@@ -1,14 +1,30 @@
+<?php
+
+/**
+ * @var \App\View\AppView $this
+ */
+?>
+
+
 
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Fighter'), ['action' => 'edit']) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Fighter'), ['action' => 'delete', $fighter->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fighter->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Fighters'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Fighter'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('Play'), ['controller' => 'Arenas', 'action' => 'sight']) ?> </li>
+        <li><?= $this->Html->link(__('List Fighters'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
+<div class="fighters form large-9 medium-8 columns content">
+    <?= $this->Form->create('Upload',array('enctype'=>'multipart/form-data')); ?> 
+    <fieldset>
+        <legend><?= __('Which upgrade for your fighter?') ?></legend>
+        <?=
+             $this->Form->radio('upgrade', ['+1 Sight','+1 Force','+3 Max. Life']);
+
+        ?>
+    </fieldset>
+    <?= $this->Form->button(__('Level UP')) ?>
+    <?= $this->Form->end() ?>
+</div>
 
 
 
@@ -32,10 +48,6 @@
         }else{
             echo "No picture available.";
         } ?>
-                                    <input id="profile-image-upload" class="hidden" type="file">
-                                    <!--<div style="color:#999;" >click here to change profile image</div>  -->
-                                    <li> <?= $this->Html->link(__($levelUpString), ['action' => 'levelup']) ?> </li> 
-                                    <!--Upload Image Js And Css-->
 
 
 
@@ -89,14 +101,8 @@
                             <div class="bot-border"></div>
 
                             <div class="col-sm-5 col-xs-6 tital" style="font-weight:bold;" ><?= __('Guild') ?></div><div class="col-sm-7">
-
     <?php if($guild) echo($guild->name);
                     else echo('No guild'); ?></div>
-
-                            <div class="col-sm-5 col-xs-6 tital" style="font-weight:bold;" ><?= __('Guilds Page') ?></div><div class="col-sm-7">
-
-     <?= $this->Html->link(__("Go to Guilds Page"), ['controller'=>'arenas','action' => 'guild']) ?> </div>
-
 
 
                             <!-- /.box-body -->
@@ -120,14 +126,62 @@
 
 
 
-
-
-
-
-
     </div>
 </div>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4>
+                            Bhaumik Patel</h4>
+                        <small><cite title="San Francisco, USA">San Francisco, USA <i class="glyphicon glyphicon-map-marker">
+                                </i></cite></small>
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
+                            <br />
+                            <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                            <br />
+                            <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary">
+                                Social</button>
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span><span class="sr-only">Social</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="https://plus.google.com/+Jquery2dotnet/posts">Google +</a></li>
+                                <li><a href="https://www.facebook.com/jquery2dotnet">Facebook</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Github</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 

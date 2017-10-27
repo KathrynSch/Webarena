@@ -39,7 +39,7 @@
 
 ?>
 </div>
-<?= $this->Html->link(__('Guild options'), ['action' => 'guild', $activeFighter['id'] ]) ?>
+<?= $this->Html->link(__('Guild options'), ['action' => 'guild' ]) ?>
 <div>
   <div class="panel panel-info">
     <div class="panel-heading"><?= $this->Html->link(__('Messages'), ['action' => 'messages' ]) ?></div>
