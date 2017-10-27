@@ -34,8 +34,9 @@ class PlayersController extends AppController
      * @return \Cake\Http\Response|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view()
     {
+        $id=$this->Auth->user('id');
         $player = $this->Players->get($id, [
             'contain' => ['Fighters']]);
         $this->set('player', $player);
@@ -117,7 +118,7 @@ class PlayersController extends AppController
             if($player){
                 $this->Auth->setUser($player);
 
-                return $this->redirect(['controller' => 'Fighters', 'action' => 'view', $player['id']]);
+                return $this->redirect(['controller' => 'Fighters', 'action' => 'view']);
             }
             //bad login
             $this->Flash->error('Incorrect Login');
