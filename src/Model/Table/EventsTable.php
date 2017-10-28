@@ -48,7 +48,9 @@ class EventsTable extends Table
 
     public function getAllEvents()
     {
-        $e = $this->find('all');
+        $inlastday = Time::now();
+        $inlastday = $inlastday->modify('-24 hours');
+        $e = $this->find('all')->where(['date >' => $inlastday]);
         return($e);
     }
     /**

@@ -42,14 +42,44 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation" style="background-color:#00897B; color:white;">
-        <ul class="title-area large-3 medium-4 columns" style="background-color:#00897B; " >
+<nav class="navbar navbar-inverse navbar-fixed-top"  role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand">Webarena</a>
+        </div>
+                       
+                          <ul class="nav navbar-nav">
+                            <li>
+                                <a <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home'), array('class' => 'text-white')); ?> </a></li>
+                            <li>
+                                <a <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?></a></li>
+                            <li>
+                                <a <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></a></li>
+                            <li>
+                                <a <?php echo $this->Html->link('Fighter', ['controller' => 'Fighters', 'action' => 'view']); ?></a></li>
+                             </ul>
+
+
+                                <ul class="nav navbar-nav navbar-right">
+                                    <?php if($loggedIn) : ?>
+                                    <li>
+                                        <a <?php echo $this->Html->link('LogIn/Out', array('controller' => 'Players', 'action' => 'logout')); ?></a></li>
+                                    <?php else: ?>
+                                    <li>
+                                        <a <?= $this->Html->link('Register',['controller' => 'Players', 'action' => 'register']); ?></a></li>
+                                    <?php endif; ?>
+
+                                </ul>
+                                                
+      </div>
+    </nav>
+
+
+ <!-- 
+    <nav class="top-bar expanded" data-topbar role="navigation">
+        <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <style type="text/css">
-                        a:link {text-decoration:none; color:white; font-size:12px;}    
-                        a:hover {text-decoration:underline; color:white; font-size:12px;}   
-                        a:active {text-decoration:underline; color:white; font-size:12px;}  >
-                </style>
+                
               <h1><a href=""><?= $this->fetch('title') ?></a></h1></li>
               <li> <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home')); ?> 
               </li>
@@ -72,10 +102,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
             </ul>
         </div>
-    </nav>
+    </nav>  -->
     
     <?= $this->Flash->render() ?>
-    <div class="container clearfix" >
+    <div class="container text-center clearfix">
         <?= $this->fetch('content') ?>
     </div>
 
