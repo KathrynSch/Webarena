@@ -66,6 +66,22 @@ class PlayersTable extends Table
 
         return $validator;
     }
+    
+    //public function findByEmail($)
+    
+   /* public function getAllPlayer(){
+        
+        $tabPlayers=$this->find('all');
+        return($tabPlayers->toArray());
+        
+    }
+    
+    public function setPasswordPlayer($PlayerId,$new_passeword){
+        
+        $f=$this->get($PlayerId);
+        $f->password=$new_password;
+        $this->save($f); 
+    } 
 
     /**
      * Returns a rules checker object that will be used for validating

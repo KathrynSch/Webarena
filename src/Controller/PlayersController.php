@@ -144,10 +144,58 @@ class PlayersController extends AppController
         $this -> set(compact('player'));
         $this -> set('_serialize',['player']);
     }
+    
+    public function forgotpassword(){
+        
+        if($this->request->is('post')){
+            $this->loadModel("Players");
+            $email=$this->data['email'];
+            $tabPlayers=$this->Players->getAllPlayer();
+            foreach( $tabPlayers as $player ){
+                
+               if(($player['email'] == $email)){
+                   
+                   $random=rand(75412, 898542);
+                   $new_password= md5($new_password);
+                   $this->Players->setPasswordPlayer($player['id'], $new_passeword);
+                    
+                
+            } 
+            else{
+                
+                echo "this email does not exist !";
+            }
+                
+            }   
+            
+        }
+        
+        } 
+    
+    /*function forgot_password() {
+        if (!empty($this->data)) {
+            $player = $this->Player->findByEmail($this->data['email']);
+            if (empty($player)) {
+                $this->Session>setflash('Sorry, the email entered was not found.');
+                $this->redirect('/players/forgot_password');
+            } else {
+                $player = $this->__generatePasswordToken($player);
+                if ($this->Player->save($Player) && $this->__sendForgotPasswordEmail($Player['email']['id'])) {
+                    $this->Session->setflash('Password reset instructions have been sent to your email address.
+						You have 24 hours to complete the request.');
+                    $this->redirect('/players/login');
+                }
+            }
+        }
+    }
+  
+        */
+        
+        
     public function home(){
        $this->render();
     }
     public function beforeFilter(Event $event){
-        $this-> Auth -> allow(['register', 'home']); // add later about and index pages
+        $this-> Auth -> allow(['register', 'home','forgotpassword']); // add later about and index pages
     }
 }
