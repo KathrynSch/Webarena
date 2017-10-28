@@ -159,11 +159,6 @@ class FightersTable extends Table
             //if(count($data)>$this->max_files){
                 //throw new InternalErrorException("Error Processing Request. Max number files accepted is {$this->max_files}",1);
             //}
-
-                
-
-                
-
                   $tabfighters=$this->getAllFighters();
                   //$filedb=TableRegistry::get('Fighters');
                   $entity=$this->newEntity();
@@ -207,9 +202,7 @@ class FightersTable extends Table
 
                       
                           
-                   //$newName=$filename.'.'.$avatarExtension;
-                  
-                  
+                   //$newName=$filename.'.'.$avatarExtension;           
     }}
 
     // ELSE
