@@ -14,7 +14,7 @@
 
 <!-- BOOTSTRAP FEATURE SUPER STYLE <-->
 
-<div class="container table-responsive">
+<div class="container">
     <div class="row">       
         <div class="col-md-9 ">
 
@@ -26,12 +26,13 @@
 
                         <div class="box-body">
                             <div class="col-sm-6">
-                            <div  align="center"> <!-- <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">--> 
+                            <div  align="center"> 
+
                 <?php if (file_exists(WWW_ROOT . 'img\avatars'.DS.$fighter->id.'.png')){
             echo $this->Html->image('avatars/'.$fighter->id.'.png', array('width' => '200px','alt'=>'fighterAvatar'));
-        }else{
-            echo "No picture available.";
-        } ?>
+        }else{ ?>
+            <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
+            <?php ;} ?>
                                     <input id="profile-image-upload" class="hidden" type="file">
                                     <!--<div style="color:#999;" >click here to change profile image</div>  -->
                                     <li> <?= $this->Html->link(__($levelUpString), ['action' => 'levelup']) ?> </li> 

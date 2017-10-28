@@ -3,7 +3,7 @@
   	<?php for($x=0; $x<10; $x++) {
     	echo('<tr>'); 
     	for($y=0; $y<15; $y++) { ?>
-         <td  style="background-color: #607D8B; width:50px; height: 50px;">
+         <td  class="bg-primary" style="width:50px; height: 50px;">
         <?php foreach($tabFighters as $fighter){
 
               if(($fighter['coordinate_x'] == $x)&&($fighter['coordinate_y']== $y)){

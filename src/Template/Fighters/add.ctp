@@ -22,7 +22,7 @@
     <?= $this->Form->end() ?>
 </div>
 
-
+<!-- 
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6">
@@ -42,7 +42,7 @@
                             <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
                             <br />
                             <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
-                        <!-- Split button -->
+                        
                         <div class="btn-group">
                             <button type="button" class="btn btn-primary">
                                 Social</button>
@@ -64,3 +64,4 @@
     </div>
 </div>
 
+ -->
