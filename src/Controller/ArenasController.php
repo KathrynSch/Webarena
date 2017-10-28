@@ -210,6 +210,20 @@ class ArenasController extends AppController {
             $this->redirect(['action' => 'messages']);
         }
     }
+    public function chat($fighterId)
+    {
+        $playerId=$this->Auth->user('id');          //Player logged in
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
+        $this->set('activeFighter', $activeFighter);
+        $fighter=$this->Fighters->getFighterById($fighterId);
+        $this->set('fighter', $fighter);
+        $fighters = $this->Fighters->getAllFighters();
+        $this->set('fighters', $fighters);
+        $this->loadModel("Messages");
+        $messages= $this->Messages->getMessagesByFighter($activeFighter->id)->toArray();
+        $this->set('messages', $messages);
+    }
 /*
     public function sendmessage()
     {

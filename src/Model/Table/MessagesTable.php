@@ -49,6 +49,18 @@ class MessagesTable extends Table
         return $messages;
     }
 
+/*    public function getChatByFighters($actualFighterId, $fighterId)
+    {
+        $chat = $this->find('all')->where(['fighter_id_from' =>$actualFighterId, 'fighter_id' =>$fighterId])
+                ->orwhere(['fighter_id_from' => $fighterId, 'fighter_id'=>$actualFighterId ]);
+        $chat = $this->find('all',array('conditions'=>array(
+            'OR' =>array(
+                'AND' =>array('fighter_id_from' =>$actualFighterId,'fighter_id' =>$fighterId),
+                'AND' =>array('fighter_id_from' => $fighterId, 'fighter_id'=>$actualFighterId )
+            ) )) );
+        return($chat);
+    }*/
+
     public function addNewMessage($data, $fighterId)
     {
         $m = $this->newEntity();
