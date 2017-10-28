@@ -51,7 +51,6 @@ class Fighter extends Entity
         'current_health' => true,
         'next_action_time' => true,
         'guild_id' => true,
-        'picture_name' => true,
         'player' => true,
         'guild' => true,
         'messages' => true,

@@ -22,7 +22,13 @@ use Cake\ORM\TableRegistry;
  *
  */
 class ArenasController extends AppController {
-    
+
+  /*  public function initialize()
+    {
+        $this->loadModel('Surrondings');
+        $this->Surroundings->initializeSurroundings
+    }
+    */
     
     public function sight() {
         $playerId=$this->Auth->user('id');          //Player logged in
@@ -78,16 +84,12 @@ class ArenasController extends AppController {
                 return('false');
             }  
         }
-        
         //Check grid borders
         if($newPosX < 0 || $newPosX >=10 || $newPosY<0 || $newPosY>=15){
                 return('false');
         }
-        
-        
         //ok to move
         return('true');
-
     }
     
 
@@ -332,6 +334,7 @@ class ArenasController extends AppController {
         $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");
         $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
+        $this->set('activeFighter', $activeFighter);
 
         //get all events
         $this->loadModel('Events');

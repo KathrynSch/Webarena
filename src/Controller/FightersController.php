@@ -95,11 +95,13 @@ class FightersController extends AppController {
         // if player has no fighter -> allow fighter creation
         $actualFighter = $this->Fighters->getFighterByPlayerId($playerId);
 
+        //if actual fighter dead delete it 
         if ($actualFighter != null && $actualFighter->current_health == 0) {
 
             $this->Fighters->deleteFighter($actualFighter->id); //delete dead fighter
         }
         if ($actualFighter == null || $actualFighter->current_health == 0) {  // if no fighter or old dead fighter -> allow new fighter
+
             $fighter = $this->Fighters->newEntity();
             if ($this->request->is('post') && !empty($this->request->data)) {
                 $this->Fighters->addNewFighter($this->request->data, $playerId);
