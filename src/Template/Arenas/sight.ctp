@@ -29,12 +29,27 @@
     </table>
 
 <div class="btn-group" role="group">
-<?php
-
-	echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $activeFighter['id']));
+  
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="span2">
+        <?php echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $activeFighter['id']));?></div>
+    
+  </div>
+  <div class="col-sm-4">
+    <div class="span1">
+          <?php echo $this->Form->postButton('Right', array('action'=>'moveFighter', 'r', $activeFighter['id'])); ?></div>
+  </div>
+  <div class="span3">
+        <?php echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $activeFighter['id'])); ?></div>
+  </div>
+</div>
+	<?php echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $activeFighter['id']));
 	echo $this->Form->postButton('Right', array('action'=>'moveFighter', 'r', $activeFighter['id']));
 	echo $this->Form->postButton('Down', array('action'=>'moveFighter', 'd', $activeFighter['id']));
 	echo $this->Form->postButton('Up', array('action'=>'moveFighter', 'u', $activeFighter['id']));
+
+
   echo $this->Form->postButton('Shout', array('action'=>'shout', $activeFighter['id']));
 
   
