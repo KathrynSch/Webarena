@@ -33,15 +33,18 @@ class FightersController extends AppController {
     }
 
     public function view() {
+        //dd("testjojo");
+
         $playerId = $this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
 
 
+        if ($fighter <> null) {
+            if ($fighter->current_health == 0) {
 
-        if ($fighter->current_health == 0) {
-
-            $this->redirect(['action' => 'deadfighter']);
+                $this->redirect(['action' => 'deadfighter']);
+            }
         }
         if ($fighter == null) {
 
@@ -88,10 +91,12 @@ class FightersController extends AppController {
     public function add() {
         $playerId = $this->Auth->user('id');
         $this->loadModel("Fighters");
+
         // if player has no fighter -> allow fighter creation
         $actualFighter = $this->Fighters->getFighterByPlayerId($playerId);
 
         if ($actualFighter != null && $actualFighter->current_health == 0) {
+
             $this->Fighters->deleteFighter($actualFighter->id); //delete dead fighter
         }
         if ($actualFighter == null || $actualFighter->current_health == 0) {  // if no fighter or old dead fighter -> allow new fighter
@@ -191,7 +196,7 @@ class FightersController extends AppController {
 
         $id = $this->Auth->user('id');
         $this->request->allowMethod(['post', 'delete']);
-        $fighter = $this->Fighters->get($id);
+        $fighter = $this->Fighters->getFighterByPlayerId($id);
         if ($this->Fighters->delete($fighter)) {
             $this->Flash->success(__('The fighter has been deleted.'));
         } else {
