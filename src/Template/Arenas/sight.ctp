@@ -28,7 +28,7 @@
     <div class="btn-group" role="group">
 <?php
 
-	echo $this->Form->postButton('<i class="gglyphicon glyphicon-arrow-left" aria-hidden="true""></i>', array('action'=>'moveFighter', 'l', $activeFighter['id']));
+	echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $activeFighter['id']));
 	echo $this->Form->postButton('Right', array('action'=>'moveFighter', 'r', $activeFighter['id']));
 	echo $this->Form->postButton('Down', array('action'=>'moveFighter', 'd', $activeFighter['id']));
 	echo $this->Form->postButton('Up', array('action'=>'moveFighter', 'u', $activeFighter['id']));

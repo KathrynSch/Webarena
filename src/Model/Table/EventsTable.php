@@ -4,6 +4,7 @@ namespace App\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use Cake\I18n\Time;
 use Cake\Validation\Validator;
 
 /**
@@ -35,6 +36,21 @@ class EventsTable extends Table
         $this->setPrimaryKey('id');
     }
 
+    public function addNewEvent($eventName, $coordinate_x, $coordinate_y)
+    {
+        $e=$this->newEntity();
+        $e->name = $eventName;
+        $e->date =  Time::now();
+        $e->coordinate_x = $coordinate_x;
+        $e->coordinate_y = $coordinate_y;
+        $this->save($e);
+    }
+
+    public function getAllEvents()
+    {
+        $e = $this->find('all');
+        return($e);
+    }
     /**
      * Default validation rules.
      *

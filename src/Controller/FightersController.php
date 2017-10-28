@@ -104,8 +104,14 @@ class FightersController extends AppController {
             if ($this->request->is('post') && !empty($this->request->data)) {
                 $this->Fighters->addNewFighter($this->request->data, $playerId);
                 $this->Flash->success(__('The fighter has been saved.'));
+                //get new fighter
+                $fighter = $this->Fighters->getFighterByPlayerId($playerId);
+                //load Events model
+                $this->loadModel('Events');
+                $eventName = $fighter['name'].'entered the Arena';
+                $this->Events->addNewEvent($eventName, $fighter['coordinate_x'], $fighter['coordinate_y']);
 
-                $filename = $this->Fighters->getFighterByPlayerId($playerId)->id;
+                $filename = $figther->id;
 
                 $file_tmp_name = $this->request->data['avatar_file']['tmp_name'];
                 $dir = WWW_ROOT . 'img' . DS . 'avatars';
@@ -224,39 +230,41 @@ class FightersController extends AppController {
             $this->Flash->error("You don't have enough XP to level up");
             $this->redirect(['action' => 'view']);
         } else {
+            if ($this->request->is('post') && !empty($this->request->data)) 
+            {
+                $newFighterLevel = $oldFighterLevel + 1;
+                $this->Fighters->setFighterLevel($fighterId, $newFighterLevel);
+                $eventName = $fighter['name'].' upgraded level to '.$newFighterLevel;
+                $this->Events->addNewEvent($eventName, $currentFighter['coordinate_x'], $currentFighter['coordinate_y']);
 
-            if ($this->request->is('post') && !empty($this->request->data)) {
-                if (($this->request->data['upgrade']) == 0) {
+                if (($this->request->data['upgrade']) == 0) 
+                {
                     $oldSight = $currentFighter->skill_sight;
 
                     $newSight = $oldSight + 1;
                     $this->Fighters->setFighterSight($fighterId, $newSight);
 
-
                     $newFighterXp = $oldFighterXp - 4;
-                    $newFighterLevel = $oldFighterLevel + 1;
                     $this->Fighters->setFighterXp($fighterId, $newFighterXp);
-                    $this->Fighters->setFighterLevel($fighterId, $newFighterLevel);
-
 
                     $this->Flash->success("You won a level and upgraded your sight!");
                     $this->redirect(['action' => 'view']);
                 }
-                if (($this->request->data['upgrade']) == 1) {
+                if (($this->request->data['upgrade']) == 1) 
+                {
                     $oldForce = $currentFighter->skill_strength;
 
                     $newForce = $oldForce + 1;
                     $this->Fighters->setFighterForce($fighterId, $newForce);
 
                     $newFighterXp = $oldFighterXp - 4;
-                    $newFighterLevel = $oldFighterLevel + 1;
                     $this->Fighters->setFighterXp($fighterId, $newFighterXp);
-                    $this->Fighters->setFighterLevel($fighterId, $newFighterLevel);
 
                     $this->Flash->success("You won a level and upgraded your strenght!");
                     $this->redirect(['action' => 'view']);
                 }
-                if (($this->request->data['upgrade']) == 2) {
+                if (($this->request->data['upgrade']) == 2) 
+                {
                     $oldMaxLife = $currentFighter->skill_health;
                     $oldCurrentLife = $currentFighter->current_health;
 
@@ -267,9 +275,7 @@ class FightersController extends AppController {
                     $this->Fighters->setFighterMaximumHealth($fighterId, $newMaxLife);
 
                     $newFighterXp = $oldFighterXp - 4;
-                    $newFighterLevel = $oldFighterLevel + 1;
                     $this->Fighters->setFighterXp($fighterId, $newFighterXp);
-                    $this->Fighters->setFighterLevel($fighterId, $newFighterLevel);
 
                     $this->Flash->success("You won a level and upgraded your life!");
                     $this->redirect(['action' => 'view']);

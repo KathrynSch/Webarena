@@ -44,14 +44,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <nav class="top-bar expanded" data-topbar role="navigation" style="background-color:#00897B; color:white;">
         <ul class="title-area large-3 medium-4 columns" style="background-color:#00897B; " >
-            <li class="name" style="font-size:12px; color:white;">
+            <li class="name">
+                <style type="text/css">
+                        a:link {text-decoration:none; color:white; font-size:12px;}    
+                        a:hover {text-decoration:underline; color:white; font-size:12px;}   
+                        a:active {text-decoration:underline; color:white; font-size:12px;}  >
+                </style>
               <h1><a href=""><?= $this->fetch('title') ?></a></h1></li>
-              <li> <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home')); ?> </li>
+              <li> <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home')); ?> 
+              </li>
                 <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?>
                 <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?>
                 <?php echo $this->Html->link('Fighter', ['controller' => 'Fighters', 'action' => 'view']); ?>
-                <?php echo $this->Html->link('Messages', ['controller' => 'Arenas', 'action' => 'messages']); ?>
                 <?php echo $this->Html->link('LogIn/Out', array('controller' => 'Players', 'action' => 'logout')); ?>
+            
             
         </ul>
         <div class="top-bar-section">
@@ -67,6 +73,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             </ul>
         </div>
     </nav>
+    
     <?= $this->Flash->render() ?>
     <div class="container clearfix" >
         <?= $this->fetch('content') ?>
