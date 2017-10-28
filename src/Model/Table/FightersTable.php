@@ -272,10 +272,6 @@ class FightersTable extends Table
             ->dateTime('next_action_time')
             ->allowEmpty('next_action_time');
 
-        $validator
-            ->scalar('image')
-            ->allowEmpty('image');
-
         return $validator;
     }
 

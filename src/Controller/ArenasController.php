@@ -22,7 +22,13 @@ use Cake\ORM\TableRegistry;
  *
  */
 class ArenasController extends AppController {
-    
+
+  /*  public function initialize()
+    {
+        $this->loadModel('Surrondings');
+        $this->Surroundings->initializeSurroundings
+    }
+    */
     
     public function sight() {
         $playerId=$this->Auth->user('id');          //Player logged in
