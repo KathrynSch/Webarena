@@ -166,7 +166,7 @@ class ArenasController extends AppController {
                 if($this->Fighters->getFighterHealth($adv['id']) == 0)
                 {
                 //GAGNE  : increment fighter's exp with his adv. exp points
-                $fighterXp=$fighter['xp']+$adv['xp'];
+                $fighterXp=$fighter['xp']+$adv['level'];
                 //Set nouvelle exp du player
                 $this->Fighters->setFighterXp($fighter['id'], $fighterXp);
                 }
