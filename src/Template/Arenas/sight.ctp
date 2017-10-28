@@ -19,7 +19,7 @@
     		}
       echo('</td>');
         }else{
-                    ?><td  style="width:50px; height: 50px;background-color: black;">
+                    ?><td class="bg-primary" style="width:50px; height: 50px;">
 
        <?php }
         
@@ -27,13 +27,8 @@
     echo('</tr>'); 
     }?>
     </table>
-    <!-- <div class="btn-group">
-      <button class="btn btn-default"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></button>
-      <button class="btn btn-default"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></button>
-      <button class="btn btn-default"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
-      <button class="btn btn-default"><span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></button>
-    </div> -->
-    <div class="btn-group" role="group">
+
+<div class="btn-group" role="group">
 <?php
 
 	echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $activeFighter['id']));

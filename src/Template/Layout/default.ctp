@@ -42,12 +42,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
 </head>
 <body>
-<nav class="navbar-inverse navbar-fixed-top top-bar expanded" data-topbar role="navigation">
-      <div class="container">
+<nav class="navbar navbar-inverse navbar-fixed-top"  role="navigation">
+      <div class="container-fluid">
         <div class="navbar-header">
-          
+          <a class="navbar-brand">Webarena</a>
         </div>
-                        <div id="navbar" class="collapse navbar-collapse">
+                       
                           <ul class="nav navbar-nav">
                             <li>
                                 <a <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home'), array('class' => 'text-white')); ?> </a></li>
@@ -57,12 +57,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                 <a <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></a></li>
                             <li>
                                 <a <?php echo $this->Html->link('Fighter', ['controller' => 'Fighters', 'action' => 'view']); ?></a></li>
-                            <li>
-                                <a <?php echo $this->Html->link('LogIn/Out', array('controller' => 'Players', 'action' => 'logout'), array('class' => 'right')); ?></a></li>
-                             <li>
-                                <a <?= $this->Html->link('Register',['controller' => 'Players', 'action' => 'register'], array('class' => 'right')); ?></a></li>
-                            </ul>
-                        </div><!--/.nav-collapse -->
+                             </ul>
+
+
+                                <ul class="nav navbar-nav navbar-right">
+                                    <?php if($loggedIn) : ?>
+                                    <li>
+                                        <a <?php echo $this->Html->link('LogIn/Out', array('controller' => 'Players', 'action' => 'logout')); ?></a></li>
+                                    <?php else: ?>
+                                    <li>
+                                        <a <?= $this->Html->link('Register',['controller' => 'Players', 'action' => 'register']); ?></a></li>
+                                    <?php endif; ?>
+
+                                </ul>
+                                                
       </div>
     </nav>
 
