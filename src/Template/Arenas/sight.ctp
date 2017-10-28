@@ -1,13 +1,13 @@
-<div class="table-responsive">
-  <table class="table table-bordered table-responsive">
-  	<?php for($y=0; $y<15; $y++) {
+<div class="table-responsive" style="margin-top:20px">
+  <table class="table table-bordered table-responsive" style="margin:auto; width:750px; length:500px">
+  	<?php for($x=0; $x<10; $x++) {
     	echo('<tr>'); 
-    	for($x=0; $x<10; $x++) { ?>
-         <td class="table_dark">
+    	for($y=0; $y<15; $y++) { ?>
+         <td  style="background-color: #607D8B; width:50px; height: 50px;">
         <?php foreach($tabFighters as $fighter){
 
               if(($fighter['coordinate_x'] == $x)&&($fighter['coordinate_y']== $y)){
-                  echo ('FF');
+                  echo $this->Html->image('avatars/'.$fighter->id.'.png', array('width' => '40px','alt'=>'fighterAvatar'));
               }
     		}
       echo('</td>');
@@ -24,7 +24,7 @@
 <div class="btn-group" role="group">
 <?php
 
-	echo $this->Form->postButton('Left', array('action'=>'moveFighter', 'l', $activeFighter['id']));
+	echo $this->Form->postButton('<i class="gglyphicon glyphicon-arrow-left" aria-hidden="true""></i>', array('action'=>'moveFighter', 'l', $activeFighter['id']));
 	echo $this->Form->postButton('Right', array('action'=>'moveFighter', 'r', $activeFighter['id']));
 	echo $this->Form->postButton('Down', array('action'=>'moveFighter', 'd', $activeFighter['id']));
 	echo $this->Form->postButton('Up', array('action'=>'moveFighter', 'u', $activeFighter['id']));

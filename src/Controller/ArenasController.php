@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -81,7 +80,7 @@ class ArenasController extends AppController {
         }
         
         //Check grid borders
-        if($newPosX < 0 || $newPosX >=10 || $newPosY<0 || $newPosY>=15){
+        if($newPosX < 0 || $newPosX >=15 || $newPosY<0 || $newPosY>=10){
                 return('false');
         }
         
