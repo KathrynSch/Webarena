@@ -197,6 +197,7 @@ class ArenasController extends AppController {
         $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
         $fighters = $this->Fighters->getAllFighters();
         $fightersNames = $this->Fighters->getFightersNames();
+        $this->set('activeFighter', $activeFighter);
         $this->set('fighters', $fighters);
         $this->set('fightersNames', $fightersNames);
         $this->loadModel("Messages");
@@ -211,17 +212,26 @@ class ArenasController extends AppController {
     }
     public function chat($fighterId)
     {
+        //get active fighter
         $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");
         $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
         $this->set('activeFighter', $activeFighter);
-        $fighter=$this->Fighters->getFighterById($fighterId);
-        $this->set('fighter', $fighter);
+        //get chat fighter
+        $chatFighter=$this->Fighters->getFighterById($fighterId);
+        $this->set('chatFighter', $chatFighter);
+        //get all fighters
         $fighters = $this->Fighters->getAllFighters();
         $this->set('fighters', $fighters);
+        // get all messages for active fighter
         $this->loadModel("Messages");
         $messages= $this->Messages->getMessagesByFighter($activeFighter->id)->toArray();
         $this->set('messages', $messages);
+        if ($this->request->is('post') && !empty($this->request->data))
+        {
+            $this->Messages->addNewChatMessage($this->request->data, $activeFighter->id, $fighterId);
+            $this->redirect(['action' => 'chat', $fighterId]);
+        }
     }
 /*
     public function sendmessage()

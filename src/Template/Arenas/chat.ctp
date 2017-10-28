@@ -2,41 +2,49 @@
       <ul class="nav nav-pills nav-stacked">
         <?php 
           foreach ($fighters as $fighter) {
+            if($fighter->id != $activeFighter->id){
               echo('<li role="presentation">');
               echo $this->Html->link($fighter->name, ['action'=>'chat', $fighter->id]);
               echo('</li>');
+            }
           }
         ?>
       </ul>
   </div>
 
-
-  <div class="panel-heading">All messsages</div>
+  <div class="panel-heading"><?= h($chatFighter->name);?></div>
   <table class="table">
   	<tr>
   		<th>Date</th>
+      <th>From</th>
+      <th>To</th>
   		<th>Title</th>
   		<th>Message</th>
   	</tr>
-  		<?php foreach($messages as $message): 
-          if($message->fighter_id == $activeFighter->id && $message->fighter_id_from == $fighter->id)
-          { // message envoyé par contact à activeFigther
+  		<?php 
+      foreach($messages as $message): 
+        if($message->fighter_id_from == $chatFighter->id)
+          { // message  reçu
         ?>
-  		<tr class="table-light">
+  		<tr>
   			<td><?= h($message->date) ?></td>
+        <td><?= h($message->fighter_id_from) ?></td>
+        <td><?= h($message->fighter_id) ?></td>
   			<td><?= h($message->title) ?></td>
   			<td><?= h($message->message) ?></td>
   		</tr> 
-      <?php } else {
-      if($message->fighter_id == $fighter->id && $message->fighter_id_from == $activeFighter->id)
-      { // message envoyé par activeFighter à contact
+      <?php }
+      if($message->fighter_id == $chatFighter->id)
+      { // message envoyé 
         ?>
-        <tr class="table-info">
+        <tr style="background-color: #607D8B;">
         <td><?= h($message->date) ?></td>
+        <td><?= h($message->fighter_id_from) ?></td>
+        <td><?= h($message->fighter_id) ?></td>
         <td><?= h($message->title) ?></td>
         <td><?= h($message->message) ?></td>
       </tr>
-      <?php } }
+      <?php } 
       endforeach; ?>
   </table>
 </div>

@@ -1,10 +1,12 @@
- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav nav-pills nav-stacked">
         <?php 
           foreach ($fighters as $fighter) {
+            if($fighter->id != $activeFighter->id){
               echo('<li role="presentation">');
               echo $this->Html->link($fighter->name, ['action'=>'chat', $fighter->id]);
               echo('</li>');
+            }
           }
         ?>
       </ul>

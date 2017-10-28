@@ -49,6 +49,7 @@ class MessagesTable extends Table
         return $messages;
     }
 
+
 /*    public function getChatByFighters($actualFighterId, $fighterId)
     {
         $chat = $this->find('all')->where(['fighter_id_from' =>$actualFighterId, 'fighter_id' =>$fighterId])
@@ -71,7 +72,16 @@ class MessagesTable extends Table
         $m->fighter_id = $data['to'];
         $this->save($m);
     }
-
+    public function addNewChatMessage($data, $fighterIdFrom, $fighterIdTo)
+    {
+        $m = $this->newEntity();
+        $m->title = $data['title'];
+        $m->date = Time::now();
+        $m->message = $data['message'];
+        $m->fighter_id_from = $fighterIdFrom;
+        $m->fighter_id = $fighterIdTo;
+        $this->save($m);
+    }
     /**
      * Default validation rules.
      *
