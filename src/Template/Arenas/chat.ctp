@@ -27,7 +27,7 @@
           { // message  reçu
         ?>
   		<tr>
-  			<td><?= h($message->date) ?></td>
+  			<td><?= h($message->date->nice()) ?></td>
         <td><?= h($message->fighter_id_from) ?></td>
         <td><?= h($message->fighter_id) ?></td>
   			<td><?= h($message->title) ?></td>
@@ -38,7 +38,7 @@
       { // message envoyé 
         ?>
         <tr style="background-color: #607D8B;">
-        <td><?= h($message->date) ?></td>
+        <td><?= h($message->date->nice()) ?></td>
         <td><?= h($message->fighter_id_from) ?></td>
         <td><?= h($message->fighter_id) ?></td>
         <td><?= h($message->title) ?></td>
