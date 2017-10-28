@@ -6,7 +6,10 @@
 				<?= $this->Form->input('email') ; ?>
 				<?= $this->Form->input('password', array('type' => 'password')) ; ?>
 			<?= $this->Form->submit('Login', array('class' => 'button')) ; ?>
+                        
 
 		<?= $this->Form->end() ; ?>
+
+          <?= $this->Form->postButton('Forget passeword ?',array('action'=>'forgot_password'));?>
 	</div>
 </div>
