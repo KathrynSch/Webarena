@@ -3,17 +3,22 @@
   	<?php for($x=0; $x<10; $x++) {
     	echo('<tr>'); 
     	for($y=0; $y<15; $y++) { ?>
+         <?php    if((abs($activeFighter['coordinate_x']-$x) + abs($activeFighter['coordinate_y']-$y)) <= $activeFighter->skill_sight){?>
+
+        
         <td  style="width:50px; height: 50px;">
 
-         <?php    if((abs($activeFighter['coordinate_x']-$x) + abs($activeFighter['coordinate_y']-$y)) <= $activeFighter->skill_sight){
-         foreach($tabFighters as $fighter){
+         <?php foreach($tabFighters as $fighter){
 
               if(($fighter['coordinate_x'] == $x)&&($fighter['coordinate_y']== $y)){
                   echo $this->Html->image('avatars/'.$fighter->id.'.png', array('width' => '40px','alt'=>'fighterAvatar'));
               }
     		}
       echo('</td>');
-        }
+        }else{
+                    ?><td  style="width:50px; height: 50px;background-color: black;">
+
+       <?php }
         
               }
     echo('</tr>'); 
