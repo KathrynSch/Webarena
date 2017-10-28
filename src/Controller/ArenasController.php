@@ -41,16 +41,16 @@ class ArenasController extends AppController {
         $newPosY= $activeFighter['coordinate_y'];
 
         if($direction == 'l'){  //move left
-           $newPosX-- ;
+           $newPosY-- ;
         }
         if($direction == 'r'){  //move right
-            $newPosX++ ;
+            $newPosY++ ;
         }
         if($direction == 'u'){  //move up
-            $newPosY-- ;
+            $newPosX-- ;
         }
         if($direction == 'd'){  //move down
-            $newPosY++ ;
+            $newPosX++ ;
         }
         
          if($this->isOkToMove($fighterId, $newPosX, $newPosY) == 'false'){
@@ -80,7 +80,7 @@ class ArenasController extends AppController {
         }
         
         //Check grid borders
-        if($newPosX < 0 || $newPosX >=15 || $newPosY<0 || $newPosY>=10){
+        if($newPosX < 0 || $newPosX >=10 || $newPosY<0 || $newPosY>=15){
                 return('false');
         }
         
@@ -102,8 +102,8 @@ class ArenasController extends AppController {
             case 'l':
                  foreach($tabFighters as $adv)
                     {
-                        if(($fighter['coordinate_y']== $adv['coordinate_y']) && 
-                            ($fighter['coordinate_x']-1 == $adv['coordinate_x']))
+                        if(($fighter['coordinate_x']== $adv['coordinate_x']) && 
+                            ($fighter['coordinate_y']-1 == $adv['coordinate_y']))
                             return $adv;
                     }
                     break;
@@ -111,8 +111,8 @@ class ArenasController extends AppController {
             case 'r':
                  foreach($tabFighters as $adv)
                     {
-                        if(($fighter['coordinate_y']== $adv['coordinate_y']) && 
-                            ($fighter['coordinate_x']+1 == $adv['coordinate_x']))
+                        if(($fighter['coordinate_x']== $adv['coordinate_x']) && 
+                            ($fighter['coordinate_y']+1 == $adv['coordinate_y']))
                             return $adv;
                     } 
                     break;
@@ -120,8 +120,8 @@ class ArenasController extends AppController {
             case 'u':
                  foreach($tabFighters as $adv)
                     {
-                        if(($fighter['coordinate_x']== $adv['coordinate_x']) && 
-                            ($fighter['coordinate_y']-1 == $adv['coordinate_y']))
+                        if(($fighter['coordinate_y']== $adv['coordinate_y']) && 
+                            ($fighter['coordinate_x']-1 == $adv['coordinate_x']))
                             return $adv;
                     }
                     break;
