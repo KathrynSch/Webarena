@@ -24,7 +24,7 @@
   	</tr>
   		<?php foreach($messages as $message): ?>
   		<tr>
-  			<td><?= h($message->date) ?></td>
+  			<td><?= h($message->date->nice()) ?></td>
   			<td><?php 
           foreach ($fighters as $fighter) {
             if($message->fighter_id_from == $fighter->id){

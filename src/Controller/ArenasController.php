@@ -149,6 +149,9 @@ class ArenasController extends AppController {
         $tabFighters=$this->Fighters->getAllAliveFighters();
         $this->set('tabFighters', $tabFighters);
 
+        //load Event model
+        $this->loadModel('Events');
+
         //If next to adv
         if($adv = $this->isNextToAdv($fighter, $tabFighters, $direction))
         {
@@ -162,22 +165,27 @@ class ArenasController extends AppController {
                 //Decremente adv current health -1
                  $this->Fighters->setFighterHealth($adv['id'],$adv['current_health']-1);
 
-                //Check if adv dead
+                //if adv dead
                 if($this->Fighters->getFighterHealth($adv['id']) == 0)
                 {
-                //GAGNE  : increment fighter's exp with his adv. exp points
-                $fighterXp=$fighter['xp']+$adv['level'];
-                //Set nouvelle exp du player
-                $this->Fighters->setFighterXp($fighter['id'], $fighterXp);
+                    //GAGNE  : increment fighter's exp with his adv. exp points
+                    $fighterXp=$fighter['xp']+$adv['level'];
+                    //Set nouvelle exp du player
+                    $this->Fighters->setFighterXp($fighter['id'], $fighterXp);
+                    $eventName = $fighter['name'].' attacks '.$adv['name'].' and kills him';
+                    $this->Events->addNewEvent($eventName, $fighter['coordinate_x'], $fighter['coordinate_y']);
                 }
                 else
                 {
                     //increment fighter xp +1
                     $this->Fighters->setFighterXp($fighter['id'], $fighter['xp']+1);
+                    $eventName = $fighter['name'].' attacks '.$adv['name'].' and touches him';
+                    $this->Events->addNewEvent($eventName, $fighter['coordinate_x'], $fighter['coordinate_y']);
                 }   
             }
             else{
-                dd('rate!');
+                $eventName = $fighter['name'].' attacks '.$adv['name'].' and misses him';
+                $this->Events->addNewEvent($eventName, $fighter['coordinate_x'], $fighter['coordinate_y']);
             }
         }
     $this->redirect(['action'=> 'sight'] );        
@@ -185,9 +193,30 @@ class ArenasController extends AppController {
 
     public function diary() 
     {   
+        // get active fighter
         $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");
         $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
+
+        //get all events
+        $this->loadModel('Events');
+        $events=$this->Events->getAllEvents();
+        $this->set('events', $events);
+    }
+
+    public function shout($fighterId)
+    {
+        //get active fighter
+        $playerId=$this->Auth->user('id');          //Player logged in
+        $this->loadModel("Fighters");
+        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
+
+        if ($this->request->is('post') && !empty($this->request->data))
+        {
+            $this->loadModel('Events');
+            $this->Events->addNewEvent($this->request->data['name'], $activeFighter->coordinate_x, $activeFighter->coordinate_y);
+            $this->redirect(['action' => 'sight']);
+        }
     }
 
     public function messages()
@@ -283,10 +312,5 @@ class ArenasController extends AppController {
         $this->redirect(['action' => 'guild']);
     }
 
-    public function shout($fighterId)
-    {
-        $playerId=$this->Auth->user('id');          //Player logged in
-        $this->loadModel("Fighters");
-        $activeFighter=$this->Fighters->getFighterByPlayerId($playerId);
-    }
+
 }
