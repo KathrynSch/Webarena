@@ -51,6 +51,7 @@
 
 
   echo $this->Form->postButton('Shout', array('action'=>'shout', $activeFighter['id']));
+  echo $this->Form->postButton('Change Surroundings', array('action'=>'generateSurroundings'));
 
   
   echo $this->Form->postButton('FightR', array('action'=>'fight', 'r', $activeFighter['id']));

@@ -23,12 +23,78 @@ use Cake\ORM\TableRegistry;
  */
 class ArenasController extends AppController {
 
-  /*  public function initialize()
+     public function generateSurroundings()
     {
-        $this->loadModel('Surrondings');
-        $this->Surroundings->initializeSurroundings
+        $this->loadModel('Surroundings');
+        // delete all existing surroundings
+        if($this->Surroundings->getAllSurroundings() != null)
+        {
+            $this->Surroundings->deleteAllSurroundings();
+            //dd('deleted');
+        }
+        // set 15 colonnes
+        for($a=0; $a<15; $a++)
+        {
+            $pX=rand(0,14);
+            $pY=rand(0,9);
+            while(!($this->isSpotFree($pX, $pY) == 'true') && ($this->isSpotSurrounding($pX,$pY) == 'E'))
+            {
+                //dd($decor);
+                $pX=rand(0,14);
+                $pY=rand(0,9);
+            }
+            
+            $this->Surroundings->addNewSurrounding('P', $pX, $pY);
+        }
+        // set 15 pièges
+        for($b=0; $b<15; $b++)
+        {
+            $tX=rand(0,14);
+            $tY=rand(0,9);
+            while(!($this->isSpotFree($pX, $pY) == 'true') && ($this->isSpotSurrounding($pX,$pY) == 'E'))
+            {
+                $tX=rand(0,14);
+                $tY=rand(0,9);
+            }
+            $this->Surroundings->addNewSurrounding('T', $tX, $tY);
+        }
+        // set 1 monstre
+        $wX=rand(0,14);
+        $wY=rand(0,9);
+        while(!($this->isSpotFree($pX, $pY) == 'true') && ($this->isSpotSurrounding($pX,$pY) == 'E'))
+        {
+            $wX=rand(0,14);
+            $wY=rand(0,9);
+        }
+        $this->Surroundings->addNewSurrounding('W', $wX, $wY);
+
+        $this->redirect(['action' => 'sight']);     
     }
-    */
+
+    public function isSpotSurrounding($posX, $posY)
+    {
+        $this->loadModel('Surroundings');
+        $decors = $this->Surroundings->getAllSurroundings();
+
+        if($decors != null)
+        {
+            foreach ($decors as $decor) {
+                if(($decor->coordinate_x == $posX) && ($decor->coordinate_y == $posY))
+                {
+                    dd($decor->type);
+                    return $decor->type;
+                }
+                else
+                {
+                    return 'E';
+                }
+            }
+        }
+        else
+        {
+            return 'E';
+        }
+    }
     
     public function sight() {
         $playerId=$this->Auth->user('id');          //Player logged in
@@ -59,7 +125,7 @@ class ArenasController extends AppController {
             $newPosX++ ;
         }
         
-         if($this->isOkToMove($fighterId, $newPosX, $newPosY) == 'false'){
+         if($this->isSpotFree($newPosX, $newPosY) == 'false'){
              $this->Flash->error('You cannot move here!');
           
          }
@@ -72,9 +138,8 @@ class ArenasController extends AppController {
          $this->redirect(['action' => 'sight']);
     }
     
-    public function isOkToMove($fighterId, $newPosX,$newPosY){
+    public function isSpotFree($newPosX,$newPosY){
         $this->loadModel("Fighters");
-        $activeFighter=$this->Fighters->getFighterById($fighterId);
         $fighters=$this->Fighters->getAllAliveFighters();
         
         //Check with other fighters

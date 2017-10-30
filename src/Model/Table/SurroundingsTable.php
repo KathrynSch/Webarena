@@ -35,6 +35,26 @@ class SurroundingsTable extends Table
         $this->setPrimaryKey('id');
     }
 
+    public function getAllSurroundings()
+    {
+        $surroundings = $this->find('all');
+        return ($surroundings);
+    }
+
+    public function addNewSurrounding($type, $x, $y)
+    {
+        $s = $this->newEntity();
+        $s->type = $type;
+        $s->coordinate_x = $x;
+        $s->coordinate_y = $y;
+        $this->save($s);
+    }
+
+    public function deleteAllSurroundings()
+    {
+        $this->deleteAll(['1 = 1']);
+    }
+
     /**
      * Default validation rules.
      *
