@@ -113,7 +113,7 @@ class FightersController extends AppController {
                 $eventName = $fighter['name'].'entered the Arena';
                 $this->Events->addNewEvent($eventName, $fighter['coordinate_x'], $fighter['coordinate_y']);
 
-                $filename = $figther->id;
+                $filename = $fighter->id;
 
                 $file_tmp_name = $this->request->data['avatar_file']['tmp_name'];
                 $dir = WWW_ROOT . 'img' . DS . 'avatars';
