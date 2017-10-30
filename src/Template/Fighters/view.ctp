@@ -28,7 +28,7 @@
                             <div class="col-sm-6">
                             <div  align="center"> 
 
-                <?php if (file_exists(WWW_ROOT . 'img\avatars'.DS.$fighter->id.'.png')){
+                <?php if (file_exists(WWW_ROOT . 'img'.DS.'avatars'.DS.$fighter->id.'.png')){
             echo $this->Html->image('avatars/'.$fighter->id.'.png', array('width' => '200px','alt'=>'fighterAvatar'));
         }else{ ?>
             <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive">
