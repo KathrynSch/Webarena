@@ -162,8 +162,8 @@ class FightersTable extends Table
                   $tabfighters=$this->getAllFighters();
                   //$filedb=TableRegistry::get('Fighters');
                   $entity=$this->newEntity();
-                  $x= rand(0,9);
-                  $y= rand(0, 14);
+                  $x= rand(0,14);
+                  $y= rand(0, 9);
                   $occupy=false;
                   foreach ($tabfighters as $fighter){
                    
@@ -175,8 +175,8 @@ class FightersTable extends Table
                
                while ($occupy){
                    $occupy=false;
-                  $x= rand(0,9);
-                  $y= rand(0, 14);
+                  $x= rand(0,14);
+                  $y= rand(0, 9);
                   
                   foreach ($tabfighters as $fighter){
                    

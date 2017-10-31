@@ -40,7 +40,21 @@ class SurroundingsTable extends Table
         $surroundings = $this->find('all');
         return ($surroundings);
     }
-
+    public function getAllPillars()
+    {
+        $surroundings = $this->find('all')->where(['type'=>'P']);
+        return ($surroundings);
+    }
+    public function getAllTraps()
+    {
+        $surroundings = $this->find('all')->where(['type'=>'T']);
+        return ($surroundings);
+    }
+    public function getMonster()
+    {
+        $surroundings = $this->find('all')->where(['type'=>'W'])->first();
+        return ($surroundings);
+    }
     public function addNewSurrounding($type, $x, $y)
     {
         $s = $this->newEntity();
@@ -53,6 +67,12 @@ class SurroundingsTable extends Table
     public function deleteAllSurroundings()
     {
         $this->deleteAll(['1 = 1']);
+    }
+
+    public function deleteMonster()
+    {
+        $s = $this->getMonster();
+        $this->delete($s);
     }
 
     /**

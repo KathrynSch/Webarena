@@ -5,4 +5,50 @@
  * and open the template in the editor.
  */
 
-body{color:red;}
+.navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+
+footer{
+	background-color: #555;
+    color: white;  
+    position: absolute;
+	bottom: 0px;
+	right: 0;
+	left: 0;
+}
+
+.content{
+	background-color: red;
+}
+
+.row{
+	background-color: yellow;
+	margin: 0;
+	padding: 0;
+}
+.panel{
+	margin-top: 10px;
+}
+.container-fluid{
+	padding: 0;
+}
+.container{
+	padding: 0;
+}
+#arenaCell{
+	width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 8px;
+}
+#arenaCell img{
+	max-width: 35px;
+	max-height: 35px;
+	margin: auto;
+}
+table{
+	margin-top: 10px;
+	height: 100%;
+}
