@@ -168,21 +168,35 @@
           </div>
           <div class="col-md-4"></div>
         </div>
+        SHOUT
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <?php echo $this->Form->postButton('<span style="color: green;" class="glyphicon glyphicon-volume-up"></span>', array('action'=>'shout', $activeFighter['id']), ['class' => 'btn btn-default']); ?>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
+
+        SURROUNDINGS
+        <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <?php echo $this->Form->postButton('<span style="color: orange;" class="glyphicon glyphicon-refresh"></span>', array('action'=>'generateSurroundings'), ['class' => 'btn btn-default']); ?>
+          </div>
+          <div class="col-md-4"></div>
+        </div>
 
           
 
             
-   <!-- 
+    
 
-
+<!-- 
     echo $this->Form->postButton('Shout', array('action'=>'shout', $activeFighter['id']));
-    echo $this->Form->postButton('Change Surroundings', array('action'=>'generateSurroundings'));
+    echo $this->Form->postButton('Change Surroundings', c);
 
     
-    echo $this->Form->postButton('FightR', array('action'=>'fight', 'r', $activeFighter['id']));
-    echo $this->Form->postButton('FightL', array('action'=>'fight', 'l', $activeFighter['id']));
-    echo $this->Form->postButton('FightU', array('action'=>'fight', 'u', $activeFighter['id']));
-    echo $this->Form->postButton('FightD', array('action'=>'fight', 'd', $activeFighter['id']));
+  
 
 
         ?> -->
