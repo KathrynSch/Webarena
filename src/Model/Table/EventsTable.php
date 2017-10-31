@@ -53,6 +53,7 @@ class EventsTable extends Table
         $e = $this->find('all')->where(['date >' => $inlastday]);
         return($e);
     }
+
     /**
      * Default validation rules.
      *

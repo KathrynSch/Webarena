@@ -62,29 +62,23 @@ class ArenasController extends AppController {
 
         $this->redirect(['action' => 'sight']);     
     }
-
+    
     public function isSpotSurrounding($posX, $posY)
     {
         $this->loadModel('Surroundings');
         $decors = $this->Surroundings->getAllSurroundings()->toArray();
-        //dd($decors);
+        
         if($decors)
         {
-            //dd($decors);
+            
             foreach ($decors as $decor) 
             {
-                //dd($decor['coordinate_x']);
                 if(($decor['coordinate_x'] == $posX) && ($decor['coordinate_y'] == $posY))
                 {
-                    //dd($decor);
-                    dd($decor);
-                    return $decor['type'];
-                }
-                else
-                {
-                    return 'E';
+                    return $decor['type'] ;
                 }
             }
+            return 'E';
         }
         else
         {
@@ -93,6 +87,7 @@ class ArenasController extends AppController {
     }
     
     public function sight() {
+
         // get active fighter
         $playerId=$this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");
@@ -109,6 +104,10 @@ class ArenasController extends AppController {
         $this->set('traps', $traps);
         $monster = $this->Surroundings->getMonster();
         $this->set('monster', $monster);
+        //get last event
+        $this->loadModel('Events');
+        $events = $this->Events->getAllEvents();
+        $this->set('events', $events);
         //dd($monster->toArray());
     }
 
@@ -470,7 +469,8 @@ class ArenasController extends AppController {
         if ($this->request->is('post') && !empty($this->request->data))
         {
             $this->loadModel('Events');
-            $this->Events->addNewEvent($this->request->data['name'], $activeFighter->coordinate_x, $activeFighter->coordinate_y);
+            $name=$activeFighter->name.' shouted: '.$this->request->data['name'];
+            $this->Events->addNewEvent($name, $activeFighter->coordinate_x, $activeFighter->coordinate_y);
             $this->redirect(['action' => 'sight']);
         }
     }

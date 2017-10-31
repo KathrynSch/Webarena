@@ -32,7 +32,6 @@
     <?= $this->Html->css('webarena') ?>
 
     
-   <?= $this->Html->font('glyphicons-halflings-regular'); ?>
 
     <?= $this->Html->script('bootstrap.min.js') ?>
 

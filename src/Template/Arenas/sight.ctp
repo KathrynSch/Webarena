@@ -1,32 +1,39 @@
 <div class="row content">
 
     <div class="col-md-2">
-      PANELS
-    <!--   <?= $this->Html->link(__('Guild options'), ['action' => 'guild' ]) ?>
-    
-        <div class="panel panel-info">
-            <div class="panel-heading"><?= $this->Html->link(__('Messages'), ['action' => 'messages' ]) ?></div>
-            <div class="panel-body">
-                trop dar ton experience !!
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Write..." aria-describedby="basic-addon2">
-                </div>
-            </div>
-        </div>
+      
+       
+      <div class="panel panel-success">
+          <div class="panel-heading"><?= $this->Html->link(__('My Fighter'), ['controller' => 'Fighters', 'action' => 'view', $activeFighter['player_id'] ]) ?></div>
+          <div class="panel-body" style="padding-left:0; padding-bottom: 0;">
+             <ul class="list-group">
+                <li class="list-group-item">Level <span class="badge"><?= h($activeFighter['level'])?></span></li>
+                <li class="list-group-item">XP <span class="badge"><?= h($activeFighter['xp'])?></span></li> 
+                <li class="list-group-item">Sight <span class="badge"><?= h($activeFighter['skill_sight'])?></span></li>
+                <li class="list-group-item">Strength <span class="badge"><?= h($activeFighter['skill_strength'])?></span></li>
+                <li class="list-group-item">Health <span class="badge"><?= h($activeFighter['current_health'])?>/<?= h($activeFighter['skill_health'])?></span></li> 
+              </ul>
+                            
+          </div>
+      </div>
+        
 
       <div class="panel panel-warning">
-          <div class="panel-heading"><?= $this->Html->link(__('Diary'), ['action' => 'diary', $activeFighter['id'] ]) ?></div>
-          <div class="panel-body">
-              Machin s'est fait tué par truc truc  
+          <div class="panel-heading"><?= $this->Html->link(__('Latest Event'), ['action' => 'diary', $activeFighter['id'] ]) ?></div>
+          <div class="panel-body" style="font-size: 9px;">
+            <?php 
+                foreach ($events as $event) {
+                    if((abs($activeFighter['coordinate_x']-$event->coordinate_x) + abs($activeFighter['coordinate_y']-$event->coordinate_y)) <= $activeFighter->skill_sight)
+                    { 
+                      echo($event->name);
+                      echo('<br>');
+                    }
+                }
+            ?>
           </div>
       </div>
 
-      <div class="panel panel-success">
-          <div class="panel-heading"><?= $this->Html->link(__('Fighter status'), ['controller' => 'Fighters', 'action' => 'view', $activeFighter['player_id'] ]) ?></div>
-          <div class="panel-body">
-              Level truc truc expereience truc truc 
-          </div>
-      </div> -->
+      
     </div>
   
   <div class="col-md-8">
@@ -187,19 +194,6 @@
         </div>
 
           
-
-            
-    
-
-<!-- 
-    echo $this->Form->postButton('Shout', array('action'=>'shout', $activeFighter['id']));
-    echo $this->Form->postButton('Change Surroundings', c);
-
-    
-  
-
-
-        ?> -->
     </div>
 
 </div>
