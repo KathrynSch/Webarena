@@ -61,7 +61,7 @@ class ArenasController extends AppController {
 
         $this->redirect(['action' => 'sight']);
     }
-<<<<<<< HEAD
+
     
     public function isSpotSurrounding($posX, $posY)
     {
@@ -82,26 +82,6 @@ class ArenasController extends AppController {
         }
         else
         {
-=======
-
-    public function isSpotSurrounding($posX, $posY) {
-        $this->loadModel('Surroundings');
-        $decors = $this->Surroundings->getAllSurroundings()->toArray();
-
-        if ($decors) {
-
-
-            foreach ($decors as $decor) {
-
-                if (($decor['coordinate_x'] == $posX) && ($decor['coordinate_y'] == $posY)) {
-
-                    return 'A';
-                }
-            }
-            return 'E';
-        } else {
-
->>>>>>> 10162bfd30643f8cff67de66106736ddfce324e0
             return 'E';
         }
     }
