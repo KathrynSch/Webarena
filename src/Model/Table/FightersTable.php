@@ -157,7 +157,7 @@ class FightersTable extends Table
     }
     
     
-    public function addNewFighter($data,$playerId){
+    public function addNewFighter($data,$playerId,$x,$y){
         
             if(!empty($data)){
             //if(count($data)>$this->max_files){
@@ -166,30 +166,7 @@ class FightersTable extends Table
                   $tabfighters=$this->getAllFighters();
                   //$filedb=TableRegistry::get('Fighters');
                   $entity=$this->newEntity();
-                  $x= rand(0,14);
-                  $y= rand(0, 9);
-                  $occupy=false;
-                  foreach ($tabfighters as $fighter){
-                   
-                    if ($fighter['coordinate_x']==$x && $fighter['coordinate_y']==$y){
-                    
-                   $occupy=true;   
-                }
-               }
-               
-               while ($occupy){
-                   $occupy=false;
-                  $x= rand(0,14);
-                  $y= rand(0, 9);
                   
-                  foreach ($tabfighters as $fighter){
-                   
-                   if ($fighter['coordinate_x']==$x && $fighter['coordinate_y']==$y){
-                    
-                     $occupy=true;   
-                   }
-                }
-               } 
                
                
                $entity->coordinate_x=$x;
