@@ -7,7 +7,7 @@
 		<h2>Forgot password</h2>
 			<?= $this->Form->create() ; ?>
 				<?= $this->Form->input('email') ; ?>
-			<?= $this->Form->postButton('Get new password', ['class' => 'btn btn-default']);?>
+			<?= $this->Form->button(__('Get new password'), ['class'=>'btn btn-default']) ?>
 		<?= $this->Form->end() ; ?>
 	</div>
 </div>

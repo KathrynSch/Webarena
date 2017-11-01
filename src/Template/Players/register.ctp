@@ -7,7 +7,7 @@
 		<div class= "form-group">
 			<?= $this->Form->input('email' ) ; ?>
 			<?= $this->Form->input('password', array('type' => 'password') ); ?>
-			<?= $this->Form->postButton('Register',array('action'=>'forgot_password'), ['class' => 'btn btn-default']);?>
+			<?= $this->Form->button(__('Register'), ['class'=>'btn btn-default']) ?>
 
 		<?= $this->Form->end() ; ?>
 		</div>

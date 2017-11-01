@@ -6,7 +6,7 @@
 			<?= $this->Form->create() ; ?>
 				<?= $this->Form->input('email') ; ?>
 				<?= $this->Form->input('password', array('type' => 'password')) ; ?>
-			<?= $this->Form->postButton('Login', ['class' => 'btn btn-default']);?>
+			<?= $this->Form->button(__('Login'), ['class'=>'btn btn-default']) ?>
 		<?= $this->Form->end() ; ?>
 	</div>
 </div>
