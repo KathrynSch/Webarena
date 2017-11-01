@@ -53,6 +53,7 @@
                 <ul class="nav navbar-nav" style="background-color: #004D40; color: white;">
                     <li>
                         <a <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home'), array('class' => 'text-white')); ?> </a></li>
+                    <?php if($loggedIn) : ?>
                     <li>
                         <a <?php echo $this->Html->link('Fighter', ['controller' => 'Fighters', 'action' => 'view']); ?></a></li>
                     <li>
@@ -61,7 +62,7 @@
                         <a <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></a></li>
                     <li>
                         <a <?php echo $this->Html->link('Messages', ['controller' => 'Arenas', 'action' => 'messages']); ?></a></li>
-                    
+                    <?php endif; ?>
                 </ul>
 
             <ul class="nav navbar-nav navbar-right">

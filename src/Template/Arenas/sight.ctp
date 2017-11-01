@@ -46,8 +46,8 @@
         echo('<tr>'); 
         for($x=0; $x<15; $x++) //columns 
         {   // SI DANS CHAMPS DE VISION
-          /*if((abs($activeFighter['coordinate_x']-$x) + abs($activeFighter['coordinate_y']-$y)) <= $activeFighter->skill_sight)
-          {*/ ?>
+          if((abs($activeFighter['coordinate_x']-$x) + abs($activeFighter['coordinate_y']-$y)) <= $activeFighter->skill_sight)
+          { ?>
             <td id="arenaCell">
               <?php
               //affichage fighters
@@ -99,7 +99,7 @@
                 if( ($pillar->coordinate_x == $x)&&($pillar->coordinate_y == $y) )
                 {
                   //dd($decor);
-                  echo('P');
+                  echo $this->Html->image('wall.jpg', array('alt'=>'wall'), );
                 }
               }
               foreach($traps as $trap)
@@ -121,12 +121,12 @@
               
 
               echo('</td>');
-            /*}
+            }
             else  // SI PAS DANS CHAMPS DE VISION
             { ?>
-              <td class="bg-primary" style="width:50px; height: 50px;">
+              <td style="width:50px; height: 50px; background-color: #80CBC4">
               <?php 
-            }*/
+            }
           }
           echo('</tr>'); 
         } ?>

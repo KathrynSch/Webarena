@@ -241,6 +241,7 @@ class FightersController extends AppController
                 $this->Fighters->setFighterStrength($currentFighter->id, $currentFighter->skill_strength +1);
                 break;
             case 'health':
+                $this->Fighters->setFighterHealth($currentFighter->id, $currentFighter->current_health +3);
                 $this->Fighters->setFighterSkillHealth($currentFighter->id, $currentFighter->skill_health +3);
                 break;
         }
