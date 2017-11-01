@@ -402,6 +402,8 @@ class ArenasController extends AppController {
                 $this->Surroundings->deleteMonster();
                 $eventName = $fighter['name'] . ' attacks the Arena monster and kills it';
                 $this->Events->addNewEvent($eventName, $fighter['coordinate_x'], $fighter['coordinate_y']);
+            } else {
+                $this->Flash->error("There is nothing to attack here!");
             }
         }
         $this->redirect(['action' => 'sight']);
