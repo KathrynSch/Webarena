@@ -84,7 +84,7 @@
 
     <div class="container-fluid content">    
         <!-- <div class="row content"> -->
-            <!-- <?= $this->Flash->render() ?> -->
+            <?= $this->Flash->render() ?>
             <!-- <div class="container text-center clearfix"> -->
                 <?= $this->fetch('content') ?>
         <!-- </div> -->

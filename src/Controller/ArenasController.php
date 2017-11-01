@@ -29,7 +29,6 @@ class ArenasController extends AppController {
         // $this->loadComponent('Upload');
         $this->loadComponent('Flash');
         $this->loadModel('Surroundings');
-        
     }
 
     public function generateSurroundings() {
@@ -70,26 +69,19 @@ class ArenasController extends AppController {
         $this->redirect(['action' => 'sight']);
     }
 
-    
-    public function isSpotSurrounding($posX, $posY)
-    {
+    public function isSpotSurrounding($posX, $posY) {
         $this->loadModel('Surroundings');
         $decors = $this->Surroundings->getAllSurroundings()->toArray();
-        
-        if($decors)
-        {
-            
-            foreach ($decors as $decor) 
-            {
-                if(($decor['coordinate_x'] == $posX) && ($decor['coordinate_y'] == $posY))
-                {
-                    return $decor['type'] ;
+
+        if ($decors) {
+
+            foreach ($decors as $decor) {
+                if (($decor['coordinate_x'] == $posX) && ($decor['coordinate_y'] == $posY)) {
+                    return $decor['type'];
                 }
             }
             return 'E';
-        }
-        else
-        {
+        } else {
             return 'E';
         }
     }
@@ -119,8 +111,7 @@ class ArenasController extends AppController {
         //dd($monster->toArray());
     }
 
-    public function moveFighter($direction, $fighterId) 
-    {
+    public function moveFighter($direction, $fighterId) {
         //get active fighter
         $this->loadModel("Fighters");
         $activeFighter = $this->Fighters->getFighterById($fighterId);
@@ -183,28 +174,32 @@ class ArenasController extends AppController {
         //getMonster
         $this->loadModel('Surroundings');
         $monster = $this->Surroundings->getMonster();
-        switch ($direction) {
-            case 'l':
-                if (($monster->coordinate_x == $posX - 1) && ($monster->coordinate_y == $posY)) {
-                    return true;
-                }
-                break;
-            case 'r':
-                if (($monster->coordinate_x == $posX + 1) && ($monster->coordinate_y == $posY)) {
-                    return true;
-                }
-                break;
-            case 'u':
-                if (($monster->coordinate_x == $posX) && ($monster->coordinate_y == $posY - 1)) {
-                    return true;
-                }
-                break;
-            case 'd':
-                if (($monster->coordinate_x == $posX) && ($monster->coordinate_y == $posY + 1)) {
-                    return true;
-                }
-                break;
-            default: return false;
+        if ($monster) {
+            switch ($direction) {
+                case 'l':
+                    if (($monster->coordinate_x == $posX - 1) && ($monster->coordinate_y == $posY)) {
+                        return true;
+                    }
+                    break;
+                case 'r':
+                    if (($monster->coordinate_x == $posX + 1) && ($monster->coordinate_y == $posY)) {
+                        return true;
+                    }
+                    break;
+                case 'u':
+                    if (($monster->coordinate_x == $posX) && ($monster->coordinate_y == $posY - 1)) {
+                        return true;
+                    }
+                    break;
+                case 'd':
+                    if (($monster->coordinate_x == $posX) && ($monster->coordinate_y == $posY + 1)) {
+                        return true;
+                    }
+                    break;
+                default: return false;
+            }
+        } else {
+            $this->Flash->error("There is nothing to attack here!");
         }
     }
 
@@ -255,46 +250,43 @@ class ArenasController extends AppController {
         //Check if Fighter position is next to another fighter from table
         //parcours table fighters
         $number = 0;
-        
-            
+
+
         switch ($direction) {
             case 'l':
                 foreach ($tabFighters as $adv) {
                     if (($fighter['coordinate_x'] - 1 == $adv['coordinate_x'] + 1) &&
-                            ($fighter['coordinate_y']  == $adv['coordinate_y']) &&
+                            ($fighter['coordinate_y'] == $adv['coordinate_y']) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
-                        
                     }
-                    if (($fighter['coordinate_x'] -1 == $adv['coordinate_x']) &&
-                            ($fighter['coordinate_y']  == $adv['coordinate_y'] + 1) &&
+                    if (($fighter['coordinate_x'] - 1 == $adv['coordinate_x']) &&
+                            ($fighter['coordinate_y'] == $adv['coordinate_y'] + 1) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
-                        
                     }
-                    if (($fighter['coordinate_x'] -1 == $adv['coordinate_x'] ) &&
-                            ($fighter['coordinate_y']  == $adv['coordinate_y'] -1) &&
+                    if (($fighter['coordinate_x'] - 1 == $adv['coordinate_x'] ) &&
+                            ($fighter['coordinate_y'] == $adv['coordinate_y'] - 1) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
-                        
                     }
                 }
                 return $number;
                 break;
             case 'r':
                 foreach ($tabFighters as $adv) {
-                    if (($fighter['coordinate_x']+ 1 == $adv['coordinate_x'] ) &&
-                            ($fighter['coordinate_y']  == $adv['coordinate_y']+1) &&
+                    if (($fighter['coordinate_x'] + 1 == $adv['coordinate_x'] ) &&
+                            ($fighter['coordinate_y'] == $adv['coordinate_y'] + 1) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
                     }
-                    if (($fighter['coordinate_x'] +1 == $adv['coordinate_x']) &&
+                    if (($fighter['coordinate_x'] + 1 == $adv['coordinate_x']) &&
                             ($fighter['coordinate_y'] == $adv['coordinate_y'] - 1) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
                     }
-                    if (($fighter['coordinate_x'] +1== $adv['coordinate_x'] - 1) &&
-                            ($fighter['coordinate_y']  == $adv['coordinate_y']) &&
+                    if (($fighter['coordinate_x'] + 1 == $adv['coordinate_x'] - 1) &&
+                            ($fighter['coordinate_y'] == $adv['coordinate_y']) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
                     }
@@ -303,18 +295,18 @@ class ArenasController extends AppController {
                 break;
             case 'u':
                 foreach ($tabFighters as $adv) {
-                    if (($fighter['coordinate_x']  == $adv['coordinate_x']) &&
-                            ($fighter['coordinate_y']-1 == $adv['coordinate_y'] + 1) &&
+                    if (($fighter['coordinate_x'] == $adv['coordinate_x']) &&
+                            ($fighter['coordinate_y'] - 1 == $adv['coordinate_y'] + 1) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
                     }
                     if (($fighter['coordinate_x'] == $adv['coordinate_x'] + 1) &&
-                            ($fighter['coordinate_y'] -1== $adv['coordinate_y']) &&
+                            ($fighter['coordinate_y'] - 1 == $adv['coordinate_y']) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
                     }
-                    if (($fighter['coordinate_x']  == $adv['coordinate_x']-1) &&
-                            ($fighter['coordinate_y'] -1== $adv['coordinate_y'] ) &&
+                    if (($fighter['coordinate_x'] == $adv['coordinate_x'] - 1) &&
+                            ($fighter['coordinate_y'] - 1 == $adv['coordinate_y'] ) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
                     }
@@ -323,7 +315,7 @@ class ArenasController extends AppController {
                 break;
             case 'd':
                 foreach ($tabFighters as $adv) {
-                    if (($fighter['coordinate_x'] == $adv['coordinate_x']+1) &&
+                    if (($fighter['coordinate_x'] == $adv['coordinate_x'] + 1) &&
                             ($fighter['coordinate_y'] + 1 == $adv['coordinate_y']) &&
                             ($adv->guild_id == $fighter->guild_id)) {
                         $number = $number + 1;
@@ -379,6 +371,7 @@ class ArenasController extends AppController {
                     $this->Flash->success('Attack succeeded with the help of ' . $number . ' member(s) of your guild!');
                 }
                 //Decremente adv current health -1
+
                 $this->Fighters->setFighterHealth($adv['id'], $adv['current_health'] - $fighter->skill_strength);
 
                 //if adv dead
@@ -435,7 +428,7 @@ class ArenasController extends AppController {
 
         if ($this->request->is('post') && !empty($this->request->data)) {
             $this->loadModel('Events');
-            $name=$activeFighter->name.' shouted: '.$this->request->data['name'];
+            $name = $activeFighter->name . ' shouted: ' . $this->request->data['name'];
             $this->Events->addNewEvent($name, $activeFighter->coordinate_x, $activeFighter->coordinate_y);
             $this->redirect(['action' => 'sight']);
         }
