@@ -80,7 +80,7 @@
                             
                                 <?php if($isUpgradable == true) { ?>
                                 <div class="alert alert-success">
-                                  <strong>Succcess!</strong><?= h($levelUpString)?>
+                                  <strong>Success!</strong><?= h($levelUpString)?>
                                 </div>
                                 <div class="list-group">
                                 <?= $this->Html->link(__('+1 Sight'), ['action' => 'levelup', 'sight'], ['class'=>'list-group-item text-center']) ?>
