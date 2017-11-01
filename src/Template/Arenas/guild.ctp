@@ -1,5 +1,12 @@
 <div class="row">
-  <div class="col-md-2"></div>
+  <div class="col-md-2">
+            <div class="list-group" style="padding-top: 10px;">
+                <?= $this->Html->link(__('My Fighter'), ['controller'=>'Fighters','action' => 'view'], ['class'=>'list-group-item']) ?>
+              <?= $this->Html->link(__('Hall of Fame'), ['controller'=>'Fighters','action' => 'index'], ['class'=>'list-group-item']) ?>
+              <?= $this->Html->link(__('Enter Arena'), ['controller' => 'Arenas', 'action' => 'sight'], ['class'=>'list-group-item']) ?>
+              
+            </div>
+        </div>
   <div class="col-md-8">
       <div class="panel panel-info">
         <div class="panel-heading">Your Guild</div>

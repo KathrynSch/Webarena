@@ -127,7 +127,7 @@ class FightersTable extends Table
         $this->save($f);
     }
     
-    public function setFighterMaximumHealth($fighterId, $fighterMaximumHealth)
+    public function setFighterSkillHealth($fighterId, $fighterMaximumHealth)
     {
         $f=$this->get($fighterId);
         $f->skill_health=$fighterMaximumHealth;
@@ -135,7 +135,7 @@ class FightersTable extends Table
     }
     
     
-    public function setFighterForce($fighterId, $fighterForce)
+    public function setFighterStrength($fighterId, $fighterForce)
     {
         $f=$this->get($fighterId);
         $f->skill_strength=$fighterForce;

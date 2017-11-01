@@ -1,20 +1,23 @@
-
-
+<div class="row">
+	<div class="col-md-4"></div>
+	<div class="col-md-4">
 	<div class="panel pagination-centered">
 		<h2>Login</h2>
 			<?= $this->Form->create() ; ?>
 				<?= $this->Form->input('email') ; ?>
 				<?= $this->Form->input('password', array('type' => 'password')) ; ?>
-			<?= $this->Form->submit('Login', ['class' => 'btn btn-default']) ; ?>
-                        
-
+			<?= $this->Form->postButton('Login', ['class' => 'btn btn-default']);?>
 		<?= $this->Form->end() ; ?>
-
-          <?= $this->Form->postButton('Forget passeword ?',array('action'=>'forgot_password'), ['class' => 'btn btn-default']);?>
 	</div>
+</div>
+<div class="col-md-4"></div>
+</div>
+<div class="row">
+	<div class="col-md-5"></div>
+	<div class="col-md-2 text-center">
+	<?= $this->Html->link(__('Forgot Password ?'), ['action' => 'forgotpassword'], ['class'=>'list-group-item']) ?>
+	</div>
+	<div class="col-md-5"></div>
+</div>
 
 
-<!-- <div class="row">
-  <div class="col-md-6">.col-md-4</div>
-  <div class="col-md-6">.col-md-4</div>
-</div> -->

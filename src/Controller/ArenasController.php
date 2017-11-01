@@ -24,42 +24,11 @@ use Cake\ORM\TableRegistry;
  */
 class ArenasController extends AppController {
 
-    public function generateSurroundings() {
-        $this->loadModel('Surroundings');
-        // delete all existing surroundings
-
-        if ($this->Surroundings->getAllSurroundings() != null) {
-            $this->Surroundings->deleteAllSurroundings();
-        }
-        // set 15 colonnes
-        for ($a = 0; $a < 15; $a++) {
-            do {
-
-                $pX = rand(0, 14);
-                $pY = rand(0, 9);
-            } while (($this->isSpotFree($pX, $pY) != 'true') || ($this->isSpotSurrounding($pX, $pY) != 'E'));
-
-            $this->Surroundings->addNewSurrounding('P', $pX, $pY);
-        }
-
-
-        // set 15 pièges
-        for ($b = 0; $b < 15; $b++) {
-            do {
-
-                $tX = rand(0, 14);
-                $tY = rand(0, 9);
-            } while (($this->isSpotFree($tX, $tY) != 'true') || ($this->isSpotSurrounding($tX, $tY) != 'E'));
-            $this->Surroundings->addNewSurrounding('T', $tX, $tY);
-        }
-        // set 1 monstre
-        do {
-            $wX = rand(0, 14);
-            $wY = rand(0, 9);
-        } while (($this->isSpotFree($wX, $wY) != 'true') || ($this->isSpotSurrounding($wX, $wY) != 'E'));
-        $this->Surroundings->addNewSurrounding('W', $wX, $wY);
-
-        $this->redirect(['action' => 'sight']);
+    public function initialize() {
+        parent::initialize();
+        // $this->loadComponent('Upload');
+        $this->loadComponent('Flash');
+        
     }
 
     
@@ -351,7 +320,7 @@ class ArenasController extends AppController {
         if ($adv = $this->isNextToAdv($fighter, $tabFighters, $direction)) {
 
             //Calculate seuil = 10 + fighter level - adv level
-            $seuil = 10 + $fighter['level'] - $adv['level'];
+            $seuil = 10 + $adv['level'] - $fighter['level'];
             $oldStrength = $fighter->skill_strength;
             //if attack succeeds
             if (rand(1, 20) > $seuil) {

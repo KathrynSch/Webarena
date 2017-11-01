@@ -73,7 +73,7 @@
                     }
                     if($istrap != 0)
                       {
-                        echo('Brise suspecte');                  
+                        echo('<br>Brise suspecte');                  
                       }
                       if($monster)
                       {
@@ -83,7 +83,7 @@
                         || (($monster->coordinate_x == $x-1) && ($monster->coordinate_y == $y)) //left
                       )
                     {
-                      echo('Puanteur');
+                      echo('<br>Puanteur');
                     }
                       }
                     
@@ -138,7 +138,7 @@
    <?php if($activeFighter->current_health != 0)
       { ?>
         
-        <div class="panel panel-default" style="padding: 0;">
+        <div class="panel panel-info" style="padding: 0;">
           <div class="panel-heading">Move</div>
           <div class="panel-body">
             <div class="row"> <!-- UP -->
@@ -168,7 +168,7 @@
         </div>
         
 
-        <div class="panel panel-default " style="padding: 0;">
+        <div class="panel panel-info " style="padding: 0;">
           <div class="panel-heading">Fight</div>
           <div class="panel-body">
         <div class="row"> <!-- UP -->
@@ -196,7 +196,7 @@
         </div>
       </div>
     </div>
-        <div class="panel panel-default" style="padding: 0;">
+        <div class="panel panel-info" style="padding: 0;">
           
           <div class="panel-body">
         <div class="row">
@@ -204,7 +204,7 @@
             <?php echo $this->Form->postButton('<span style="color: green;" class="glyphicon glyphicon-volume-up"></span>', array('action'=>'shout', $activeFighter['id']), ['class' => 'btn btn-default']); ?>
           </div>
           <div class="col-md-6 pagination-centered">
-            <?php echo $this->Form->postButton('<span style="color: orange;" class="glyphicon glyphicon-refresh"></span>', array('action'=>'generateSurroundings'), ['class' => 'btn btn-default']); ?>
+            <?php echo $this->Form->postButton('<span style="color: orange;" class="glyphicon glyphicon-tower"></span>', array('action'=>'generateSurroundings'), ['class' => 'btn btn-default']); ?>
           </div>
         </div>
       </div>

@@ -4,21 +4,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+html{
+	position:relative;
+	min-height: 100%;
+}
 body{
 	font-size: 15px;
+	margin-bottom: 70px;
 }
 .navbar {
       margin-bottom: 0;
       border-radius: 0;
-    }
+}
 
 footer{
-	background-color: #555;
+	background-color: #00695C;
     color: white;  
-    position: absolute;
+    position: fixed;
+    height:50px;
 	bottom: 0px;
-	right: 0;
-	left: 0;
+	width: 100%;
 }
 
 .row{
@@ -27,6 +33,11 @@ footer{
 }
 .panel{
 	margin-top: 10px;
+}
+
+.list-group-item{
+	border-color: #00796B;
+	color: #00796B;
 }
 .container-fluid{
 	padding: 0;
@@ -51,4 +62,7 @@ table{
 }
 .alert-danger{
 	margin-top: 20px;
+}
+.btn.btn-default{
+	margin-bottom: 10px;
 }

@@ -46,11 +46,11 @@
     <nav class="navbar navbar-inverse" role="navigation">
         <div class="container-fluid">
 
-            <div class="navbar-header">
+            <div class="navbar-header" style="background-color: #004D40;">
               <a class="navbar-brand">Webarena</a>
             </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
+            <div class="collapse navbar-collapse" style="background-color: #004D40;" id="myNavbar">
+                <ul class="nav navbar-nav" style="background-color: #004D40; color: white;">
                     <li>
                         <a <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home'), array('class' => 'text-white')); ?> </a></li>
                     <li>
@@ -66,6 +66,8 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <?php if($loggedIn) : ?>
+                <li>
+                    <a <?php echo $this->Html->link('Manage account', array('controller' => 'Players', 'action' => 'edit')); ?></a></li>
                 <li>
                     <a <?php echo $this->Html->link('Logout', array('controller' => 'Players', 'action' => 'logout')); ?></a></li>
                 <?php else: ?>

@@ -1,23 +1,24 @@
- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav nav-pills nav-stacked">
+<div class="row content">
+
+  <div class="col-md-2">
+      <div class="list-group" style="padding-top: 10px;">
         <?php 
           foreach ($fighters as $fighter) {
             if($fighter->id != $activeFighter->id){
-              echo('<li role="presentation">');
-              echo $this->Html->link($fighter->name, ['action'=>'chat', $fighter->id]);
-              echo('</li>');
+              echo $this->Html->link($fighter->name, ['action'=>'chat', $fighter->id], ['class'=>'list-group-item']);
             }
           }
         ?>
-      </ul>
+      </div>
   </div>
 
-  <div class="panel-heading"><?= h($chatFighter->name);?></div>
+    <div class="col-md-6">
+  <div class="panel panel-default">
+  <div class="panel-heading">Chat with <?= h($chatFighter->name)?></div>
+    <div class="panel-body">
   <table class="table">
   	<tr>
   		<th>Date</th>
-      <th>From</th>
-      <th>To</th>
   		<th>Title</th>
   		<th>Message</th>
   	</tr>
@@ -28,8 +29,6 @@
         ?>
   		<tr>
   			<td><?= h($message->date->nice()) ?></td>
-        <td><?= h($message->fighter_id_from) ?></td>
-        <td><?= h($message->fighter_id) ?></td>
   			<td><?= h($message->title) ?></td>
   			<td><?= h($message->message) ?></td>
   		</tr> 
@@ -37,10 +36,8 @@
       if($message->fighter_id == $chatFighter->id)
       { // message envoyé 
         ?>
-        <tr style="background-color: #607D8B;">
+        <tr style="background-color: #B2DFDB;">
         <td><?= h($message->date->nice()) ?></td>
-        <td><?= h($message->fighter_id_from) ?></td>
-        <td><?= h($message->fighter_id) ?></td>
         <td><?= h($message->title) ?></td>
         <td><?= h($message->message) ?></td>
       </tr>
@@ -48,12 +45,20 @@
       endforeach; ?>
   </table>
 </div>
+</div>
+</div>
+
+<div class="col-md-4 pagination-centered">
+<div class="panel panel-default">
+  <div class="panel-heading">Send message</div>
   <?php echo $this->Form->create(); ?>
-      <span class="input-group-addon" id="sizing-addon1">@</span>
       <?php 
       echo $this->Form->input('title',array('label'=>'title','type'=>'text'));
       echo $this->Form->input('message',array('label'=>'message','type'=>'text'));
-      echo $this->Form->submit('Send', array('class' => 'button')) ;
+      echo $this->Form->button(__('Send'),['class'=>'btn btn-default']);      
       echo $this->Form->end();
     ?>
+</div>
+</div>
+
 </div>

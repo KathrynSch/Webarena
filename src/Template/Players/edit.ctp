@@ -3,29 +3,20 @@
  * @var \App\View\AppView $this
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $player->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $player->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Players'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Fighters'), ['controller' => 'Fighters', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Fighter'), ['controller' => 'Fighters', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="players form large-9 medium-8 columns content">
+
+<div class="row" style="padding-top: 10px;">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pagination-centered"> 
     <?= $this->Form->create($player) ?>
-    <fieldset>
-        <legend><?= __('Edit Player') ?></legend>
+
+        <legend><?= __('Change your account settings') ?></legend>
         <?php
             echo $this->Form->control('email');
             echo $this->Form->control('password');
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+
+    <?= $this->Form->button(__('Submit'),['class'=>'btn btn-default']) ?>
     <?= $this->Form->end() ?>
+</div>
+<div class="col-md-4"></div>
 </div>

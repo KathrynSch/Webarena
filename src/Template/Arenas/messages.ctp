@@ -56,10 +56,10 @@
   <div class="panel-heading">Send message</div>
   <?php echo $this->Form->create(); ?>
       <?php 
-      echo $this->Form->input('to', ['type'=>'select', 'options'=>$fightersNames, 'empty'=>'Choose a fighter']);
+      echo $this->Form->input('to', ['type'=>'select', 'options'=>$fightersNames, 'empty'=>'Choose a fighter'], ['style'=>'font-size: 8px;']);
       echo $this->Form->input('title',array('label'=>'title','type'=>'text'));
       echo $this->Form->input('message',array('label'=>'message','type'=>'text'));
-      echo $this->Form->submit('Send', array('class' => 'button')) ;
+      echo $this->Form->button(__('Send'),['class'=>'btn btn-default']);
       echo $this->Form->end();
     ?>
 </div>

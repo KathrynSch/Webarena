@@ -12,7 +12,8 @@ use App\Controller\App;
  *
  * @method \App\Model\Entity\Fighter[] paginate($object = null, array $settings = [])
  */
-class FightersController extends AppController {
+class FightersController extends AppController 
+{
 
     public function initialize() {
         parent::initialize();
@@ -35,33 +36,39 @@ class FightersController extends AppController {
         $this->set('guilds', $guilds);
     }
 
-    public function view() {
-        //dd("testjojo");
-
+    public function view() 
+    {
+        //get active fighter
         $playerId = $this->Auth->user('id');          //Player logged in
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
-
+        //if no fighter
         if ($fighter == null) {
 
             $this->Flash->error("You have no fighter to display. Create a fighter please.");
             $this->redirect(['controller' => 'Fighters', 'action' => 'add']);
-        } else {
+        } 
+        else 
+        {
+            //get guilds
             $this->loadModel("Guilds");
             $guild = $this->Guilds->getFighterGuild($fighter->guild_id);
-
             $this->set('guild', $guild);
-
+            //set fighter
             $this->set(compact('fighter'));
             $this->set('_serialize', ['fighter']);
             if (($fighter->xp) < 4) {
-                $this->set("levelUpString", "You don't have enough XP to level up");
-            } else {
+                $isUpgradable =false;
+                $this->set('isUpgradable', $isUpgradable);
+            } 
+            else 
+            {
                 $oldFighterXp = $fighter->xp;
                 $nbUpgrades = floor($oldFighterXp / 4);
-
-                $levelUpString = "/!\ You can upgrade " . $nbUpgrades . " times!";
+                $levelUpString = "You can upgrade your level (" . $nbUpgrades . ") !";
                 $this->set("levelUpString", $levelUpString);
+                $isUpgradable =true;
+                $this->set('isUpgradable', $isUpgradable);
             }
         }
     }
@@ -210,76 +217,34 @@ class FightersController extends AppController {
         return $this->redirect(['action' => 'index']);
     }
 
-    public function levelup() {
+    public function levelup($upgrade) 
+    {
+        //get active fighter
         $playerId = $this->Auth->user('id');
         $this->loadModel("Fighters");
         $currentFighter = $this->Fighters->getFighterByPlayerId($playerId);
-        $this->set("fighter", $currentFighter);
-
-        $this->loadModel("Guilds");
-        $guild = $this->Guilds->getFighterGuild($currentFighter->guild_id);
-        $this->set('guild', $guild);
-
-        $fighterId = $currentFighter->id;
-        $oldFighterXp = $currentFighter->xp;
-        $oldFighterLevel = $currentFighter->level;
-
-        if (($currentFighter->xp) < 4) {
-            $this->Flash->error("You don't have enough XP to level up");
-            $this->redirect(['action' => 'view']);
-        } else {
-            if ($this->request->is('post') && !empty($this->request->data)) 
-            {
-                $newFighterLevel = $oldFighterLevel + 1;
-                $this->Fighters->setFighterLevel($fighterId, $newFighterLevel);
-                $eventName = $fighter['name'].' upgraded level to '.$newFighterLevel;
-                $this->Events->addNewEvent($eventName, $currentFighter['coordinate_x'], $currentFighter['coordinate_y']);
-
-                if (($this->request->data['upgrade']) == 0) 
-                {
-                    $oldSight = $currentFighter->skill_sight;
-
-                    $newSight = $oldSight + 1;
-                    $this->Fighters->setFighterSight($fighterId, $newSight);
-
-                    $newFighterXp = $oldFighterXp - 4;
-                    $this->Fighters->setFighterXp($fighterId, $newFighterXp);
-
-                    $this->Flash->success("You won a level and upgraded your sight!");
-                    $this->redirect(['action' => 'view']);
-                }
-                if (($this->request->data['upgrade']) == 1) 
-                {
-                    $oldForce = $currentFighter->skill_strength;
-
-                    $newForce = $oldForce + 1;
-                    $this->Fighters->setFighterForce($fighterId, $newForce);
-
-                    $newFighterXp = $oldFighterXp - 4;
-                    $this->Fighters->setFighterXp($fighterId, $newFighterXp);
-
-                    $this->Flash->success("You won a level and upgraded your strenght!");
-                    $this->redirect(['action' => 'view']);
-                }
-                if (($this->request->data['upgrade']) == 2) 
-                {
-                    $oldMaxLife = $currentFighter->skill_health;
-                    $oldCurrentLife = $currentFighter->current_health;
-
-                    $newMaxLife = $oldMaxLife + 3;
-                    $newCurrentLife = $newMaxLife;
-
-                    $this->Fighters->setFighterHealth($fighterId, $newCurrentLife);
-                    $this->Fighters->setFighterMaximumHealth($fighterId, $newMaxLife);
-
-                    $newFighterXp = $oldFighterXp - 4;
-                    $this->Fighters->setFighterXp($fighterId, $newFighterXp);
-
-                    $this->Flash->success("You won a level and upgraded your life!");
-                    $this->redirect(['action' => 'view']);
-                }
-            }
+        //write event
+        $this->loadModel('Events');
+        $eventName = $currentFighter['name'].' upgraded level to '.($currentFighter->level+1);
+        $this->Events->addNewEvent($eventName, $currentFighter->coordinate_x, $currentFighter->coordinate_y);
+        //set new level
+        $this->Fighters->setFighterLevel($currentFighter->id, $currentFighter->level +1);
+        //set new XP
+        $this->Fighters->setFighterXp($currentFighter->id, $currentFighter->xp -4);
+        //set new skill
+        switch($upgrade)
+        {
+            case 'sight':
+                $this->Fighters->setFighterSight($currentFighter->id, $currentFighter->skill_sight +1);
+                break;
+            case 'strength':
+                $this->Fighters->setFighterStrength($currentFighter->id, $currentFighter->skill_strength +1);
+                break;
+            case 'health':
+                $this->Fighters->setFighterSkillHealth($currentFighter->id, $currentFighter->skill_health +3);
+                break;
         }
+        $this->redirect(['action'=>'view']);
     }
 
 }

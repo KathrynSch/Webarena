@@ -5,7 +5,14 @@
  */
 ?>
 <div class="row">
-<div class="col-md-2"></div>
+<div class="col-md-2">
+            <div class="list-group" style="padding-top: 10px;">
+                <?= $this->Html->link(__('My Fighter'), ['controller'=>'Fighters','action' => 'view'], ['class'=>'list-group-item']) ?>
+              <?= $this->Html->link(__('Guilds'), ['controller'=>'Arenas','action' => 'guild'], ['class'=>'list-group-item']) ?>
+              <?= $this->Html->link(__('Enter Arena'), ['controller' => 'Arenas', 'action' => 'sight'], ['class'=>'list-group-item']) ?>
+              
+            </div>
+        </div>
 <div class="col-md-8">
     <h3 class="pagination-centered"><?= __('Hall of Fame') ?></h3>
     <table class="table">

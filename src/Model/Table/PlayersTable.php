@@ -41,6 +41,16 @@ class PlayersTable extends Table
         ]);
     }
 
+    public function getPlayerById($playerId)
+    {
+        $p = $this->find('all')->where(['id'=>$playerId])->first();
+        return $p;
+    }
+    public function getPlayerByEmail($email)
+    {
+        $p = $this->find('all')->where(['email'=>$email])->first();
+        return $p;
+    }
     /**
      * Default validation rules.
      *

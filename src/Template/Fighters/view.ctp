@@ -1,4 +1,3 @@
-
     <div class="row content">
 
         <div class="col-md-2">
@@ -75,11 +74,28 @@
                             <?php if($guild) echo($guild->name);
                             else echo('No guild'); ?>
                         </div>
+
+
                         <div class="col-md-3">
-                            <div class="list-group">
-                            <?= $this->Html->link(__($levelUpString), ['action' => 'levelup'], ['class'=>'list-group-item text-center']) ?>
-                            </div>
-                            <?php if($fighter->current_health == 0)
+                            
+                                <?php if($isUpgradable == true) { ?>
+                                <div class="alert alert-success">
+                                  <strong>Succcess!</strong><?= h($levelUpString)?>
+                                </div>
+                                <div class="list-group">
+                                <?= $this->Html->link(__('+1 Sight'), ['action' => 'levelup', 'sight'], ['class'=>'list-group-item text-center']) ?>
+                                <?= $this->Html->link(__('+1 Strength'), ['action' => 'levelup', 'strength'], ['class'=>'list-group-item text-center']) ?>
+                                <?= $this->Html->link(__('+3 Max health'), ['action' => 'levelup', 'health'], ['class'=>'list-group-item text-center']) ?>
+                                </div>
+
+                            <?php } else
+                            { ?>
+                                <div class="alert alert-info">
+                                  You don't have enough XP to upgrade level !
+                                </div>
+                            <?php }
+                        
+                            if($fighter->current_health == 0)
                             {
                                 ?>
                                 <div class="alert alert-danger">
