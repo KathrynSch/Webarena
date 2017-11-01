@@ -102,7 +102,7 @@
                   echo $this->Html->image('wall.jpg', array('alt'=>'wall') );
                 }
               }
-              foreach($traps as $trap)
+              /*foreach($traps as $trap)
               {
                 //affichage colonnes
                 if( ($trap->coordinate_x == $x)&&($trap->coordinate_y == $y) )
@@ -117,7 +117,7 @@
                 //dd($decor);
                 echo('W');
               }
-              }
+              }*/
               
 
               echo('</td>');

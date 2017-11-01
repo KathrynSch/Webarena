@@ -66,6 +66,10 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
     }
+    public function versions()
+    {
+        
+    }
 
     /**
      * Before render callback.
