@@ -111,9 +111,13 @@ class ArenasController extends AppController {
         //dd($monster->toArray());
     }
 
-    public function moveFighter($direction, $fighterId) {
+    public function moveFighter($direction, $fighterId) 
+    {
+        //get active fighter
         $this->loadModel("Fighters");
         $activeFighter = $this->Fighters->getFighterById($fighterId);
+        //get event
+        $this->loadModel('Events');
         $newPosX = $activeFighter['coordinate_x'];
         $newPosY = $activeFighter['coordinate_y'];
 
@@ -136,6 +140,9 @@ class ArenasController extends AppController {
             //if piège invisible T ou monstre W
             if (($this->isSpotSurrounding($newPosX, $newPosY) == 'T') || ($this->isSpotSurrounding($newPosX, $newPosY) == 'W')) {
                 // activeFighter died
+                $eventName = $activeFighter['name'] . ' died accidently';
+                $this->Events->addNewEvent($eventName, $activeFighter['coordinate_x'], $activeFighter['coordinate_y']);
+
                 $this->Fighters->setFighterHealth($activeFighter->id, 0);
             } else { // nothing -> Can move
                 $this->Fighters->setPosition($fighterId, $newPosX, $newPosY);

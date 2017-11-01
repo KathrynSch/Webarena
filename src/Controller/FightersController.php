@@ -26,10 +26,13 @@ class FightersController extends AppController {
      * @return \Cake\Http\Response|void
      */
     public function index() {
-        $fighters = $this->paginate($this->Fighters);
+        $this->loadModel('Fighters');
+        $fighters=$this->Fighters->getFightersLeveled();
+        $this->set('fighters', $fighters);
 
-        $this->set(compact('fighters'));
-        $this->set('_serialize', ['fighters']);
+        $this->loadModel('Guilds');
+        $guilds = $this->Guilds->getGuilds();
+        $this->set('guilds', $guilds);
     }
 
     public function view() {
@@ -39,13 +42,6 @@ class FightersController extends AppController {
         $this->loadModel("Fighters");   //load model de la table fighters
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
 
-
-        if ($fighter <> null) {
-            if ($fighter->current_health == 0) {
-
-                $this->redirect(['action' => 'deadfighter']);
-            }
-        }
         if ($fighter == null) {
 
             $this->Flash->error("You have no fighter to display. Create a fighter please.");
@@ -122,7 +118,7 @@ class FightersController extends AppController {
                 $avatarExtension = strtolower(substr(strrchr($this->request->data['avatar_file']['name'], '.'), 1));
 
                 if (!in_array($avatarExtension, $allowed)) {
-                    dd("There is a problem with your file, please choose another.");
+                    $this->Flash->error("There is a problem with your file, please choose another.");
                 }
                 $newName = $filename . '.png';
                 if (move_uploaded_file($file_tmp_name, $dir . DS . $newName) && is_writable($dir)) {

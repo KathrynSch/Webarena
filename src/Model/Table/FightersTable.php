@@ -72,6 +72,10 @@ class FightersTable extends Table
         $tabFighters=$this->find('all');
         return($tabFighters->toArray());
     }
+    public function getFightersLeveled(){
+        $tabFighters=$this->find('all', ['order' => 'level'])->where(['current_health !='=> 0]);
+        return($tabFighters->toArray());
+    }
 
     public function getAllAliveFighters(){
         $tabFighters=$this->find('all')->where(['current_health !='=> 0]);

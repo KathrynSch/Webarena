@@ -4,7 +4,7 @@
       
        
       <div class="panel panel-success">
-          <div class="panel-heading"><?= $this->Html->link(__('My Fighter'), ['controller' => 'Fighters', 'action' => 'view', $activeFighter['player_id'] ]) ?></div>
+          <div class="panel-heading"><?= $this->Html->link(__($activeFighter->name), ['controller' => 'Fighters', 'action' => 'view', $activeFighter['player_id'] ]) ?></div>
           <div class="panel-body" style="padding-left:0; padding-bottom: 0;">
              <ul class="list-group">
                 <li class="list-group-item">Level <span class="badge"><?= h($activeFighter['level'])?></span></li>
@@ -19,12 +19,14 @@
         
 
       <div class="panel panel-warning">
-          <div class="panel-heading"><?= $this->Html->link(__('Latest Event'), ['action' => 'diary', $activeFighter['id'] ]) ?></div>
+          <div class="panel-heading"><?= $this->Html->link(__('Latest Events'), ['action' => 'diary', $activeFighter['id'] ]) ?></div>
           <div class="panel-body" style="font-size: 9px;">
             <?php 
                 foreach ($events as $event) {
                     if((abs($activeFighter['coordinate_x']-$event->coordinate_x) + abs($activeFighter['coordinate_y']-$event->coordinate_y)) <= $activeFighter->skill_sight)
                     { 
+                      echo('<span style="color: green ;" class="glyphicon glyphicon-bullhorn"></span>');
+                      echo(' ');
                       echo($event->name);
                       echo('<br>');
                     }
@@ -73,7 +75,9 @@
                       {
                         echo('Brise suspecte');                  
                       }
-                    if ( (($monster->coordinate_x == $x) && ($monster->coordinate_y == $y+1)) // down
+                      if($monster)
+                      {
+                        if ( (($monster->coordinate_x == $x) && ($monster->coordinate_y == $y+1)) // down
                         || (($monster->coordinate_x == $x) && ($monster->coordinate_y == $y-1)) //up
                         || (($monster->coordinate_x == $x+1) && ($monster->coordinate_y == $y)) // right
                         || (($monster->coordinate_x == $x-1) && ($monster->coordinate_y == $y)) //left
@@ -81,6 +85,8 @@
                     {
                       echo('Puanteur');
                     }
+                      }
+                    
                   }
                 }
 
@@ -105,11 +111,14 @@
                   echo('T');
                 }
               }
-              if( ($monster->coordinate_x == $x)&&($monster->coordinate_y == $y) )
+              if($monster){
+                if( ($monster->coordinate_x == $x)&&($monster->coordinate_y == $y) )
               {
                 //dd($decor);
                 echo('W');
               }
+              }
+              
 
               echo('</td>');
             /*}
@@ -124,10 +133,15 @@
   </table>
 </div>
 
+
   <div class="col-md-2">
-   
-        MOVE
-        <div class="row"> <!-- UP -->
+   <?php if($activeFighter->current_health != 0)
+      { ?>
+        
+        <div class="panel panel-default" style="padding: 0;">
+          <div class="panel-heading">Move</div>
+          <div class="panel-body">
+            <div class="row"> <!-- UP -->
           <div class="col-md-4"></div>
           <div class="col-md-4">
             <?php echo $this->Form->postButton('<span style="color: blue;" class="glyphicon glyphicon-arrow-up"></span>', array('action'=>'moveFighter', 'u', $activeFighter['id']), ['class' => 'btn btn-default']); ?>
@@ -150,8 +164,13 @@
           </div>
           <div class="col-md-4"></div>
         </div>
+          </div>
+        </div>
+        
 
-        FIGHT
+        <div class="panel panel-default " style="padding: 0;">
+          <div class="panel-heading">Fight</div>
+          <div class="panel-body">
         <div class="row"> <!-- UP -->
           <div class="col-md-4"></div>
           <div class="col-md-4">
@@ -175,26 +194,32 @@
           </div>
           <div class="col-md-4"></div>
         </div>
-        SHOUT
+      </div>
+    </div>
+        <div class="panel panel-default" style="padding: 0;">
+          
+          <div class="panel-body">
         <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
+          <div class="col-md-6 pagination-centered">
             <?php echo $this->Form->postButton('<span style="color: green;" class="glyphicon glyphicon-volume-up"></span>', array('action'=>'shout', $activeFighter['id']), ['class' => 'btn btn-default']); ?>
           </div>
-          <div class="col-md-4"></div>
-        </div>
-
-        SURROUNDINGS
-        <div class="row">
-          <div class="col-md-4"></div>
-          <div class="col-md-4">
+          <div class="col-md-6 pagination-centered">
             <?php echo $this->Form->postButton('<span style="color: orange;" class="glyphicon glyphicon-refresh"></span>', array('action'=>'generateSurroundings'), ['class' => 'btn btn-default']); ?>
           </div>
-          <div class="col-md-4"></div>
         </div>
-
-          
+      </div>
     </div>
+    
+    <?php }
+      else
+    { ?>
+        <div class="alert alert-danger">
+          <strong>You have just died!</strong> You have to start with a new fighter
+        </div>
+    <?php } ?>
+    
+    </div>
+
 
 </div>
 

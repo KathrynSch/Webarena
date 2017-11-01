@@ -50,7 +50,7 @@ class EventsTable extends Table
     {
         $inlastday = Time::now();
         $inlastday = $inlastday->modify('-24 hours');
-        $e = $this->find('all')->where(['date >' => $inlastday]);
+        $e = $this->find('all', ['order' => ['date' => 'DESC']])->where(['date >' => $inlastday]);
         return($e);
     }
 

@@ -3,20 +3,19 @@
  * @var \App\View\AppView $this
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Guilds'), ['action' => 'guild']) ?></li>
-    </ul>
-</nav>
-<div class="guilds form large-9 medium-8 columns content">
+<div class="row" style="padding-top: 10px;">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pagination-centered">
     <?= $this->Form->create('Upload',array('enctype'=>'multipart/form-data')); ?> 
-    <fieldset>
-        <legend><?= __('Add Guild') ?></legend>
+    
+        <legend><?= __('Creat a new guild') ?></legend>
         <?php
              echo $this->Form->input('name',array('label'=>'Guild name','type'=>'text'));
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    
+    <?= $this->Form->button(__('Submit'),['class'=>'btn btn-default']) ?>
     <?= $this->Form->end() ?>
+        </div>
+    <div class="col-md-4"></div>
 </div>
+

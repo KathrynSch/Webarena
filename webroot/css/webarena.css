@@ -4,7 +4,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+body{
+	font-size: 15px;
+}
 .navbar {
       margin-bottom: 0;
       border-radius: 0;
@@ -19,12 +21,7 @@ footer{
 	left: 0;
 }
 
-.content{
-	background-color: red;
-}
-
 .row{
-	background-color: yellow;
 	margin: 0;
 	padding: 0;
 }
@@ -51,4 +48,7 @@ footer{
 table{
 	margin-top: 10px;
 	height: 100%;
+}
+.alert-danger{
+	margin-top: 20px;
 }

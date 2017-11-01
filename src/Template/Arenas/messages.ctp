@@ -1,19 +1,22 @@
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav nav-pills nav-stacked">
+<div class="row content">
+
+  <div class="col-md-2">
+      <div class="list-group" style="padding-top: 10px;">
         <?php 
           foreach ($fighters as $fighter) {
             if($fighter->id != $activeFighter->id){
-              echo('<li role="presentation">');
-              echo $this->Html->link($fighter->name, ['action'=>'chat', $fighter->id]);
-              echo('</li>');
+              echo $this->Html->link($fighter->name, ['action'=>'chat', $fighter->id], ['class'=>'list-group-item']);
             }
           }
         ?>
-      </ul>
+      </div>
   </div>
 
 
-  <div class="panel-heading">All messsages</div>
+  <div class="col-md-6">
+  <div class="panel panel-default">
+  <div class="panel-heading">All Messages</div>
+    <div class="panel-body">
   <table class="table">
   	<tr>
   		<th>Date</th>
@@ -45,11 +48,13 @@
   		<?php endforeach; ?>
   </table>
 </div>
+</div>
+</div>
 
+<div class="col-md-4 pagination-centered">
 <div class="panel panel-default">
   <div class="panel-heading">Send message</div>
   <?php echo $this->Form->create(); ?>
-      <span class="input-group-addon" id="sizing-addon1">@</span>
       <?php 
       echo $this->Form->input('to', ['type'=>'select', 'options'=>$fightersNames, 'empty'=>'Choose a fighter']);
       echo $this->Form->input('title',array('label'=>'title','type'=>'text'));
@@ -57,4 +62,7 @@
       echo $this->Form->submit('Send', array('class' => 'button')) ;
       echo $this->Form->end();
     ?>
+</div>
+</div>
+
 </div>

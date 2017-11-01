@@ -3,23 +3,23 @@
  * @var \App\View\AppView $this
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Fighters'), ['action' => 'index']) ?></li>
-    </ul>
-</nav>
-<div class="fighters form large-9 medium-8 columns content">
+
+<div class="row" style="padding-top: 10px;">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 pagination-centered">
     <?= $this->Form->create('Upload',array('enctype'=>'multipart/form-data')); ?> 
-    <fieldset>
-        <legend><?= __('Add Fighter') ?></legend>
+    
+        <legend class="pagination-centered"><?= __('Create your new fighter !') ?></legend>
+
         <?php
-             echo $this->Form->input('name',array('label'=>'Fighter name','type'=>'text'));
+             echo $this->Form->input('name',array('label'=>'Fighter name','type'=>'text'), ['input'=>['class'=>'form_control']]);
              echo $this->Form->input('avatar_file',array('label'=>'Fighter avatar (jpg,png,jpeg,gif)','type'=>'file')); 
         ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    
+    <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-default']) ?>
     <?= $this->Form->end() ?>
+    </div>
+    <div class="col-md-4"></div>
 </div>
 
 <!-- 

@@ -135,7 +135,7 @@ class PlayersController extends AppController
             $player = $this-> Players ->patchEntity($player, $this->request->data);
             if ($this->Players->save($player)) {
                 $this->Flash->success('You are registered ! ');
-                 return $this->redirect(['action' => 'login']);
+                 return $this->redirect(['controller' => 'Fighters', 'action' => 'view']);
             }
             else{
                 $this->Flash->error('You are not registered ! ');
@@ -157,7 +157,7 @@ class PlayersController extends AppController
                    
                    $random=rand(75412, 898542);
                    $new_password= md5($new_password);
-                   $this->Players->setPasswordPlayer($player['id'], $new_passeword);
+                   $this->Players->setPasswordPlayer($player['id'], $new_password);
                     
                 
             } 
@@ -170,7 +170,7 @@ class PlayersController extends AppController
             
         }
         
-        } 
+    } 
     
     /*function forgot_password() {
         if (!empty($this->data)) {

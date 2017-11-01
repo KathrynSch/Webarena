@@ -19,7 +19,7 @@
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"> -->
 
     <title>
         <?= $this->fetch('title') ?>
@@ -54,11 +54,14 @@
                     <li>
                         <a <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home'), array('class' => 'text-white')); ?> </a></li>
                     <li>
+                        <a <?php echo $this->Html->link('Fighter', ['controller' => 'Fighters', 'action' => 'view']); ?></a></li>
+                    <li>
                         <a <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?></a></li>
                     <li>
                         <a <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></a></li>
                     <li>
-                        <a <?php echo $this->Html->link('Fighter', ['controller' => 'Fighters', 'action' => 'view']); ?></a></li>
+                        <a <?php echo $this->Html->link('Messages', ['controller' => 'Arenas', 'action' => 'messages']); ?></a></li>
+                    
                 </ul>
 
             <ul class="nav navbar-nav navbar-right">
