@@ -379,6 +379,7 @@ class ArenasController extends AppController {
                     $this->Flash->success('Attack succeeded with the help of ' . $number . ' member(s) of your guild!');
                 }
                 //Decremente adv current health -1
+                
                 $this->Fighters->setFighterHealth($adv['id'], $adv['current_health'] - $fighter->skill_strength);
 
                 //if adv dead
