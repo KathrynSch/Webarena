@@ -99,7 +99,7 @@
                 if( ($pillar->coordinate_x == $x)&&($pillar->coordinate_y == $y) )
                 {
                   //dd($decor);
-                  echo $this->Html->image('wall.jpg', array('alt'=>'wall'), );
+                  echo $this->Html->image('wall.jpg', array('alt'=>'wall') );
                 }
               }
               foreach($traps as $trap)
