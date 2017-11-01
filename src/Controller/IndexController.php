@@ -19,8 +19,5 @@ class PlayersController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
-    public function version()
-    {
-    	$this->render();
-    }
+    
 }

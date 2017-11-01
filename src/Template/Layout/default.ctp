@@ -97,7 +97,7 @@
         © 
         <span>Web Design By: BRUNETON, DUMONT, GRIERE, SCHUTTE</span><br>
         <span>Options B,F and D - SI05 October 2017</span><br>
-        <span><a style="color: white;" href="versions.log">versions.log</a></span>
+        <a <?= $this->Html->link('versions.log',['controller' => 'App', 'action' => 'versions']); ?></a></li>
     </p>
 </footer>
 
