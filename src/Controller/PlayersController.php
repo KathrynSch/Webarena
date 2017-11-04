@@ -137,7 +137,8 @@ class PlayersController extends AppController
             $player = $this-> Players ->patchEntity($player, $this->request->data);
             if ($this->Players->save($player)) {
                 $this->Flash->success('You are registered ! ');
-                 return $this->redirect(['controller' => 'Fighters', 'action' => 'view']);
+                $this->Auth->setUser($player);
+                return $this->redirect(['controller' => 'Fighters', 'action' => 'view']);
             }
             else{
                 $this->Flash->error('You are not registered ! ');
