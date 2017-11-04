@@ -47,17 +47,15 @@
         <div class="container-fluid">
 
             <div class="navbar-header" style="background-color: #004D40;">
-              <a class="navbar-brand">Webarena</a>
+              <a <?php echo $this->Html->link('Webarena', array('controller' => 'Players', 'action' => 'home'), array('class' => 'navbar-brand')); ?> </a>
             </div>
             <div class="collapse navbar-collapse" style="background-color: #004D40;" id="myNavbar">
-                <ul class="nav navbar-nav" style="background-color: #004D40; color: white;">
-                    <li>
-                        <a <?php echo $this->Html->link('Home', array('controller' => 'Players', 'action' => 'home'), array('class' => 'text-white')); ?> </a></li>
+                <ul class="nav navbar-nav" style="background-color: #004D40; color: white; font-size: 15px;">
                     <?php if($loggedIn) : ?>
                     <li>
                         <a <?php echo $this->Html->link('Fighter', ['controller' => 'Fighters', 'action' => 'view']); ?></a></li>
                     <li>
-                        <a <?php echo $this->Html->link('Sight', array('controller' => 'Arenas', 'action' => 'sight')); ?></a></li>
+                        <a <?php echo $this->Html->link('Arena', array('controller' => 'Arenas', 'action' => 'sight')); ?></a></li>
                     <li>
                         <a <?php echo $this->Html->link('Diary', array('controller' => 'Arenas', 'action' => 'diary')); ?></a></li>
                     <li>
@@ -65,7 +63,7 @@
                     <?php endif; ?>
                 </ul>
 
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="font-size: 15px;">
                 <?php if($loggedIn) : ?>
                 <li>
                     <a <?php echo $this->Html->link('Manage account', array('controller' => 'Players', 'action' => 'edit')); ?></a></li>
@@ -95,9 +93,10 @@
 <footer class="container-fluid text-center bg-lightgray">        
     <p>
         © 
-        <span>Web Design By: BRUNETON, DUMONT, GRIERE, SCHUTTE</span><br>
-        <span>Options B,F and D - SI05 October 2017</span><br>
-        <a <?= $this->Html->link('versions.log',['controller' => 'App', 'action' => 'versions']); ?></a></li>
+        <span>Web Design By: BRUNETON, DUMONT, GRIERE, SCHUTTE - SI05 October 2017</span><br>
+        <span>Options B,F and D  -  It's out there !   www.webarena.ovh  </span><br>
+        <a <?= $this->Html->link('versions.log',['controller' => 'App', 'action' => 'versions'], ['style'=>'color: white']); ?></a></li>
+        
     </p>
 </footer>
 

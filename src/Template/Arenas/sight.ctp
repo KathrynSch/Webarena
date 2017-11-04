@@ -1,8 +1,12 @@
 <div class="row content">
-
+<?php if($activeFighter == null){
+  ?>
+        <div class="alert alert-warning">
+          <strong>Warning! </strong> You must create a fighter before entering arena.
+        </div>
+<?php } 
+else { ?>
     <div class="col-md-2">
-      
-       
       <div class="panel panel-success">
           <div class="panel-heading"><?= $this->Html->link(__($activeFighter->name), ['controller' => 'Fighters', 'action' => 'view', $activeFighter['player_id'] ]) ?></div>
           <div class="panel-body" style="padding-left:0; padding-bottom: 0;">
@@ -12,11 +16,9 @@
                 <li class="list-group-item">Sight <span class="badge"><?= h($activeFighter['skill_sight'])?></span></li>
                 <li class="list-group-item">Strength <span class="badge"><?= h($activeFighter['skill_strength'])?></span></li>
                 <li class="list-group-item">Health <span class="badge"><?= h($activeFighter['current_health'])?>/<?= h($activeFighter['skill_health'])?></span></li> 
-              </ul>
-                            
+              </ul>                  
           </div>
       </div>
-        
 
       <div class="panel panel-warning">
           <div class="panel-heading"><?= $this->Html->link(__('Latest Events'), ['action' => 'diary', $activeFighter['id'] ]) ?></div>
@@ -34,8 +36,6 @@
             ?>
           </div>
       </div>
-
-      
     </div>
   
   <div class="col-md-8">
@@ -73,7 +73,7 @@
                     }
                     if($istrap != 0)
                       {
-                        echo('<br>Brise suspecte');                  
+                        echo('<br>Suspicious breeze');                  
                       }
                       if($monster)
                       {
@@ -81,16 +81,14 @@
                         || (($monster->coordinate_x == $x) && ($monster->coordinate_y == $y-1)) //up
                         || (($monster->coordinate_x == $x+1) && ($monster->coordinate_y == $y)) // right
                         || (($monster->coordinate_x == $x-1) && ($monster->coordinate_y == $y)) //left
-                      )
-                    {
-                      echo('<br>Puanteur');
-                    }
+                        )
+                        {
+                          echo('<br>Stench !!');
+                        }
                       }
-                    
-                  }
                 }
-
-    		      }
+              }
+    		    }
                 //affichage décor
               foreach($pillars as $pillar)
               {
@@ -118,7 +116,6 @@
                 echo('W');
               }
               }*/
-              
 
               echo('</td>');
             }
@@ -127,17 +124,15 @@
               <td style="width:50px; height: 50px; background-color: #80CBC4">
               <?php 
             }
-          }
-          echo('</tr>'); 
-        } ?>
+        }
+        echo('</tr>'); 
+      } ?>
   </table>
 </div>
-
 
   <div class="col-md-2">
    <?php if($activeFighter->current_health != 0)
       { ?>
-        
         <div class="panel panel-info" style="padding: 0;">
           <div class="panel-heading">Move</div>
           <div class="panel-body">
@@ -219,7 +214,7 @@
     <?php } ?>
     
     </div>
-
+<?php } ?>
 
 </div>
 

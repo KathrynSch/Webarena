@@ -31,10 +31,7 @@
                         ?>
                 </div>
                 <div class="col-md-6 ">
-                        
-                       
-                            
-                            
+
                             <!-- Level up to 20 -->
                             Level
                             <div class="progress">
@@ -77,24 +74,7 @@
 
 
                         <div class="col-md-3">
-                            
-                                <?php if($isUpgradable == true) { ?>
-                                <div class="alert alert-success">
-                                  <strong>Success!</strong><?= h($levelUpString)?>
-                                </div>
-                                <div class="list-group">
-                                <?= $this->Html->link(__('+1 Sight'), ['action' => 'levelup', 'sight'], ['class'=>'list-group-item text-center']) ?>
-                                <?= $this->Html->link(__('+1 Strength'), ['action' => 'levelup', 'strength'], ['class'=>'list-group-item text-center']) ?>
-                                <?= $this->Html->link(__('+3 Max health'), ['action' => 'levelup', 'health'], ['class'=>'list-group-item text-center']) ?>
-                                </div>
-
-                            <?php } else
-                            { ?>
-                                <div class="alert alert-info">
-                                  You don't have enough XP to upgrade level !
-                                </div>
-                            <?php }
-                        
+                            <?php
                             if($fighter->current_health == 0)
                             {
                                 ?>
@@ -102,6 +82,25 @@
                                   <strong>You have just died!</strong> You have to start with a new fighter
                                 </div>
                                 <?php 
+                            } 
+                            else {
+                                if($isUpgradable == true) 
+                                { ?>
+                                    <div class="alert alert-success">
+                                      <strong>Success!</strong><?= h($levelUpString)?>
+                                    </div>
+                                    <div class="list-group">
+                                    <?= $this->Html->link(__('+1 Sight'), ['action' => 'levelup', 'sight'], ['class'=>'list-group-item text-center']) ?>
+                                    <?= $this->Html->link(__('+1 Strength'), ['action' => 'levelup', 'strength'], ['class'=>'list-group-item text-center']) ?>
+                                    <?= $this->Html->link(__('+3 Max health'), ['action' => 'levelup', 'health'], ['class'=>'list-group-item text-center']) ?>
+                                    </div>
+
+                            <?php } else
+                                { ?>
+                                    <div class="alert alert-info">
+                                      You don't have enough XP to upgrade level !
+                                    </div>
+                                <?php }
                             }
                             ?>
                         </div>

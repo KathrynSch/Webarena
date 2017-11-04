@@ -43,8 +43,7 @@ class FightersController extends AppController {
         $fighter = $this->Fighters->getFighterByPlayerId($playerId);
         //if no fighter
         if ($fighter == null) {
-
-            $this->Flash->error("You have no fighter to display. Create a fighter please.");
+            
             $this->redirect(['controller' => 'Fighters', 'action' => 'add']);
         } else {
             //get guilds
@@ -68,18 +67,6 @@ class FightersController extends AppController {
         }
     }
 
-    public function deadfighter() {
-        $playerId = $this->Auth->user('id');          //Player logged in
-        $this->loadModel("Fighters");   //load model de la table fighters
-        $fighter = $this->Fighters->getFighterByPlayerId($playerId);
-        $this->loadModel("Guilds");
-        $guild = $this->Guilds->getFighterGuild($fighter->id);
-        $this->set('guild', $guild);
-
-        $this->set(compact('fighter'));
-        $this->set('_serialize', ['fighter']);
-        $this->render('deadfighter');
-    }
 
     /**
      * Add method
@@ -119,9 +106,6 @@ class FightersController extends AppController {
                     }
                 } while (($occupy) || ($Arenas->isSpotFree($x, $y) != 'true') || ($Arenas->isSpotSurrounding($x, $y) != 'E'));
 
-
-
-
                 $this->Fighters->addNewFighter($this->request->data, $playerId, $x, $y);
                 $this->Flash->success(__('The fighter has been saved.'));
                 //get new fighter
@@ -148,7 +132,7 @@ class FightersController extends AppController {
                     $this->redirect(['action' => 'view']);
                 }
             } else {
-                $this->Flash->error('There is a problem with your picture upload.');
+                //$this->Flash->error('There is a problem with your picture upload.');
             }
         } else {   //if fighter is dead (condition unecessary)
             //if($actualFighter->current_health == 0)
@@ -174,7 +158,7 @@ class FightersController extends AppController {
 
                 $fighterId = $this->Fighters->getFighterByPlayerId($playerId)->id;
                 $this->Fighters->setFighterName($fighterId, $this->request->data['name']);
-                $this->Flash->success(__('The name has been saved.'));
+                //$this->Flash->success(__('The name has been saved.'));
 
                 $filename = $this->Fighters->getFighterByPlayerId($playerId)->id;
 
@@ -191,7 +175,7 @@ class FightersController extends AppController {
 
                 if (move_uploaded_file($file_tmp_name, $dir . DS . $newName) && is_writable($dir)) {
 
-                    $this->Flash->success('Your picture upload is successfull!');
+                    //$this->Flash->success('Your picture upload is successfull!');
                     $this->redirect(['action' => 'view']);
                 } else {
 
