@@ -1,3 +1,5 @@
+<?php $this->assign('title', 'Fighter'); ?>
+
 <?php
  echo $this->Form->create('Upload',array('enctype'=>'multipart/form-data')); ?>
 

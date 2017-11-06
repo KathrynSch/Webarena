@@ -30,8 +30,19 @@ class ArenasController extends AppController {
         $this->loadComponent('Flash');
         $this->loadModel('Surroundings');
     }
+    public function generateSurroundings()
+    {
+         $this->loadModel('Surroundings');
 
-    public function generateSurroundings() {
+        // if no surroundings generate
+        if ($this->Surroundings->getAllSurroundings() != null) 
+        {
+            $this->Surroundings->deleteAllSurroundings();
+        }
+        $this->redirect(['action' => 'sight']);
+    }
+
+    public function regenerateSurroundings() {
         $this->loadModel('Surroundings');
         // delete all existing surroundings
 

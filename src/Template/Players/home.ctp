@@ -1,4 +1,4 @@
-<?php //$this->assign('title', 'home');
+<?php $this->assign('title', 'Webarena');
 ?>
 
 
@@ -85,9 +85,15 @@
 		  		<p style="font-size: 15px;">
 		  			Use the "tower" button to change the environment. 
 		  		</p>
-		  	<h2>Watch the obstacles</h2>
+		  	<h2>Watch the obstacles !</h2>
 		  		<p style="font-size: 15px;">
 		  			The arena has pillars that will stop you from passing, traps that will kill you and a monster that will do just as well. Beware ! You won't be able to see the traps and the monster but keep all of your senses aware: a suspicious breeze might alert of a trap, and some weird stench could probably come from a monster... If ever you feel the presence of a monster around you, kill him, the chances are you will win. 
+		  		</p>
+		<h1 style="color:#00695C;" >Evaluation mode</h1>
+	  		<h2>Generate or remove surroundings</h2>
+		  		<p style="font-size: 15px;">
+		  			<span style="color: yellow;" class="glyphicon glyphicon-tower"></span> Use the yellow tower to generate surroundings. <br>
+		  			<span style="color: grey;" class="glyphicon glyphicon-tower"></span> Use the grey tower to remove surroundings.
 		  		</p>
 
   	</div>

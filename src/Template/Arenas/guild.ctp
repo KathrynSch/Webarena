@@ -1,3 +1,5 @@
+<?php $this->assign('title', 'Guild'); ?>
+
 <div class="row">
   <div class="col-md-2">
             <div class="list-group" style="padding-top: 10px;">

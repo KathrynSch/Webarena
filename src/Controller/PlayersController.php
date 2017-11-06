@@ -78,15 +78,14 @@ class PlayersController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            dd($this->request->getData());
             $player = $this->Players->patchEntity($player, $this->request->getData());
             if ($this->Players->save($player)) {
-                $this->Flash->success(__('The player has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                $this->Flash->success(__('Your new account settings have been saved.'));
+                return $this->redirect(['action' => 'edit']);
             }
             $this->Flash->error(__('The player could not be saved. Please, try again.'));
         }
+
         $this->set(compact('player'));
         $this->set('_serialize', ['player']);
     }

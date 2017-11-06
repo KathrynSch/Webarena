@@ -1,9 +1,5 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Fighter[]|\Cake\Collection\CollectionInterface $fighters
- */
-?>
+<?php $this->assign('title', 'Hall of Fame'); ?>
+
 <div class="row">
 <div class="col-md-2">
             <div class="list-group" style="padding-top: 10px;">

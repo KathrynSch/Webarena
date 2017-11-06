@@ -1,3 +1,5 @@
+<?php $this->assign('title', 'Shout'); ?>
+
 <div class="row" style="padding-top: 10px;">
     <div class="col-md-4"></div>
     <div class="col-md-4 pagination-centered">  

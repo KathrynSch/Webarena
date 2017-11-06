@@ -1,8 +1,5 @@
-<?php
-/**
- * @var \App\View\AppView $this
- */
-?>
+<?php $this->assign('title', 'Fighter'); ?>
+
 
 <div class="row" style="padding-top: 10px;">
     <div class="col-md-4"></div>

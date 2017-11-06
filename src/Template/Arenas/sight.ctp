@@ -1,3 +1,5 @@
+<?php $this->assign('title', 'Arena'); ?>
+
 <div class="row content">
 <?php if($activeFighter == null){
   ?>
@@ -73,7 +75,7 @@ else { ?>
                     }
                     if($istrap != 0)
                       {
-                        echo('<br>Suspicious breeze');                  
+                        echo('<br><span style="color:red">Suspicious breeze</span>');                  
                       }
                       if($monster)
                       {
@@ -83,7 +85,7 @@ else { ?>
                         || (($monster->coordinate_x == $x-1) && ($monster->coordinate_y == $y)) //left
                         )
                         {
-                          echo('<br>Stench !!');
+                          echo('<br><span style="color:green">Stench !! </span>');
                         }
                       }
                 }
@@ -192,14 +194,16 @@ else { ?>
       </div>
     </div>
         <div class="panel panel-info" style="padding: 0;">
-          
           <div class="panel-body">
         <div class="row">
-          <div class="col-md-6 pagination-centered">
+          <div class="col-md-4 pagination-centered">
             <?php echo $this->Form->postButton('<span style="color: green;" class="glyphicon glyphicon-volume-up"></span>', array('action'=>'shout', $activeFighter['id']), ['class' => 'btn btn-default']); ?>
           </div>
-          <div class="col-md-6 pagination-centered">
-            <?php echo $this->Form->postButton('<span style="color: orange;" class="glyphicon glyphicon-tower"></span>', array('action'=>'generateSurroundings'), ['class' => 'btn btn-default']); ?>
+          <div class="col-md-4 pagination-centered">
+            <?php echo $this->Form->postButton('<span style="color: orange;" class="glyphicon glyphicon-tower"></span>', array('action'=>'regenerateSurroundings'), ['class' => 'btn btn-default']); ?>
+          </div>
+          <div class="col-md-4 pagination-centered">
+            <?php echo $this->Form->postButton('<span style="color: grey;" class="glyphicon glyphicon-tower"></span>', array('action'=>'generateSurroundings'), ['class' => 'btn btn-default']); ?>
           </div>
         </div>
       </div>

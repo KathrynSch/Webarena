@@ -1,3 +1,5 @@
+<?php $this->assign('title', 'Fighter'); ?>
+
     <div class="row content">
 
         <div class="col-md-2">

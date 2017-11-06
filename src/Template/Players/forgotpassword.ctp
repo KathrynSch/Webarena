@@ -1,3 +1,5 @@
+<?php $this->assign('title', 'Forgot Password'); ?>
+
 <?php if(!$showPassword){ ?>
 
 <div class="row">
